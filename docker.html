@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="DevOps,Docker,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="DevOps,Docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker 入門紀錄">
+<meta property="og:url" content="https://dylan237.github.io/docker.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://miro.medium.com/max/2652/0*b3vZvl70I3HyLKqU.png">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/docker-1.png?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/docker-2.png?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/dockerfile-commands.png?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-08-20%20%E4%B8%8B%E5%8D%885.37.07.png?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-08-21%20%E4%B8%8A%E5%8D%8811.33.23.png?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-08-21%20%E4%B8%8A%E5%8D%8811.13.57.png?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.432Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker 入門紀錄">
+<meta name="twitter:image" content="https://miro.medium.com/max/2652/0*b3vZvl70I3HyLKqU.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/docker.html">
+
+
+
+
+
+  <title>Docker 入門紀錄 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/docker.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Docker 入門紀錄</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-09-02T10:04:51+08:00">
+                2020-09-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DevOps/" itemprop="url" rel="index">
+                    <span itemprop="name">DevOps</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DevOps/Docker/" itemprop="url" rel="index">
+                    <span itemprop="name">Docker</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/docker.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="docker.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="https://miro.medium.com/max/2652/0*b3vZvl70I3HyLKqU.png" alt style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px">
+
+<a id="more"></a>
+
+<!-- <div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源：
+  <a href="javascript:;">
+    網路
+  </a>
+</div>
+<br /> -->
+
+<!--
+![docker](https://miro.medium.com/max/2652/0*b3vZvl70I3HyLKqU.png) -->
+
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>海 → VPS<br>鯨魚 → Docker<br>貨櫃 → Container，來自單個或數個 Image</p>
+<h2 id="installation"><a href="#installation" class="headerlink" title="installation"></a>installation</h2><h3 id="方法-1"><a href="#方法-1" class="headerlink" title="方法 1"></a>方法 1</h3><p><a href="https://gist.github.com/peter279k/eb0a98a1836513795e24e9bbfd3a18f3" target="_blank" rel="noopener">Docker (docker-ce) installation for Ubuntu 16.04 and Ubuntu 18.04</a></p>
+<p>將 docker_installer.sh 檔案放到 VPS 上，執行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bash docker_installer.sh</span><br></pre></td></tr></table></figure>
+
+<h3 id="方法-2"><a href="#方法-2" class="headerlink" title="方法 2"></a>方法 2</h3><p>下載安裝腳本 sh install-docker.sh # 執行安裝腳本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl https://get.docker.com/</span><br><span class="line">sh install-docker.sh</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><a href="http://www.markjour.com/article/docker-no-root.html" target="_blank" rel="noopener">不加 sudo 执行 Docker 命令</a></p>
+</blockquote>
+<h2 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h2><p>將 <a href="https://hub.docker.com/" target="_blank" rel="noopener">Docker Hub</a> 用來練習的 Hello World 映像檔拉進 VPS</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run hello-world</span><br></pre></td></tr></table></figure>
+
+<p>背後運作</p>
+<ol>
+<li>在本機端(VPS)尋找是否有 Hello World 映像檔，若有直接將該 image 運行成一個 container</li>
+<li>若沒有，從 Docker Hub 上拉取對應的 image 並運行</li>
+<li>若 Docker Hub 也沒有，拋出錯誤訊息</li>
+</ol>
+<h2 id="Docker-基本指令"><a href="#Docker-基本指令" class="headerlink" title="Docker 基本指令"></a>Docker 基本指令</h2><h3 id="幫助命令"><a href="#幫助命令" class="headerlink" title="幫助命令"></a>幫助命令</h3><h4 id="版本查詢"><a href="#版本查詢" class="headerlink" title="版本查詢"></a>版本查詢</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker version</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看-Docker-資訊"><a href="#查看-Docker-資訊" class="headerlink" title="查看 Docker 資訊"></a>查看 Docker 資訊</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+
+<h4 id="常用指令"><a href="#常用指令" class="headerlink" title="常用指令"></a>常用指令</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker --<span class="built_in">help</span></span><br></pre></td></tr></table></figure>
+
+<p>查看特定指令細節說明</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">help</span> COMMAND</span><br></pre></td></tr></table></figure>
+
+<h3 id="image-相關命令"><a href="#image-相關命令" class="headerlink" title="image 相關命令"></a>image 相關命令</h3><h4 id="列出現有的-images"><a href="#列出現有的-images" class="headerlink" title="列出現有的 images"></a>列出現有的 images</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images [OPTIONS]</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>REPOSITORY</th>
+<th>TAG</th>
+<th>IMAGE ID</th>
+<th>CREATED</th>
+<th>SIZE</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>倉庫源(唯一)</td>
+<td>版本</td>
+<td>ID(唯一)</td>
+<td>創建日期</td>
+<td>檔案大小</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>同一個倉庫源可以有個 tag，代表不同版本(e.g 3.2)，使用 <code>REPOSITORY:TAG</code> 來定義不同的 image，如果不指定版本標籤預設為 lastest (e.g ubuntu:latest)</p>
+</blockquote>
+<pre><code>options
+    -a (列出本地所有images，包含中間層)
+    -q (只顯示image ID)
+    --digests (顯示image的摘要訊息)
+    --no-trunc (顯示完整的image訊息)</code></pre><h4 id="查詢遠端倉庫-docker-hub-的-image"><a href="#查詢遠端倉庫-docker-hub-的-image" class="headerlink" title="查詢遠端倉庫(docker hub)的 image"></a>查詢遠端倉庫(docker hub)的 image</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search [OPTIONS] REPONAME</span><br></pre></td></tr></table></figure>
+
+<pre><code>options
+    -s [number] (列出 stars 數不小於[number]的 repo)
+    --automated (只列出 automated build 類型的 images)
+    --no-trunc (顯示完整的image訊息)</code></pre><h4 id="下載遠端倉庫-docker-hub-的-image"><a href="#下載遠端倉庫-docker-hub-的-image" class="headerlink" title="下載遠端倉庫(docker hub)的 image"></a>下載遠端倉庫(docker hub)的 image</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull REPONAME[:TAG]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若不加上<code>:TAG</code>參數，預設下載最新版本(latest)，若需指定版本<br>e.g <code>docker pull nginx:3.2</code></p>
+</blockquote>
+<h4 id="刪除-image"><a href="#刪除-image" class="headerlink" title="刪除 image"></a>刪除 image</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi [OPTIONS] IMAGE[:TAG]</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>若不加上<code>:TAG</code>參數，預設刪除最新版本(latest)</li>
+<li>可刪除多個，只需在 imageName 後加空白，接續著要刪除的 imageName</li>
+</ul>
+</blockquote>
+<pre><code>options
+        -f (強制刪除，即使在運行中)</code></pre><h4 id="刪除所有-images"><a href="#刪除所有-images" class="headerlink" title="刪除所有 images"></a>刪除所有 images</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker rmi -f $(docker images -q)</span><br><span class="line">docker rmi -f $(docker images -qa) (包含所有中間層)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>$()</code> 可以解釋為一個子命令，<code>docker images -q</code> 如上面說明，可羅列出宿主機器所有 image 的 id，搭配起來即可刪同時刪除所有 id 被羅列的 image。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker images -q | xargs docker rmi -f</span><br><span class="line">docker images -qa | xargs docker rmi -f (包含所有中間層)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>將 | 前指令產生的字串作為參數，傳入 | 後的指令中 (Linux 原生指令)</p>
+</blockquote>
+<h4 id="列出-image-歷史"><a href="#列出-image-歷史" class="headerlink" title="列出 image 歷史"></a>列出 image 歷史</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">history</span> IMAGE</span><br></pre></td></tr></table></figure>
+
+<h3 id="Container-相關命令"><a href="#Container-相關命令" class="headerlink" title="Container 相關命令"></a>Container 相關命令</h3><h4 id="將-image-實例化為-container-並執行"><a href="#將-image-實例化為-container-並執行" class="headerlink" title="將 image 實例化為 container 並執行"></a>將 image 實例化為 container 並執行</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run [OPTIONS] IMAGE</span><br></pre></td></tr></table></figure>
+
+<pre><code>options
+        --name (為該容器命名)
+        -d (啟動守護式容器(常用於後台應用) -&gt; 不需與 container 終端交互)
+        -i (啟動互動式容器(常用於前台應用) -&gt; 登入 container 時可與終端交互，通常與 -t 同時使用)
+        -t (自動打開該 container 終端介面)
+        -P (隨機 port 映射)
+        -p [vps port]:[container port] (指定 port 映射)</code></pre><h5 id="運行交互式容器"><a href="#運行交互式容器" class="headerlink" title="運行交互式容器"></a>運行交互式容器</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name mycentos centos /bin/bash</span><br><span class="line"><span class="comment"># /bin/bash 為進入容器終端機後的路徑，可不寫，預設是即是 /bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/docker-1.png?raw=true" alt></p>
+<p>以 centos 映像開啟一個名為 mycentos 的交互式 container。使用 <code>-it</code> 選項會直接進入該 container 的終端介面(紅框處)，該紅框處的 SHA 值則對應此 container 的 ID</p>
+<h5 id="運行守護式容器"><a href="#運行守護式容器" class="headerlink" title="運行守護式容器"></a>運行守護式容器</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name mycentos centos</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/docker-2.png?raw=true" alt></p>
+<p>開啟守護式容器成功後，系統會返回一個 conatainer ID，證明已經開啟成功。<br>不過有個需注意的地方，在成功開啟後，再以 docker ps 查詢運行中容器時，卻發現沒有發現該容器(如上圖)。</p>
+<p>原因是在該容器成功實例化並執行後，由於沒有任何前台進程，所以很快又就被 docker 自動清除掉了。<a href="https://www.youtube.com/watch?v=OaP9uYf_QBw&list=PLmOn9nNkQxJFX0YVLDw5EMUL-4cVzXL33&index=15#t=6m0s" target="_blank" rel="noopener">參考</a></p>
+<p>上述問題是由於 docker 機制所導致，docker 後台容器要運作，就必須有一個前台進程</p>
+<p>如何讓前台有進程執行？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d centos bin/sh -c <span class="string">"while true;do echo hello;sleep 2;done"</span></span><br></pre></td></tr></table></figure>
+
+<p>該指令每兩秒會在終端機 log 一次 ‘hello’ 字串，如此一來有進程正在執行，docker 就不會自動清除該容器。</p>
+<h4 id="列出-docker-所有運行中的-container"><a href="#列出-docker-所有運行中的-container" class="headerlink" title="列出 docker 所有運行中的 container"></a>列出 docker 所有運行中的 container</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps [OPTIONS]</span><br></pre></td></tr></table></figure>
+
+<pre><code>options
+        -a (列出正在運行及歷史上運行過的容器)
+        -l (列出最近一個執行的容器)
+        -n [number] (列出最近[number]個運行的容器)
+        -q (只顯示容器編號)</code></pre><h4 id="停止-container"><a href="#停止-container" class="headerlink" title="停止 container"></a>停止 container</h4><h5 id="在-container-環境中的終端執行"><a href="#在-container-環境中的終端執行" class="headerlink" title="在 container 環境中的終端執行"></a>在 <code>container</code> 環境中的終端執行</h5><ol>
+<li>container 停止並退出</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>重啟”已關閉(exited)”容器<ol>
+<li><code>docker ps -l</code> -&gt; 列出上一個被操作的容器，記下 ID SHA 值 或 容器名稱</li>
+<li><code>docker start NAME|ID</code> -&gt; 重啟</li>
+</ol>
+</li>
+<li>重啟並進入 container 交互終端<br><code>docker start NAME|ID -i</code></li>
+</ul>
+</blockquote>
+<ol start="2">
+<li>container 不停止並退出</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ctrl + P + Q</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>如何證明容器沒有被關閉？<ul>
+<li><code>docker ps</code> 查看該 container 的 status 是否為 up</li>
+</ul>
+</li>
+<li>可透過 <code>attach</code> 指令重新進到”不停止退出”的容器，下面會有該指令介紹。</li>
+</ul>
+</blockquote>
+<h5 id="在-宿主機-環境中的終端執行"><a href="#在-宿主機-環境中的終端執行" class="headerlink" title="在 宿主機 環境中的終端執行"></a>在 <code>宿主機</code> 環境中的終端執行</h5><ol>
+<li>正常停止，需等待 (建議使用)</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop NAME|ID</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>強制停止，立即關閉</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">kill</span> NAME|ID</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li><a href="http://dockone.io/question/158" target="_blank" rel="noopener">docker kill 和 stop 有什么区别</a></li>
+<li><a href="https://superuser.com/questions/756999/whats-the-difference-between-docker-stop-and-docker-kill" target="_blank" rel="noopener">what’s the difference between <code>docker stop</code> and <code>docker kill</code>?</a></li>
+</ul>
+</blockquote>
+<h4 id="刪除已停止運行的-container"><a href="#刪除已停止運行的-container" class="headerlink" title="刪除已停止運行的 container"></a>刪除已停止運行的 container</h4><ol>
+<li>刪除單個</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm NAME|ID</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>刪除全部</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker rm $(docker ps -qa)</span><br><span class="line">docker ps -qa | xargs docker rm</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<ul>
+<li>已刪除的 container 會從快取中清除，使用 <code>docker ps</code> 指令查詢不到</li>
+<li>刪除未停止的容器需加上 <code>-f</code> 參數進行強制刪除</li>
+</ul>
+</blockquote>
+<h4 id="重啟正在運行的-container"><a href="#重啟正在運行的-container" class="headerlink" title="重啟正在運行的 container"></a>重啟正在運行的 container</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart NAME|ID</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>重啟後輸入指令 <code>docker ps NAME|ID</code>，查看該容器的 status，開啟時間會變為幾秒前，證明該容器確實已被重新啟動</p>
+</blockquote>
+<h4 id="查看容器日誌-logs"><a href="#查看容器日誌-logs" class="headerlink" title="查看容器日誌 logs"></a>查看容器日誌 logs</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs [OPTIONS] NAME|ID</span><br></pre></td></tr></table></figure>
+
+<pre><code>options
+        -t (顯示各 log 時間)
+        -f (即時更新)
+        --tail [number] (只看最後 [number] 行)</code></pre><h4 id="查看容器內執行中的進程"><a href="#查看容器內執行中的進程" class="headerlink" title="查看容器內執行中的進程"></a>查看容器內執行中的進程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker top [OPTIONS] NAME|ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看容器內部細節"><a href="#查看容器內部細節" class="headerlink" title="查看容器內部細節"></a>查看容器內部細節</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker inspect [OPTIONS] NAME|ID</span><br></pre></td></tr></table></figure>
+
+<h4 id="進入正在執行的容器並以終端機交互"><a href="#進入正在執行的容器並以終端機交互" class="headerlink" title="進入正在執行的容器並以終端機交互"></a>進入正在執行的容器並以終端機交互</h4><p>指令</p>
+<table>
+<thead>
+<tr>
+<th>attach</th>
+<th>exec</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>進入容器開啟終端，且不開啟新的進程。</td>
+<td>啟動容器中新的終端，並開啟新進程</td>
+</tr>
+</tbody></table>
+<h5 id="attach"><a href="#attach" class="headerlink" title="attach"></a>attach</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach [OPTIONS] CONTAINER</span><br></pre></td></tr></table></figure>
+
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker attach d2ea08ddc42c</span><br></pre></td></tr></table></figure>
+
+<p>在容器內使用 <code>ctrl + P + Q</code> 退出後，輸入此指令可以回到容器終端介面。</p>
+<h5 id="exec"><a href="#exec" class="headerlink" title="exec"></a>exec</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> [OPTIONS] CONTAINER [script]</span><br></pre></td></tr></table></figure>
+
+<p>範例 1：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it d2ea08ddc42c /bin/bash</span><br></pre></td></tr></table></figure>
+
+<p>此指令效果相當於上面的 <code>docker attach d2ea08ddc42c</code>，原理實際上是啟動了容器內的 /bin/bash，此時你就可以通過 bash shell 與容器內交互了，就像遠端連接了 SSH 一樣。</p>
+<p>範例 2：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">exec</span> -it d2ea08ddc42c ls /tmp</span><br></pre></td></tr></table></figure>
+
+<p>此指令不會進入 <code>d2ea08ddc42c</code> 容器，並且在該指定容器中的 <code>/tmp</code> 目錄下操作 <code>ls</code> 指令，並將結果返回宿主環境。</p>
+<h4 id="從容器內複製文件到宿主環境"><a href="#從容器內複製文件到宿主環境" class="headerlink" title="從容器內複製文件到宿主環境"></a>從容器內複製文件到宿主環境</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp [OPTION] d2ea08ddc42c:容器內路徑 宿主環境路徑</span><br></pre></td></tr></table></figure>
+
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker cp d2ea08ddc42c:/tmp/test.txt /tmp</span><br></pre></td></tr></table></figure>
+
+<p>將容器內的 <code>/tmp/test.txt</code> 檔案複製一份到宿主環境的 <code>/tmp</code> 路徑</p>
+<h4 id="修改並提交現有容器成為一個新的-image"><a href="#修改並提交現有容器成為一個新的-image" class="headerlink" title="修改並提交現有容器成為一個新的 image"></a>修改並提交現有容器成為一個新的 image</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit [OPTION] CONTAINER [REPOSITORY[:TAG]]</span><br></pre></td></tr></table></figure>
+
+<pre><code>options
+        -a=&quot;&quot; (作者)
+        -m=&quot;&quot; (提交訊息)
+        -c (將 Dockerfile 指令應用於創建的映像)
+        -p (再提交時暫停容器運作，預設為true)</code></pre><p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit -a=<span class="string">"dylam"</span> -m=<span class="string">"customCentOS"</span> d2ea08ddc42c dylan/centOS:1.1.0</span><br></pre></td></tr></table></figure>
+
+<h2 id="Data-Volumes-資料卷"><a href="#Data-Volumes-資料卷" class="headerlink" title="Data Volumes 資料卷"></a>Data Volumes 資料卷</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在 Docker 容器中產生的資料，若不透過 commit 將資料成為 image 的一部分的話，在關閉容器時資料就會消失，為了解決這個問題，可以 透過 Data Volumes 解決。</p>
+<h3 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h3><ol>
+<li>將容器資料持久化儲存</li>
+<li>容器間繼承、共享資料</li>
+<li>Data Volumes 在容器中修改會直接生效</li>
+<li>Data Volumes 的更改不會包含在 image 的更新中</li>
+<li>直到沒有任何容器使用，他的生命週期才正式結束</li>
+</ol>
+<h3 id="容器內添加"><a href="#容器內添加" class="headerlink" title="容器內添加"></a>容器內添加</h3><h4 id="以指令添加"><a href="#以指令添加" class="headerlink" title="以指令添加"></a>以指令添加</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /宿主機絕對路徑資料夾:/容器資料夾 IMAGE</span><br></pre></td></tr></table></figure>
+
+<p>可支援添加多個 Data Volume</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /host<span class="_">-a</span>:/container<span class="_">-a</span> -v /host-b:/container-b IMAGE</span><br></pre></td></tr></table></figure>
+
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /hostDataVolume:/containerDataVolume dylan/centos:1.0.0</span><br></pre></td></tr></table></figure>
+
+<p>此指令將會以 dylan/centos:1.0.0 映像，開啟一個交互式容器，同時建立 Data Volumes，hostDataVolume 資料夾建立在宿主機根路徑下，containerDataVolume 則建立在容器根路徑下。兩個目錄具有共享資料的功能及上述所有特性。</p>
+<ul>
+<li>訪問錯誤<br>Docker 掛載主機目錄 Docker 訪問若出現 <code>cannot open directory .: permission denied</code><br>解決方法，添加 privileged 參數:</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /宿主機絕對路徑資料夾:/容器資料夾 --privileged=<span class="literal">true</span> IMAGE</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>自訂權限</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it -v /宿主機絕對路徑資料夾:/容器資料夾:ro IMAGE</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>or 表示 <code>read-only</code>，加上此參數後，容器內的 Volume 不可修改。</p>
+</blockquote>
+<h4 id="以-Dockerfile-添加"><a href="#以-Dockerfile-添加" class="headerlink" title="以 Dockerfile 添加"></a>以 Dockerfile 添加</h4><h5 id="在根目錄新增資料夾，並且添加一個-dockerfile-檔案"><a href="#在根目錄新增資料夾，並且添加一個-dockerfile-檔案" class="headerlink" title="在根目錄新增資料夾，並且添加一個 dockerfile 檔案"></a>在根目錄新增資料夾，並且添加一個 dockerfile 檔案</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> / &amp;&amp; mkdir mydocker &amp;&amp; <span class="built_in">cd</span> mydocker &amp;&amp; touch dockerfile &amp;&amp; vim dockerfile</span><br></pre></td></tr></table></figure>
+
+<h5 id="編寫基礎-dockerfile"><a href="#編寫基礎-dockerfile" class="headerlink" title="編寫基礎 dockerfile"></a>編寫基礎 dockerfile</h5><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="keyword">VOLUME</span><span class="bash"> [<span class="string">"/dataVolumeContainer1"</span>, <span class="string">"/dataVolumeContainer2"</span>]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"finished,---------success1"</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> /bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>FROM</th>
+<th>VOLUME</th>
+<th>CMD</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>基礎環境</td>
+<td>映像生成後，自動建立的<code>容器內</code> Data Volume 資料夾路徑(支援生成多個目錄)，以 Dockerfile 描述的 volume 無法指定對應的宿主機資料夾位置，而是由 Docker 自動產生</td>
+<td>執行 shell 指令</td>
+</tr>
+</tbody></table>
+<h5 id="docker-build"><a href="#docker-build" class="headerlink" title="docker build"></a>docker build</h5><p>透過 dockerfile 生成 image</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f ~/mydocker/Dockerfile -t dylan/centos:1.0.0 .</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>若已在 ~/mydocker 目錄下，則也不須加 <code>-f ~/mydocker/Dockerfile</code>，預設會讀取當下目錄的 Dockerfile(D 大寫) 檔案</p>
+</blockquote>
+<pre><code>options
+        -f (dockerfile 路徑)
+        -t (生成的 image 名字)</code></pre><h4 id="查看是否掛載成功"><a href="#查看是否掛載成功" class="headerlink" title="查看是否掛載成功"></a>查看是否掛載成功</h4><p>使用指令 <code>docker inspect CONTAINER</code> 查詢容器細節<br>將會發現此資料：</p>
+<ol>
+<li>以指令添加時</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">"HostConfig": &#123;</span><br><span class="line">    "Binds": [</span><br><span class="line">      <span class="string">"/myDataVolume:/containerDataVolume"</span></span><br><span class="line">    ],</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>以 Dockerfile 添加時</li>
+</ol>
+<p>Destination 為容器 data volume 位置，Source 為宿主機 data volume 位置(docker 自動產生)</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">"Mounts": [</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="attr">"Type"</span>: <span class="string">"volume"</span>,</span><br><span class="line">       <span class="attr">"Name"</span>: <span class="string">"aa92d3f6045c1d0b3a99e3fa44c491937ca7a062b826dd5fe43a3a50515c54c0"</span>,</span><br><span class="line">	<span class="attr">"Source"</span>: <span class="string">"/var/lib/docker/volumes/aa92d3f6045c1d0b3a99e3fa44c491937ca7a062b826dd5fe43a3a50515c54c0/_data"</span>,</span><br><span class="line">	<span class="attr">"Destination"</span>: <span class="string">"/dataVolumeContainer1"</span>,</span><br><span class="line">	<span class="attr">"Driver"</span>: <span class="string">"local"</span>,</span><br><span class="line">	<span class="attr">"Mode"</span>: <span class="string">""</span>,</span><br><span class="line">	<span class="attr">"RW"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"Propagation"</span>: <span class="string">""</span></span><br><span class="line">   &#125;,</span><br><span class="line">   &#123;</span><br><span class="line">	<span class="attr">"Type"</span>: <span class="string">"volume"</span>,</span><br><span class="line">	<span class="attr">"Name"</span>: <span class="string">"fb5ee2c3dc4826ac025011a789a74364409e70b654305184e55eb790019d2979"</span>,</span><br><span class="line">	<span class="attr">"Source"</span>: <span class="string">"/var/lib/docker/volumes/fb5ee2c3dc4826ac025011a789a74364409e70b654305184e55eb790019d2979/_data"</span>,</span><br><span class="line">	<span class="attr">"Destination"</span>: <span class="string">"/dataVolumeContainer2"</span>,</span><br><span class="line">	<span class="attr">"Driver"</span>: <span class="string">"local"</span>,</span><br><span class="line">	<span class="attr">"Mode"</span>: <span class="string">""</span>,</span><br><span class="line">	<span class="attr">"RW"</span>: <span class="literal">true</span>,</span><br><span class="line">	<span class="attr">"Propagation"</span>: <span class="string">""</span></span><br><span class="line">   &#125;</span><br><span class="line">],</span><br></pre></td></tr></table></figure>
+
+<h3 id="繼承其他容器的-Data-Volume"><a href="#繼承其他容器的-Data-Volume" class="headerlink" title="繼承其他容器的 Data Volume"></a>繼承其他容器的 Data Volume</h3><p>假設現在已經有一個正在運行的容器，名為 dc01，並且已有設定 Data Volume，此時如果想要在新建一個容器，並且共享 dc01 的 Data Volume，可以怎麼做呢？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name dc02 --volumes-from dc01 IMAGE</span><br></pre></td></tr></table></figure>
+
+<p>此時新生成一個 dc02 容器，並且與 dc01 共享 Data Volume，在內部所有資料將會共享並同步，即使父容器 dc01 被刪除，dc02 繼承自 dc01 的 Data Volume 依然會存在。</p>
+<h2 id="Dockerfile"><a href="#Dockerfile" class="headerlink" title="Dockerfile"></a>Dockerfile</h2><h3 id="什麼是-Dockerfile"><a href="#什麼是-Dockerfile" class="headerlink" title="什麼是 Dockerfile?"></a>什麼是 Dockerfile?</h3><ol>
+<li>Dockerfile 是用來構建 Docker image 的文件，是由一系列指令和參數構成的腳本。</li>
+<li>構建三步驟<ul>
+<li>編寫 Dockerfile</li>
+<li>docker build -&gt; 執行 dockerfile，建構成 image</li>
+<li>docker run -&gt; 執行生成的映像成為一個運行中容器</li>
+</ul>
+</li>
+</ol>
+<h3 id="Dockerfile-的解析過程"><a href="#Dockerfile-的解析過程" class="headerlink" title="Dockerfile 的解析過程"></a>Dockerfile 的解析過程</h3><h4 id="基礎知識"><a href="#基礎知識" class="headerlink" title="基礎知識"></a>基礎知識</h4><ol>
+<li>每條保留字都必須全大寫，且至少要有一個參數</li>
+<li>指令從上到下依序執行</li>
+<li><code>#</code> 表示註解</li>
+<li>每條指令都會創建一個 <code>映像層</code>，並對映像進行提交</li>
+</ol>
+<h4 id="Docker-執行-Dockerfile-的大致流程"><a href="#Docker-執行-Dockerfile-的大致流程" class="headerlink" title="Docker 執行 Dockerfile 的大致流程"></a>Docker 執行 Dockerfile 的大致流程</h4><ol>
+<li>Docker 從基礎映像運行一個容器 (FROM 後的參數)</li>
+<li>執行一條指令並對容器作出修改</li>
+<li>執行類似 docker commit 的操作，提交一個新的映像層</li>
+<li>再基於剛提交的映像運行一個新容器</li>
+<li>執行下一條 Dockerfile 指令，直到所有指令執行完成</li>
+</ol>
+<h3 id="Dockerfile-保留字指令"><a href="#Dockerfile-保留字指令" class="headerlink" title="Dockerfile 保留字指令"></a>Dockerfile 保留字指令</h3><p><img src="https://github.com/dylan237/images_source/blob/master/dockerfile-commands.png?raw=true" alt></p>
+<h4 id="FORM"><a href="#FORM" class="headerlink" title="FORM"></a>FORM</h4><blockquote>
+<p>基礎 IMAGE，當前新映像是基於哪個映像的</p>
+</blockquote>
+<h4 id="MAINTAINER"><a href="#MAINTAINER" class="headerlink" title="MAINTAINER"></a>MAINTAINER</h4><blockquote>
+<p>作者資訊</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">MAINTAINER</span> The CentOS Project &lt;cloud-ops@centos.org&gt;</span><br></pre></td></tr></table></figure>
+
+<h4 id="RUN"><a href="#RUN" class="headerlink" title="RUN"></a>RUN</h4><blockquote>
+<p>容器構建時需要運行的額外 Linux 命令</p>
+</blockquote>
+<h4 id="EXPOSE"><a href="#EXPOSE" class="headerlink" title="EXPOSE"></a>EXPOSE</h4><blockquote>
+<p>當前容器對外暴露的 port 號</p>
+</blockquote>
+<h4 id="WORKDIR"><a href="#WORKDIR" class="headerlink" title="WORKDIR"></a>WORKDIR</h4><blockquote>
+<p>指定在創建容器後，終端機預設的工作目錄</p>
+</blockquote>
+<h4 id="ENV"><a href="#ENV" class="headerlink" title="ENV"></a>ENV</h4><blockquote>
+<p>在構建映像的過程中，設定環境變數<br>這個變數可以在後續任何 <code>RUN</code> 指令中引用，就如同在命令指令了環境變數前綴一樣;也可以在其他指令中直接使用這些變數。</p>
+</blockquote>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ENV</span> MY_PATH /usr/test</span><br><span class="line"><span class="comment"># 引用 WORKDIR $MY_PATH</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ADD"><a href="#ADD" class="headerlink" title="ADD"></a>ADD</h4><blockquote>
+<p>將宿主機資料夾下的文件複製進映像且預設自動處理 URL 和解壓縮 tar</p>
+</blockquote>
+<h4 id="COPY"><a href="#COPY" class="headerlink" title="COPY"></a>COPY</h4><blockquote>
+<p>類似 ADD 指令，拷貝文件和資料夾到映像中。<br>從宿主機上下文(dockerfile 所在的資料夾)中的文件或資料夾，複製到映像內的&lt;目標路徑&gt;位置</p>
+</blockquote>
+<p>支援兩種格式寫法，前者為 &lt;源路徑&gt; 後者為 &lt;目標路徑&gt;</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">COPY</span><span class="bash"> src dest</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> [<span class="string">"src"</span>, <span class="string">'dest'</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="VOLUME"><a href="#VOLUME" class="headerlink" title="VOLUME"></a>VOLUME</h4><blockquote>
+<p>定義容器內的 Data Volume 資料夾的路徑</p>
+</blockquote>
+<h4 id="CMD"><a href="#CMD" class="headerlink" title="CMD"></a>CMD</h4><blockquote>
+<p>指定容器啟動時要運行的指令</p>
+</blockquote>
+<h5 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h5><ol>
+<li>Dockerfile 中可以有多個 CMD 指令</li>
+<li>但只有最後一個生效</li>
+<li>CMD 會被 docker run 之後的參數覆蓋。</li>
+</ol>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">10.15</span>.<span class="number">3</span>-alpine</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> . /app</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> npm install</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> node index.js</span></span><br></pre></td></tr></table></figure>
+
+<p>以這個簡單的 dockerfile 為例，將這個 dockerfile 透過 docker build 指令產生 image 後，使用 docker run 指令生成容器：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3000:3000 -it myNodeApp</span><br></pre></td></tr></table></figure>
+
+<p>在執行的最後，終端會執行最後一個 dockerfile 的 CMD 指令，也是就是 <code>node index.js</code>(將 node app 啟動)。但如果在下 docker run 時，在指令最後加上了其他 command 指令，則這個指令會覆蓋掉 node index.js</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -p 3000:3000 -it myNodeApp ls -l</span><br></pre></td></tr></table></figure>
+
+<p>可以想像 dockerfile 在你加了其他指令後變成：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> node:<span class="number">10.15</span>.<span class="number">3</span>-alpine</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> /app</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> . /app</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> npm install</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">3000</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> node index.js <span class="comment">## 不會執行</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> ls -l <span class="comment">## 會執行</span></span></span><br></pre></td></tr></table></figure>
+
+<p>如上述 1、2 點所敘述，CMD 指令可以有多個，但只有最後一個會起作用。</p>
+<h5 id="格式"><a href="#格式" class="headerlink" title="格式"></a>格式</h5><p>CMD 指令格式和 RUN 相似，也是兩種格式</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># shell 格式</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> &lt;commnad&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># exex 格式</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"可執行文件"</span>, <span class="string">"參數1"</span>, <span class="string">"參數2"</span>, ...]</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 參數列表格式，在指定了 ENTRYPOINT 指令後，用 CMD 指定具體的參數</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"參數1"</span>, <span class="string">"參數2"</span>, ...]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="ENTRYPOINT"><a href="#ENTRYPOINT" class="headerlink" title="ENTRYPOINT"></a>ENTRYPOINT</h4><blockquote>
+<p>指定容器啟動時要運行的指令，ENTRYPOINT 和 CMD 一樣，都是在指定容器啟動程序及參數</p>
+</blockquote>
+<h5 id="注意-1"><a href="#注意-1" class="headerlink" title="注意"></a>注意</h5><ol>
+<li>和 CMD 不同的是，ENTRYPOINT 後這指令不會被 docker run 之後的參數覆蓋，而是為該指令追加參數。</li>
+<li>docker run 之後的參數會被當作參數傳遞給 ENTRYPOINT 指定的指令，形成新的指令組合，但 dockerfile 內必須使用 <code>ENTRYPOINT [&quot;&quot;]</code> 格式，否則追加參數不會起作用。</li>
+</ol>
+<h4 id="ONBUILD"><a href="#ONBUILD" class="headerlink" title="ONBUILD"></a>ONBUILD</h4><blockquote>
+<p>當構建一個被繼承的 Dockerfile 時運行該指令，父映像在被子映像繼承後，父映像的 ONBUILD 會被觸發。</p>
+</blockquote>
+<h5 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h5><p>父映像 ~/mydocker/parentdockerfile</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="keyword">ONBUILD</span> <span class="keyword">RUN</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"Hello!"</span></span></span><br></pre></td></tr></table></figure>
+
+<p>透過父映像 dockerfile 生成 image</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run build -f ~/mydocker/parentdockerfile -t parent/image .</span><br></pre></td></tr></table></figure>
+
+<h5 id="子映像-mydocker-childdockerfile"><a href="#子映像-mydocker-childdockerfile" class="headerlink" title="子映像 ~/mydocker/childdockerfile"></a>子映像 ~/mydocker/childdockerfile</h5><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> parent/image</span><br></pre></td></tr></table></figure>
+
+<p>執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f ~/mydocker/childdockerfile -t child/image .</span><br></pre></td></tr></table></figure>
+
+<p>此時因為父映像被繼承(FROM)，因此 <code>ONBUILD RUN echo &quot;Hello!&quot;</code> 會被觸發，並且在終端機輸出執行結果。</p>
+<h3 id="案例-1"><a href="#案例-1" class="headerlink" title="案例"></a>案例</h3><h4 id="Base-映像-scratch"><a href="#Base-映像-scratch" class="headerlink" title="Base 映像(scratch)"></a>Base 映像(scratch)</h4><p>下面是 centOS 6.8 官方 Dockerfile，Docker Hub 中 99% 的映像都是在 scratch 映像中安裝和配置需要的軟體而構建出來的，你可以把它當作 docker 映像的基底，大部分映像的映像層最底部都是它。<br>當你編寫的 Dockerfile 包含指令<code>FROM centos</code> 即代表該 Dockerfile 描述的映像的內部映像層也包含了 scratch 映像。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> scratch</span><br><span class="line"><span class="keyword">MAINTAINER</span> The CentOS Project &lt;cloud-ops@centos.org&gt;</span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> c68-docker.tar.xz /</span></span><br><span class="line"><span class="keyword">LABEL</span><span class="bash"> name=<span class="string">"CentOS Base Image"</span> \</span></span><br><span class="line"><span class="bash">    vendor=<span class="string">"CentOS"</span> \</span></span><br><span class="line"><span class="bash">    license=<span class="string">"GPLv2"</span> \</span></span><br><span class="line"><span class="bash">    build-date=<span class="string">"2016-06-02"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Default command</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> [<span class="string">"/bin/bash"</span>]</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="自訂義映像"><a href="#自訂義映像" class="headerlink" title="自訂義映像"></a>自訂義映像</h4><h5 id="編寫-Dockerfile-案例-1"><a href="#編寫-Dockerfile-案例-1" class="headerlink" title="編寫 Dockerfile 案例 1"></a>編寫 Dockerfile 案例 1</h5><p><img src="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-08-20%20%E4%B8%8B%E5%8D%885.37.07.png?raw=true" alt></p>
+<p>Docker hub 中官方的 centos 是一個精簡版的 Linux 系統，為的是盡可能壓縮大小，因此有許多功能是不支援的。另外某些行為已經被官方的 Dockerfile 所定義，如下：</p>
+<ol>
+<li>執行 <code>docker run -it centos</code> 時，預設進入的目錄路徑為 <code>/</code>。</li>
+<li>不支援 ifconfig 指令查找 ip 資訊</li>
+<li>不支援 vim 編輯器</li>
+</ol>
+<p>現在嘗試使用官方的 centos 映像為基底，編寫一個新的 Dockerfile，讓上述的功能可以被支援，且進入容器時的預設目錄為 <code>/tmp</code>。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 路徑: ~/mydocker/dockerfile</span></span><br><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="keyword">MAINTAINER</span> Dylan&lt;dylan.liu237@gmail.com&gt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">ENV</span> MYPATH /tmp</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> <span class="variable">$MYPATH</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum -y install vim</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum -y install net-tools</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">80</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="built_in">echo</span> <span class="variable">$MYPATH</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"--success--"</span></span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> /bin/bash</span></span><br></pre></td></tr></table></figure>
+
+<p>將 Dockerfile 編譯成 image</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -f ~/mydocker/dockerfile -t dylan/mycentos .</span><br></pre></td></tr></table></figure>
+
+<p>查看 image 歷史。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker <span class="built_in">history</span> dylan/mycentos</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-08-21%20%E4%B8%8A%E5%8D%8811.33.23.png?raw=true" alt></p>
+<blockquote>
+<p>有一點值得注意，Docker 映像的概念就是一層一層映像層的嵌套，透過 image history 這個指令可以證實，每一個 Docker 保留字的指令都會生成一個新的映像層(參考上述的 <code>Docker 執行 Dockerfile 的大致流程</code> 部分)，每層都有擁有一個 ID，而最後一個指令產生的映像層 ID，將會成為這個映像最終對外暴露的 ID。</p>
+</blockquote>
+<p>執行 image 成 container</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -it --name mycentos dylan/mycentos</span><br></pre></td></tr></table></figure>
+
+<p>接著就可以發現這個容器的變化了<br><img src="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-08-21%20%E4%B8%8A%E5%8D%8811.13.57.png?raw=true" alt></p>
+<h5 id="編寫-Dockerfile-案例-2"><a href="#編寫-Dockerfile-案例-2" class="headerlink" title="編寫 Dockerfile 案例 2"></a>編寫 Dockerfile 案例 2</h5><p>此案例是使用 centos 為基底，並包含 tomcat 環境，並且此案例中會涵蓋幾乎所有的 Dockerfile 保留字指令。</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">FROM</span> centos</span><br><span class="line"><span class="keyword">MAINTAINER</span> abc&lt;abc@abc.com&gt;</span><br><span class="line"> <span class="comment"># 將宿主機當前資料夾路徑(context)的 host.txt 複製到容器中的 /uer/local/ 路徑，並改名為 container.txt</span></span><br><span class="line"><span class="keyword">COPY</span><span class="bash"> host.txt /usr/<span class="built_in">local</span>/container.txt</span></span><br><span class="line"><span class="comment"># 把 Java 和 tomcat 壓縮檔加到容器中的 /user/lacal 路徑，並且解壓縮</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> jdk-8u171-linux-x64.tar.gz /usr/lacal</span></span><br><span class="line"><span class="keyword">ADD</span><span class="bash"> apache-tomcat-9.0.8.tar.gz /usr/lacal</span></span><br><span class="line"><span class="comment"># 安裝 vim</span></span><br><span class="line"><span class="keyword">RUN</span><span class="bash"> yum -y install vim</span></span><br><span class="line"><span class="comment"># 進入容器後的預設資料夾路徑</span></span><br><span class="line"><span class="keyword">ENV</span> MYPATH /usr/local</span><br><span class="line"><span class="keyword">WORKDIR</span><span class="bash"> <span class="variable">$MYPATH</span></span></span><br><span class="line"><span class="comment"># 設定 Java 和 tomcat 環境變數</span></span><br><span class="line"><span class="keyword">ENV</span> JAVA_HOME /usr/local/apache-tomcat-<span class="number">9.0</span>.<span class="number">8</span></span><br><span class="line"><span class="keyword">ENV</span> CLASSPATH $JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tools.jar</span><br><span class="line"><span class="keyword">ENV</span> CATALINA_HOME /usr/local/apache-tomcat-<span class="number">9.0</span>.<span class="number">8</span></span><br><span class="line"><span class="keyword">ENV</span> PATH $PATH:$JAVA_HOME/bin:$CATALINA_HOME/lib:$CATALINA_HOME/bin</span><br><span class="line"><span class="comment"># 容器運作時監聽的 port</span></span><br><span class="line"><span class="keyword">EXPOSE</span> <span class="number">8080</span></span><br><span class="line"><span class="comment"># 啟動容器時運行 tomcat</span></span><br><span class="line"><span class="comment"># ENTRYPOINT ["/usr/local/apache-tomcat-9.0.8/bin/startup.sh"]</span></span><br><span class="line"><span class="comment">#CMD ["/usr/local/apache-tomcat-9.0.8/bin/catalina.sh","run"]</span></span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> /usr/<span class="built_in">local</span>/apache-tomcat9.0.8/bin/startup.sh &amp;&amp; tail -F /usr/<span class="built_in">local</span>/apache-tomcat-9.0.8/bin/logs/catalina.out</span></span><br></pre></td></tr></table></figure>
+
+<p>執行 Dockerfile 形成 image</p>
+<blockquote>
+<p>若 Dockerfile 在宿主機當前路徑下，可以不需指定 Dockerfile 位置 <code>-f ~/mydocker/Dockerfile</code></p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t custom/centos .</span><br></pre></td></tr></table></figure>
+
+<p>執行 image 成 container</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 9999:8080 --name mycentos -v /dylan/tomcat9/volume:/usr/<span class="built_in">local</span>/apache-tomcat-9.0.9/webapps/volume -v /dylan/tomcat0/logs/:/usr/<span class="built_in">local</span>/apache-tomcat-9.0.8/logs --privileged=<span class="literal">true</span> custom/centos</span><br></pre></td></tr></table></figure>
+
+<p>看起來有點長，不過都是上面所提到的東西綜合運用而已，斷行後一個一個看看：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以後台方式執行容器，不進入容器終端、不印出任何執行log</span></span><br><span class="line">docker run -d</span><br><span class="line"> <span class="comment"># 指定宿主機的 9999 port 與該容器的 8080 port 互相映射</span></span><br><span class="line">-p 9999:8080</span><br><span class="line"><span class="comment"># 指定容器名稱</span></span><br><span class="line">--name mycentos</span><br><span class="line"><span class="comment"># 設定兩組 Data Volume 對應</span></span><br><span class="line">-v /dylan/tomcat9/volume:/usr/<span class="built_in">local</span>/apache-tomcat-9.0.9/webapps/volume</span><br><span class="line">-v /dylan/tomcat0/logs/:/usr/<span class="built_in">local</span>/apache-tomcat-9.0.8/logs</span><br><span class="line"><span class="comment"># 開啟"寫權限"</span></span><br><span class="line">--privileged=<span class="literal">true</span></span><br><span class="line"><span class="comment"># 執行的映像名稱</span></span><br><span class="line">custom/centos</span><br></pre></td></tr></table></figure>
+
+<h2 id="上傳-image-到-Docker-Hub"><a href="#上傳-image-到-Docker-Hub" class="headerlink" title="上傳 image 到 Docker Hub"></a>上傳 image 到 Docker Hub</h2><h3 id="Build-image-from-Dockerfile"><a href="#Build-image-from-Dockerfile" class="headerlink" title="Build image from Dockerfile"></a>Build image from Dockerfile</h3><p>假設已經 commit 了一個新的映像，或者用自己的 Dockerfile 產生了一個映像，叫做 <code>dylan237/centos</code>，執行此指令產生 image</p>
+<blockquote>
+<p>/ 前必須與 Docker Hub 帳號一致</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t dylan237/centos .</span><br></pre></td></tr></table></figure>
+
+<h3 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h3><p>在執行 <code>docker push</code> 指令前需要先登入，輸入自己的 Docker Hub 帳號密碼，只要登入過 Docker 會把 credential 保存，往後不需要再登入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker login</span><br></pre></td></tr></table></figure>
+
+<h3 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h3><p>將 image 上傳</p>
+<blockquote>
+<p>補充: Docker image 大小動輒數百 MB，要上傳的話其實算蠻肥的，還記得上面提過映像是由多個映像層組成的概念嗎？假設今天這個例子的基底是 centos，在 commit 的時候 Docker 並不會把完整的映像層都提交到遠端，而是將你新增的幾個映像層做提交而已，未來 pull 下來會連同你的基底 image 和你提交的映像層合併成你自己的 image 讓你使用。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push dylan237/centos</span><br></pre></td></tr></table></figure>
+
+<h3 id="更新版本"><a href="#更新版本" class="headerlink" title="更新版本"></a>更新版本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push dylan237/centos:tagname</span><br></pre></td></tr></table></figure>
+
+<h2 id="透過資料形式保存-image"><a href="#透過資料形式保存-image" class="headerlink" title="透過資料形式保存 image"></a>透過資料形式保存 image</h2><p>如果在客戶端環境不能使用網路，這時候就能利用 <code>docker save</code> 將 image 轉成檔案，之後只要有這支檔案，就透過 <code>docker load</code> 指令將檔案轉還原成 image，幫助我們在無網路的環境中，跨平台部署專案。</p>
+<p>假設想輸出成檔案的映像叫 dylan/test，並且希望輸出後的檔案位置在當下目錄 ./myImageInFileForm</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker save -o ./myImageInFileForm dylan/<span class="built_in">test</span></span><br></pre></td></tr></table></figure>
+
+<p>在當下目錄輸入指令 <code>ls -l</code> 應該就可以看到輸出完成的檔案 myImageInFileForm，接著可以透過任何形式保存這支檔案。</p>
+<p>將檔案還原成 image</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker load -i myImageInFileForm.bin</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a href="https://www.youtube.com/playlist?list=PLmOn9nNkQxJFX0YVLDw5EMUL-4cVzXL33" target="_blank" rel="noopener">尚硅谷</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/84894157" target="_blank" rel="noopener">写给前端工程师看的 Docker 教程-实战篇</a></li>
+<li><a href="https://rock-it.pl/how-to-write-excellent-dockerfiles/" target="_blank" rel="noopener">How to write excellent Dockerfiles</a></li>
+<li><a href="https://medium.com/@cbb104002/docker-%E7%AD%86%E8%A8%98-5d1e0c8c3169" target="_blank" rel="noopener">Image 映像檔堆疊（分層式結構)</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/DevOps/" rel="tag"># DevOps</a>
+          
+            <a href="/tags/Docker/" rel="tag"># Docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/connect-gcp-with-ssh.html" rel="next" title="使用 SSH 遠端連線 VPS (Google GCP)">
+                <i class="fa fa-chevron-left"></i> 使用 SSH 遠端連線 VPS (Google GCP)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/linux-basic.html" rel="prev" title="Linux 基本認識與常用指令整理">
+                Linux 基本認識與常用指令整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#installation"><span class="nav-number">2.</span> <span class="nav-text">installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-1"><span class="nav-number">2.1.</span> <span class="nav-text">方法 1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法-2"><span class="nav-number">2.2.</span> <span class="nav-text">方法 2</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-World"><span class="nav-number">3.</span> <span class="nav-text">Hello World</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Docker-基本指令"><span class="nav-number">4.</span> <span class="nav-text">Docker 基本指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#幫助命令"><span class="nav-number">4.1.</span> <span class="nav-text">幫助命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#版本查詢"><span class="nav-number">4.1.1.</span> <span class="nav-text">版本查詢</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看-Docker-資訊"><span class="nav-number">4.1.2.</span> <span class="nav-text">查看 Docker 資訊</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用指令"><span class="nav-number">4.1.3.</span> <span class="nav-text">常用指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#image-相關命令"><span class="nav-number">4.2.</span> <span class="nav-text">image 相關命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#列出現有的-images"><span class="nav-number">4.2.1.</span> <span class="nav-text">列出現有的 images</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查詢遠端倉庫-docker-hub-的-image"><span class="nav-number">4.2.2.</span> <span class="nav-text">查詢遠端倉庫(docker hub)的 image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#下載遠端倉庫-docker-hub-的-image"><span class="nav-number">4.2.3.</span> <span class="nav-text">下載遠端倉庫(docker hub)的 image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#刪除-image"><span class="nav-number">4.2.4.</span> <span class="nav-text">刪除 image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#刪除所有-images"><span class="nav-number">4.2.5.</span> <span class="nav-text">刪除所有 images</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出-image-歷史"><span class="nav-number">4.2.6.</span> <span class="nav-text">列出 image 歷史</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Container-相關命令"><span class="nav-number">4.3.</span> <span class="nav-text">Container 相關命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#將-image-實例化為-container-並執行"><span class="nav-number">4.3.1.</span> <span class="nav-text">將 image 實例化為 container 並執行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#運行交互式容器"><span class="nav-number">4.3.1.1.</span> <span class="nav-text">運行交互式容器</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#運行守護式容器"><span class="nav-number">4.3.1.2.</span> <span class="nav-text">運行守護式容器</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#列出-docker-所有運行中的-container"><span class="nav-number">4.3.2.</span> <span class="nav-text">列出 docker 所有運行中的 container</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止-container"><span class="nav-number">4.3.3.</span> <span class="nav-text">停止 container</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在-container-環境中的終端執行"><span class="nav-number">4.3.3.1.</span> <span class="nav-text">在 container 環境中的終端執行</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#在-宿主機-環境中的終端執行"><span class="nav-number">4.3.3.2.</span> <span class="nav-text">在 宿主機 環境中的終端執行</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#刪除已停止運行的-container"><span class="nav-number">4.3.4.</span> <span class="nav-text">刪除已停止運行的 container</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重啟正在運行的-container"><span class="nav-number">4.3.5.</span> <span class="nav-text">重啟正在運行的 container</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看容器日誌-logs"><span class="nav-number">4.3.6.</span> <span class="nav-text">查看容器日誌 logs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看容器內執行中的進程"><span class="nav-number">4.3.7.</span> <span class="nav-text">查看容器內執行中的進程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看容器內部細節"><span class="nav-number">4.3.8.</span> <span class="nav-text">查看容器內部細節</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#進入正在執行的容器並以終端機交互"><span class="nav-number">4.3.9.</span> <span class="nav-text">進入正在執行的容器並以終端機交互</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#attach"><span class="nav-number">4.3.9.1.</span> <span class="nav-text">attach</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#exec"><span class="nav-number">4.3.9.2.</span> <span class="nav-text">exec</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#從容器內複製文件到宿主環境"><span class="nav-number">4.3.10.</span> <span class="nav-text">從容器內複製文件到宿主環境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改並提交現有容器成為一個新的-image"><span class="nav-number">4.3.11.</span> <span class="nav-text">修改並提交現有容器成為一個新的 image</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Data-Volumes-資料卷"><span class="nav-number">5.</span> <span class="nav-text">Data Volumes 資料卷</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">5.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特性"><span class="nav-number">5.2.</span> <span class="nav-text">特性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器內添加"><span class="nav-number">5.3.</span> <span class="nav-text">容器內添加</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#以指令添加"><span class="nav-number">5.3.1.</span> <span class="nav-text">以指令添加</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#以-Dockerfile-添加"><span class="nav-number">5.3.2.</span> <span class="nav-text">以 Dockerfile 添加</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#在根目錄新增資料夾，並且添加一個-dockerfile-檔案"><span class="nav-number">5.3.2.1.</span> <span class="nav-text">在根目錄新增資料夾，並且添加一個 dockerfile 檔案</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#編寫基礎-dockerfile"><span class="nav-number">5.3.2.2.</span> <span class="nav-text">編寫基礎 dockerfile</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#docker-build"><span class="nav-number">5.3.2.3.</span> <span class="nav-text">docker build</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看是否掛載成功"><span class="nav-number">5.3.3.</span> <span class="nav-text">查看是否掛載成功</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#繼承其他容器的-Data-Volume"><span class="nav-number">5.4.</span> <span class="nav-text">繼承其他容器的 Data Volume</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dockerfile"><span class="nav-number">6.</span> <span class="nav-text">Dockerfile</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什麼是-Dockerfile"><span class="nav-number">6.1.</span> <span class="nav-text">什麼是 Dockerfile?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile-的解析過程"><span class="nav-number">6.2.</span> <span class="nav-text">Dockerfile 的解析過程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基礎知識"><span class="nav-number">6.2.1.</span> <span class="nav-text">基礎知識</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Docker-執行-Dockerfile-的大致流程"><span class="nav-number">6.2.2.</span> <span class="nav-text">Docker 執行 Dockerfile 的大致流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dockerfile-保留字指令"><span class="nav-number">6.3.</span> <span class="nav-text">Dockerfile 保留字指令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FORM"><span class="nav-number">6.3.1.</span> <span class="nav-text">FORM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MAINTAINER"><span class="nav-number">6.3.2.</span> <span class="nav-text">MAINTAINER</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RUN"><span class="nav-number">6.3.3.</span> <span class="nav-text">RUN</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EXPOSE"><span class="nav-number">6.3.4.</span> <span class="nav-text">EXPOSE</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WORKDIR"><span class="nav-number">6.3.5.</span> <span class="nav-text">WORKDIR</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ENV"><span class="nav-number">6.3.6.</span> <span class="nav-text">ENV</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ADD"><span class="nav-number">6.3.7.</span> <span class="nav-text">ADD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#COPY"><span class="nav-number">6.3.8.</span> <span class="nav-text">COPY</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#VOLUME"><span class="nav-number">6.3.9.</span> <span class="nav-text">VOLUME</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CMD"><span class="nav-number">6.3.10.</span> <span class="nav-text">CMD</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意"><span class="nav-number">6.3.10.1.</span> <span class="nav-text">注意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#格式"><span class="nav-number">6.3.10.2.</span> <span class="nav-text">格式</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ENTRYPOINT"><span class="nav-number">6.3.11.</span> <span class="nav-text">ENTRYPOINT</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#注意-1"><span class="nav-number">6.3.11.1.</span> <span class="nav-text">注意</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ONBUILD"><span class="nav-number">6.3.12.</span> <span class="nav-text">ONBUILD</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#案例"><span class="nav-number">6.3.12.1.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#子映像-mydocker-childdockerfile"><span class="nav-number">6.3.12.2.</span> <span class="nav-text">子映像 ~/mydocker/childdockerfile</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例-1"><span class="nav-number">6.4.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Base-映像-scratch"><span class="nav-number">6.4.1.</span> <span class="nav-text">Base 映像(scratch)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自訂義映像"><span class="nav-number">6.4.2.</span> <span class="nav-text">自訂義映像</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#編寫-Dockerfile-案例-1"><span class="nav-number">6.4.2.1.</span> <span class="nav-text">編寫 Dockerfile 案例 1</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#編寫-Dockerfile-案例-2"><span class="nav-number">6.4.2.2.</span> <span class="nav-text">編寫 Dockerfile 案例 2</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#上傳-image-到-Docker-Hub"><span class="nav-number">7.</span> <span class="nav-text">上傳 image 到 Docker Hub</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-image-from-Dockerfile"><span class="nav-number">7.1.</span> <span class="nav-text">Build image from Dockerfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登入"><span class="nav-number">7.2.</span> <span class="nav-text">登入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Push"><span class="nav-number">7.3.</span> <span class="nav-text">Push</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新版本"><span class="nav-number">7.4.</span> <span class="nav-text">更新版本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透過資料形式保存-image"><span class="nav-number">8.</span> <span class="nav-text">透過資料形式保存 image</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">9.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/docker.html';
+          this.page.identifier = 'docker.html';
+          this.page.title = 'Docker 入門紀錄';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

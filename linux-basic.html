@@ -1,0 +1,1812 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 基本認識與常用指令整理">
+<meta property="og:url" content="https://dylan237.github.io/linux-basic.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://progressbar.tw/uploads/ckeditor/pictures/1268/content_1.png">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/cmd09.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/centos7_0210filepermission_2.gif?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/centos7_0210filepermission_2.gif?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-09-01%20%E4%B8%8A%E5%8D%8811.31.45.png?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-09-01%20%E4%B8%8A%E5%8D%8811.40.30.png?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux 基本認識與常用指令整理">
+<meta name="twitter:image" content="https://progressbar.tw/uploads/ckeditor/pictures/1268/content_1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/linux-basic.html">
+
+
+
+
+
+  <title>Linux 基本認識與常用指令整理 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/linux-basic.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Linux 基本認識與常用指令整理</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2020-09-02T10:18:41+08:00">
+                2020-09-02
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/linux-basic.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="linux-basic.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="https://progressbar.tw/uploads/ckeditor/pictures/1268/content_1.png" alt style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px">
+
+<a id="more"></a>
+
+<!-- <div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源：
+  <a href="javascript:;">
+    網路
+  </a>
+</div>
+<br /> -->
+
+<!-- ## 待補
+- 查 port 砍 port
+- where
+- whoami 查詢現在是哪個使用者
+- su - userXXX 切換到某某使用者 -->
+
+<h2 id="Linux-檔案系統架構"><a href="#Linux-檔案系統架構" class="headerlink" title="Linux 檔案系統架構"></a>Linux 檔案系統架構</h2><p>理論上所有 Linux 發布版都應該要遵守 Linux 檔案系統的標準（Filesystem Hierarchy Standard, FHS)，但不同版本可能會有些許差異，大致結構如下：</p>
+<h3 id="根目錄-底下的目錄"><a href="#根目錄-底下的目錄" class="headerlink" title="根目錄(/)底下的目錄"></a>根目錄(/)底下的目錄</h3><table>
+<thead>
+<tr>
+<th>目錄名稱</th>
+<th>說明</th>
+<th>例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>/bin</code></td>
+<td>放一些一般使用者可以操作的指令。連結到 /usr/bin</td>
+<td>kill、cp..</td>
+</tr>
+<tr>
+<td><code>/sbin</code></td>
+<td>放置系統管理員可以操作的指令。連結到 /usr/sbin</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/boot</code></td>
+<td>系統開機相關的一些載入檔</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/etc</code></td>
+<td>系統設定檔案</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/home</code></td>
+<td>主要是一般帳戶的家目錄</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/root</code></td>
+<td>系統管理者的家目錄</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/lib</code>, <code>/lib64</code></td>
+<td>主要為系統函式庫和核心函式庫，若是 64 位元則放在 /lib64。連結到 /usr/lib, /usr/lib64</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/proc</code></td>
+<td>整個系統的運作資訊</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/sys</code></td>
+<td>與 /proc 類似，但主要針對硬體相關參數</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/usr</code></td>
+<td>全名為 unix software resource 縮寫，放置系統相關軟體、服務（注意不是 user 的縮寫）</td>
+<td>X-Window</td>
+</tr>
+<tr>
+<td><code>/var</code></td>
+<td>記載著各種系統上的變數的地方</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/tmp</code></td>
+<td>全名為 temporary，放置暫存檔案(雜七雜八的東西)</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/media</code></td>
+<td>放置隨插即用的裝置慣用目錄</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/mnt</code></td>
+<td>為管理員、使用者手動掛上（mount）的目錄</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/opt</code></td>
+<td>全名為 optional，通常為第三方廠商放置軟體處</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/srv</code></td>
+<td>通常是放置開發的服務（service），如：網站服務 www 等</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/vmlinuz</code></td>
+<td>系統核心檔案</td>
+<td></td>
+</tr>
+<tr>
+<td><code>lost+found</code></td>
+<td>系統檢查結果</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/run</code></td>
+<td>系統進行服務軟體運作管理處</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/cdrom</code></td>
+<td>光碟機裡的資料被掛上來的地方</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/dosc</code></td>
+<td>開機時把 dos 檔案系統掛上來的地方</td>
+<td></td>
+</tr>
+<tr>
+<td><code>/dev</code></td>
+<td>放置 device 裝置檔案，鍵盤滑鼠等</td>
+<td></td>
+</tr>
+</tbody></table>
+<h2 id="基本指令"><a href="#基本指令" class="headerlink" title="基本指令"></a>基本指令</h2><h3 id="1-資料夾與檔案處理"><a href="#1-資料夾與檔案處理" class="headerlink" title="1. 資料夾與檔案處理"></a>1. 資料夾與檔案處理</h3><h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><p>建立資料夾</p>
+<p>結構：</p>
+<blockquote>
+<p>mkdir [OPTION] DIR</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-p：多層目錄同時創建</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 新增 myDir 資料夾</span></span><br><span class="line">mkdir myDir</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多層目錄</span></span><br><span class="line">mkdir -p dir1/dir2/dir3</span><br></pre></td></tr></table></figure>
+
+<h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><p>remove - 刪除檔案或資料夾</p>
+<p>結構：</p>
+<blockquote>
+<p>rm [OPTION] FILE</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-r：刪除資料夾</li>
+<li>-f：強制刪除</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 刪除檔案</span></span><br><span class="line">rm abc.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刪除資料夾</span></span><br><span class="line">rm -r myDir</span><br></pre></td></tr></table></figure>
+
+<h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><p>list - 列出資料夾下內容</p>
+<p>結構：</p>
+<blockquote>
+<p>ls [OPTION] DIR</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-l：列出詳細檔案資訊 (權限、日期等)</li>
+<li>-a：也列出隱藏檔案</li>
+<li>-R：遞迴，也列出子資料夾內的所有檔案及資料夾內容</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 只列出檔名</span></span><br><span class="line">ls</span><br><span class="line"></span><br><span class="line"><span class="comment"># 也列出隱藏檔案，外加詳細資訊</span></span><br><span class="line">ls -al</span><br><span class="line"></span><br><span class="line"><span class="comment"># ls -al 的縮寫</span></span><br><span class="line">ll</span><br></pre></td></tr></table></figure>
+
+<h4 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h4><p>change directory - 切換工作目錄</p>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 進入 myDir 資料夾</span></span><br><span class="line"><span class="built_in">cd</span> myDir</span><br><span class="line"></span><br><span class="line"><span class="comment"># 回上層目錄</span></span><br><span class="line"><span class="built_in">cd</span> ..</span><br><span class="line"></span><br><span class="line"><span class="comment"># 進入"家目錄"</span></span><br><span class="line"><span class="built_in">cd</span> ~</span><br><span class="line"></span><br><span class="line"><span class="comment"># 進入"根目錄"</span></span><br><span class="line"><span class="built_in">cd</span> /</span><br></pre></td></tr></table></figure>
+
+<h4 id="pwd"><a href="#pwd" class="headerlink" title="pwd"></a>pwd</h4><p>print working directory - 列出當前工作目錄</p>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">pwd</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><p>copy - 複製資料夾或檔案</p>
+<p>結構：</p>
+<blockquote>
+<p>cp [OPTION] SOURCE DEST 【 cp -參數 來源檔(或目錄) 目的檔(或目錄) 】</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-r：針對目錄下檔案做遞歸複製(白話：整個目錄下每一個檔案複製到你想要的位置)</li>
+<li>-p：將檔案本身屬性(權限、所有者、時間)同時複製過去(一般用於備份居多)</li>
+<li>-f：拷貝時若相同檔名的檔案直接複蓋不提出警告(強制複製)</li>
+<li>-i：如果要複製過去的位置已經有相同檔案，會在覆蓋前詢問是否持續進行</li>
+<li>-s：複製成符號連結檔(symbolic link)(白話：複製成捷徑檔)</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將 a.txt 複製成一份 b.txt (若操作的目標在當下目錄內，也可以不加./)</span></span><br><span class="line">cp ./a.txt ./b.txt</span><br><span class="line"><span class="comment"># 等同於</span></span><br><span class="line">cp a.txt b.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將 myDir 整個資料夾包含檔案複製成一份 myDir2</span></span><br><span class="line">cp -r ./myDir ./myDir2</span><br><span class="line"><span class="comment"># 等同於</span></span><br><span class="line">cp -r myDir myDir2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將 from.txt 檔案從當下工作目錄中的 myDir 目錄，複製到當下工作目錄中的 myDir2 目錄下，並改名為 to.txt</span></span><br><span class="line">cp myDir/from.txt myDir2/to.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將跟目錄中的 from 目錄下的 user 目錄，連同檔案整個複製到跟目錄中的 to 目錄</span></span><br><span class="line">cp -r /from/user /to/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將跟目錄中的 source 目錄下的 user 目錄，連同檔案與屬性整個備份到跟目錄中的 backup 目錄</span></span><br><span class="line">cp -rp /<span class="built_in">source</span>/user /backup/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 複製多個檔案到跟目錄中的 to 目錄夾</span></span><br><span class="line">cp a.txt b.txt /to/</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用萬用符號 * 複製多個符合 .mp3 檔案到 to 目錄夾</span></span><br><span class="line">cp /from/*.mp3 /to/</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>補充說明：像是特殊權限檔案 (/etc/shadow)，密碼檔、設定檔 …等，需要加上 -a 或 -p 參數，才能完整複製檔案。如果複製過程希望有進度條功能，建議改用 scp 或 rsync 指令</p>
+</blockquote>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><p>move - 移動或重命名資料夾或檔案</p>
+<p>結構：</p>
+<blockquote>
+<p>mv [OPTION] SOURCE DEST 【 mv -參數 來源檔(或目錄) 目的檔(或目錄) 】</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-b：移動之前先做備份</li>
+<li>-v：做完移動之後顯示所做的移動情形</li>
+<li>-f：強迫性移動，不會詢問使用者是否確認</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將當下目錄 a.txt 改名成 b.txt (若操作的目標在當下目錄內，也可以不加./)</span></span><br><span class="line">mv ./a.txt ./b.txt</span><br><span class="line"><span class="comment"># 等同於</span></span><br><span class="line">mv a.txt b.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將當下目錄 myDir 資料夾改名成 myDir2 (若操作的目標在當下目錄內，也可以不加./)</span></span><br><span class="line">mv ./myDir ./myDir2</span><br><span class="line"><span class="comment"># 等同於</span></span><br><span class="line">mv myDir myDir2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將當前目錄中的 myDir 目錄中的所有檔案，移動到當前目錄中的 myDir2 目錄中</span></span><br><span class="line">mv myDir/* myDir2/</span><br></pre></td></tr></table></figure>
+
+<h4 id="rm-1"><a href="#rm-1" class="headerlink" title="rm"></a>rm</h4><p>remove - 刪除檔案或資料夾</p>
+<p>結構：</p>
+<blockquote>
+<p>rm [OPTION] FILE</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-r：刪除資料夾</li>
+<li>-f：強制刪除</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 刪除檔案</span></span><br><span class="line">rm abc.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 刪除資料夾</span></span><br><span class="line">rm -r myDir</span><br></pre></td></tr></table></figure>
+
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><p>在指定資料夾與其子資料夾搜尋檔案，輸出符合條件資料之路徑</p>
+<p>參數：</p>
+<ul>
+<li>-name：指定檔案(目錄)名稱</li>
+<li>-iname：不區分大小寫</li>
+</ul>
+<p>範例：</p>
+<p>基礎</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查詢當前目錄下的檔名為 a.txt 的檔案 (. 可省略，不給值預設就是查詢當下目錄)</span></span><br><span class="line">find . -name <span class="string">'a.txt'</span></span><br><span class="line"><span class="comment"># 查詢 HOME 目錄下所有 txt 檔案，$HOME 是 Linux 下的一個環境變數，預設指向執行帳號的 HOME 目錄</span></span><br><span class="line">find <span class="variable">$HOME</span> -name <span class="string">'*.txt'</span></span><br></pre></td></tr></table></figure>
+
+<p>「或」邏輯運算符</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 HOME 目錄下尋找 html 和 js 檔案</span></span><br><span class="line">find <span class="variable">$HOME</span> -name <span class="string">'*.html'</span> -o -name <span class="string">'*.js'</span></span><br></pre></td></tr></table></figure>
+
+<p>指定檔案類型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 指定只要搜尋「檔案」名稱</span></span><br><span class="line">find /var/<span class="built_in">log</span> -<span class="built_in">type</span> f -iname <span class="string">'*.txt'</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 指定只要搜尋「檔案」名稱</span></span><br><span class="line">find /var/<span class="built_in">log</span> -<span class="built_in">type</span> d -iname <span class="string">'myDir'</span></span><br></pre></td></tr></table></figure>
+
+<p>檔案大小</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找尋所有檔案大小大於 50MB 的檔案 (不加上 -name 代表搜尋全部檔案)</span></span><br><span class="line">find /var -<span class="built_in">type</span> f -size +50M</span><br><span class="line"></span><br><span class="line"><span class="comment"># 找尋所有檔案大小小於 50MB 的檔案</span></span><br><span class="line">find /var -<span class="built_in">type</span> f -size -50M</span><br></pre></td></tr></table></figure>
+
+<p>時間</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 尋找超過 7 天沒有被存取或修改過的檔案 (判斷檔案存取時間)</span></span><br><span class="line">find <span class="variable">$HOME</span> -<span class="built_in">type</span> f -atime +7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尋找曾經在 7 天內被存取或修改過的檔案 (判斷檔案存取時間)</span></span><br><span class="line">find <span class="variable">$HOME</span> -<span class="built_in">type</span> f -atime -7</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尋找超過 10 分鐘沒有被存取或修改過的檔案 (判斷檔案存取時間)</span></span><br><span class="line">find <span class="variable">$HOME</span> -<span class="built_in">type</span> f -amin +10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尋找曾經在 10 分鐘內被存取或修改過的檔案 (判斷檔案存取時間)</span></span><br><span class="line">find <span class="variable">$HOME</span> -<span class="built_in">type</span> f -amin -10</span><br><span class="line"></span><br><span class="line"><span class="comment"># 尋找檔案建立時間已超過 30 天的檔案</span></span><br><span class="line">find <span class="variable">$HOME</span> -<span class="built_in">type</span> f -ctime +30</span><br></pre></td></tr></table></figure>
+
+<p>使用者</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">尋找特定使用者的檔案</span><br><span class="line">find <span class="variable">$HOME</span> -<span class="built_in">type</span> f -user dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>exec 執行</p>
+<blockquote>
+<p>指令解釋：尋找名字為 a.txt 的檔案，透過 -exec 指令將輸出結果 (a.txt 檔案路徑)，丟入 cat 執行，印出檔案內文本。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">find ~ -<span class="built_in">type</span> f -iname <span class="string">'a.txt'</span> -<span class="built_in">print</span> -<span class="built_in">exec</span> cat &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>~ (相當於 $HOME) 目錄</li>
+<li>指令最後一個分號前一定要加上反斜線</li>
+<li>加上 –print 是為了讓被刪除的檔案檔名一併顯示在畫面上，這個參數可以省略</li>
+<li>使用 –exec 會讓查詢到的每一個檔案路徑代入 {} 位置，一個檔案會執行一遍 cat 命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 補充，上面的 exec 範例也可以用原生的 xargs 指令達成相同效果</span></span><br><span class="line">find ~ -<span class="built_in">type</span> f -name <span class="string">'a.txt'</span> | xargs cat</span><br></pre></td></tr></table></figure>
+
+<p>實用範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在當前目錄中，找出檔案大小在 10 MB 以上的 mp3 檔案，並刪除。</span></span><br><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">'*.mp3'</span> -size +10M -<span class="built_in">exec</span> rm -f &#123;&#125; \;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在當前目錄中，找出所有 js 檔，透過 grep 搜尋檔案內的原始碼，過濾出含有 Hello World 單字的檔案，列出所有符合條件的檔案列表</span></span><br><span class="line">find . -<span class="built_in">type</span> f -name <span class="string">'*.js'</span> -<span class="built_in">exec</span> grep -wl Hello World &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h4 id="diff"><a href="#diff" class="headerlink" title="diff"></a>diff</h4><p>以逐行的方式，比較文本文件的異同處。如果指定要比較目錄，則 diff 會比較目錄中相同文件名的文件，但不會比較其中子目錄</p>
+<p>參數：</p>
+<ul>
+<li>-c：(上下文模式) 顯示差異處的前後內文，並標出差異處</li>
+<li>-u：(Git diff 模式)</li>
+<li>-y：(並排模式)</li>
+<li>-b：不比較空白字元</li>
+<li>-B：不比較空白行數</li>
+<li>-w：忽略全部的空白和 tab</li>
+<li>-i：忽略大小寫</li>
+<li>-l：忽略指定字串的差異</li>
+<li>-q：僅顯示是否有差異，不顯示其餘訊息</li>
+</ul>
+<p>用法參考：</p>
+<ul>
+<li><a href="https://juejin.im/post/6844903731348111373" target="_blank" rel="noopener">Linux 下文本比对方法:diff 命令</a></li>
+<li><a href="https://juejin.im/post/6847902214409682957" target="_blank" rel="noopener">Linux 下 diff 命令用法详解</a></li>
+</ul>
+<h3 id="2-文本處理"><a href="#2-文本處理" class="headerlink" title="2. 文本處理"></a>2. 文本處理</h3><h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><p>將檔案內容印在終端機上。</p>
+<p>參數：</p>
+<ul>
+<li>-n：由 1 開始對所有輸出的行數編號</li>
+<li>-b：和 n 類似，不過空白行不編號</li>
+<li>-s：當遇到兩行以上空白行，就合為一行空白行</li>
+<li>-E：在每行結束點顯示 $ 符號</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將 a.txt 內容加上行號，並覆寫 b.txt 內容</span></span><br><span class="line">cat -n a.txt &gt; b.txt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 將 a.txt 內容加上行號(空白行不加)，並追加進 b.txt 現有內容之後</span></span><br><span class="line">cat -b a.txt &gt;&gt; b.txt</span><br></pre></td></tr></table></figure>
+
+<p>實用範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清空 a.txt 內容</span></span><br><span class="line">cat /dev/null &gt; a.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h4><p>印出一行文本</p>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># output: It is a string</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">'It\'</span>s a string<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 換行顯示 (-e 開啟轉譯)</span></span><br><span class="line"><span class="string">echo -e '</span>OK! \n<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 不換行</span></span><br><span class="line"><span class="string">echo -e '</span>OK! \c<span class="string">'</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"># 顯示日期 (注意：這裡是反引號 ` 而不是單引號 '</span>)</span><br><span class="line"><span class="built_in">echo</span> `date`</span><br></pre></td></tr></table></figure>
+
+<p>範例 2：</p>
+<p>以下程式碼儲存為 test.sh 檔案</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">read name</span><br><span class="line">echo "$name It is a test"</span><br></pre></td></tr></table></figure>
+
+<p>執行 <code>sh test.sh</code>，後輸入字串，該字串將成為 shell 變數 ($name)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@www ~]# sh test.sh</span><br><span class="line">OK                       # 輸入</span><br><span class="line">OK  It is a test         # 輸出</span><br></pre></td></tr></table></figure>
+
+<p>實用範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 以 "It is a test" 字串覆蓋 a.txt 內容</span></span><br><span class="line"><span class="built_in">echo</span> <span class="string">"It is a test"</span> &gt; a.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="grep"><a href="#grep" class="headerlink" title="grep"></a>grep</h4><p>用關鍵字找尋檔案</p>
+<p>結構：</p>
+<blockquote>
+<p>grep [OPTION] 內容關鍵字 [檔名條件] [目錄或檔案路徑]</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-r：遞歸搜尋，搜尋指定目錄還有其子目錄內容</li>
+<li>-a：不忽略二進位資料</li>
+<li>-A&lt;顯示行數&gt;：除了符合關鍵字的行內容，額外多顯示該行”之後”的內容(多的行數就是你所指定的數字)</li>
+<li>-B&lt;顯示行數&gt;：同 -A，但是是多顯示”之前”的內容</li>
+<li>-C&lt;顯示行數&gt;：同 -A -B，前後的內容都顯示，顯示的行數就是指定的數量</li>
+<li>-v：反向搜尋</li>
+<li>-E：將關鍵字用正則表達式使用</li>
+<li>-i：忽略大小寫</li>
+<li>-n：顯示行數</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在當前目錄搜尋檔名結尾為 file 且內容含有 hello 字串的目標，並將該檔案符合該字串的行內容輸出</span></span><br><span class="line">grep <span class="string">'hello'</span> *file</span><br><span class="line"></span><br><span class="line"><span class="comment"># 檔名後綴符合的檔案(根目錄下包含跟目錄下所有子目錄)</span></span><br><span class="line">grep -r <span class="string">'hello'</span> file* /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 多個關鍵字</span></span><br><span class="line">grep -r <span class="string">'hello|world'</span> file* /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 反向搜尋，找出不含關鍵字的行數</span></span><br><span class="line">grep -v <span class="string">'hello'</span> file* /</span><br><span class="line"></span><br><span class="line"><span class="comment"># 搭配 pipe 篩選資料，例如篩選出含有 network 的輸出內容</span></span><br><span class="line">ls /etc/ | grep <span class="string">'network'</span></span><br></pre></td></tr></table></figure>
+
+<p>正則：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># a 開頭</span></span><br><span class="line">ls | grep <span class="string">"^a"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># b 結尾</span></span><br><span class="line">ls | grep <span class="string">"b$"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># a 或 b 開頭</span></span><br><span class="line">ls | grep <span class="string">"^[ab]"</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># a 或 b 結尾</span></span><br><span class="line">ls | grep <span class="string">"[ab]$"</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="wc"><a href="#wc" class="headerlink" title="wc"></a>wc</h4><p>利用 wc 指令我們可以計算檔案的位元組數，字數，或者列數，如果不指定檔案名，或者所造成的檔案稱為’-‘，則 wc 指令會從標準輸入設備讀取資料。</p>
+<p>參數：</p>
+<ul>
+<li>-l：只顯示行數</li>
+<li>-w：只顯示字數 (單字)</li>
+<li>-c：只顯示 Bytes 數</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># a.txt</span><br><span class="line">hello a.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wc a.txt</span><br><span class="line"><span class="comment"># output:  1 2 14 a.txt  -&gt; 行數 字數 Bytes數 檔名</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="sort"><a href="#sort" class="headerlink" title="sort"></a>sort</h4><p>預設將檔案內容依照 ASCII 碼的次序排列，再輸到終端</p>
+<p>參數：</p>
+<ul>
+<li>-b：忽略美航前面開始出的空格字元</li>
+<li>-d：排序時，處理英文字母、數字及空格字符外，忽略其他的字符</li>
+<li>-f：排序時，將小寫字母視為大寫字母</li>
+<li>-o&lt;輸出檔案 &gt;：將排序後的結果存入指定的檔案。</li>
+<li>r：以相反的順序來排序。</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ cat testfile      #testfile文件原有排序</span><br><span class="line">test 30</span><br><span class="line">Hello 95</span><br><span class="line">Linux 85</span><br></pre></td></tr></table></figure>
+
+<p>使用 sort 指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sort testfile</span><br></pre></td></tr></table></figure>
+
+<p>輸出</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Hello 95</span><br><span class="line">Linux 85</span><br><span class="line">test 30</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-系統管理"><a href="#3-系統管理" class="headerlink" title="3. 系統管理"></a>3. 系統管理</h3><p>Linux 系統對於檔案設有三種權限，分別為<code>讀 Read</code>、<code>寫 Write</code>、<code>執行 eXecute</code>，另外不同的角色能擁有的檔案權限都不同，角色則分別有<code>使用者 user</code>、<code>群組 group</code>、<code>其他 others</code> 三種，輸入 ls -l 指令後可以觀察到所有檔案和目錄的權限資訊。想深入學習可以閱讀鳥哥的<a href="http://linux.vbird.org/linux_basic/0210filepermission.php" target="_blank" rel="noopener">第五章 - Linux 的檔案權限與目錄配置</a>。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/cmd09.jpg?raw=true" alt></p>
+<blockquote>
+<p>圖片來源： <a href="https://www.eebreakdown.com/2016/08/linux.html#sec-5" target="_blank" rel="noopener">https://www.eebreakdown.com/2016/08/linux.html#sec-5</a></p>
+</blockquote>
+<p><img src="https://github.com/dylan237/images_source/blob/master/centos7_0210filepermission_2.gif?raw=true" alt></p>
+<blockquote>
+<p>圖片來源： <a href="http://linux.vbird.org/linux_basic/0210filepermission.php" target="_blank" rel="noopener">鳥哥</a></p>
+</blockquote>
+<h4 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h4><p>Linux 的檔案角色權限分為三級：<code>使用者 user</code>、<code>群組 group</code>、<code>其他 others</code> ，利用該指令可以控制檔案如何被他人利用。</p>
+<p>參數：</p>
+<ul>
+<li>u (使用者)、g (群組)、o (其他)、a (全部)</li>
+<li>+ (增加權限)、- (取消權限)、= (唯一設定權限)</li>
+<li>r (可讀取)、w (可寫入)、x (可執行)、X (只有該檔案是個子目錄或該檔案已經被設定過為可執行)</li>
+</ul>
+<p>其他參數：</p>
+<ul>
+<li>-f：若該檔案權限無法被更改也不要顯示錯誤訊息</li>
+<li>-v：顯示權限變更的詳細資料</li>
+<li>-R：遞歸，對該目錄下所有檔案與子目錄進行相同權限變更</li>
+</ul>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將檔案 a.txt 設定為所有人皆可讀取</span></span><br><span class="line">chmod ugo+r a.txt</span><br><span class="line"><span class="comment"># 同上</span></span><br><span class="line">chmod a+r a.txt</span><br><span class="line"><span class="comment"># 將檔案 a.txt 和 b.txt 設定為該檔案的擁有者，與其所屬同一個群組可寫入，但其他人不可寫入</span></span><br><span class="line">chmod ug+w,o-w a.txt b.txt</span><br><span class="line"><span class="comment"># 將 ex.py 設定為只有該文件擁有者可以執行</span></span><br><span class="line">chmod u+x ex.py</span><br><span class="line"><span class="comment"># 將該目錄所有檔案和子文建設為任何人皆可讀取</span></span><br><span class="line">chmod -R a+r *</span><br></pre></td></tr></table></figure>
+
+<p>另外權限也可以用數字來表示，語法為：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod abc file</span><br></pre></td></tr></table></figure>
+
+<p>a,b,c 各為一個數字，分別代表 User、Group、others 的權限</p>
+<p>權重表：<br>| Read | Write | eXecute |<br>| ——– | ——– | ——– |<br>| 4 | 2 | 1 |</p>
+<blockquote>
+<p>若要 rwx 權限，則 4+2+1=7，也就是 7 代表著最高權限，若要 rw 權限，則 4+2=6.. 以此類推</p>
+</blockquote>
+<p>範例：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">chmod a=rwx a.txt</span><br><span class="line"><span class="comment"># 相當於</span></span><br><span class="line">chmod 777 a.txt</span><br><span class="line"></span><br><span class="line">chmod ug=rwx,o=x a.txt</span><br><span class="line"><span class="comment"># 相當於</span></span><br><span class="line">chmod 771 a.txt</span><br></pre></td></tr></table></figure>
+
+<h4 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h4><p>Linux/Unix 是多人多工作業系統，所有的檔案皆有擁有者。利用 chown 將指定檔案的擁有者改為指定的使用者或組，使用者可以是使用者名或者使用者 ID；組可以是組名或者組 ID；檔案是以空格分開的要改變權限的檔案。</p>
+<p>一般來說，這個指令只有是由系統管理者(root)所使用，一般使用者沒有權限可以改變別人的檔案擁有者，也沒有權限把自己的檔案擁有者改設為別人。只有系統管理者(root)才有這樣的權限。</p>
+<p>參數：</p>
+<ul>
+<li>-f：若該檔案權限無法被更改也不要顯示錯誤訊息</li>
+<li>-v：顯示權限變更的詳細資料</li>
+<li>-R：遞歸，對該目錄下所有檔案與子目錄進行相同權限變更</li>
+</ul>
+<p>使用 chown 指令前可以先透過 <code>ls -l</code> 來查看或是確認欲更改檔案的擁有者及群組。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/centos7_0210filepermission_2.gif?raw=true" alt></p>
+<blockquote>
+<p>圖片來源： <a href="http://linux.vbird.org/linux_basic/0210filepermission.php" target="_blank" rel="noopener">鳥哥</a></p>
+</blockquote>
+<p>範例：</p>
+<p>將 a.txt 的擁有者改為 usera</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown usera a.txt</span><br></pre></td></tr></table></figure>
+
+<p>將 a.txt 的群組改為 groupa，第一個參數須以冒號開頭，代表更改群組。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown :groupa a.txt</span><br></pre></td></tr></table></figure>
+
+<p>同時更改使用者及群組</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown usera:groupa a.txt</span><br></pre></td></tr></table></figure>
+
+<p>預設情況下，使用 chown 指令後並不會出現任訊息(除非出現錯誤)，若要讓 chown 明確顯示更改結果，要加上 -v 參數</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -v usera a.txt</span><br></pre></td></tr></table></figure>
+
+<p>若不想輸出任何錯誤訊息，可以加上 -f</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -f usera a.txt</span><br></pre></td></tr></table></figure>
+
+<p>如果要一次修改某個目錄下所有檔案與子目錄的擁有者與群組，可以使用 chown 加上 -R 參數來處理</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chown -R usera:groupa myDir</span><br></pre></td></tr></table></figure>
+
+<p>如果想要把某檔案的擁有者與群組改成和另一個檔案一樣</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 將 myDir 的擁有者與群組改成和 refDir 一樣</span></span><br><span class="line">sudo chown --reference=refDir myDir</span><br></pre></td></tr></table></figure>
+
+<p>實用範例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 找出目前目錄下所有的 *.c 檔，並將這些檔案的擁有者與群組改為 myuser:mygroup</span></span><br><span class="line">sudo find ./ -name *.c -<span class="built_in">exec</span> chown myuser:mygroup &#123;&#125; \;</span><br></pre></td></tr></table></figure>
+
+<h4 id="su"><a href="#su" class="headerlink" title="su"></a>su</h4><p>switch user - 切換到其他 Linux 用戶，但是不切換環境變數，除 root 外，需要輸入該使用者密碼，所有使用者皆有權限使用該指令。</p>
+<p>參數：</p>
+<ul>
+<li>-m -p：執行 su 時，不改變環境變數</li>
+<li>-c <command>：變更帳號後執行後面接著的指令，再切回原來的使用者</li>
+<li>-s：指定要執行的 shell，預設值為 /etc/passwd 內該使用者的 shell</li>
+<li>- -l：加了這個參數後，就好像重新 login 為該使用者一樣，大部分環境變數都是以該使用者為主，並且工作目錄也會改變，如果沒有指定使用者，預設為 root</li>
+</ul>
+<p>範例：</p>
+<p>取得 root 權限。執行 su 並輸入密碼後，可以取得 root (最高) 權限。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>忘記 root 密碼解決方式：在 Ubuntu 下第一次使用 root 時會提示要求你輸入密碼，你可能會發現自己根本沒有設置過密碼。輸入指令 <code>sudo passwd root</code>，終端會提示你 Enter new UNIX password 和 Reentry new UNIX password，建立一個 root 帳戶就可以了，看到 password updated successfully 就表示成功了。</p>
+</blockquote>
+<p>不過要注意，在這種情況下，雖然使用者帳號的 user id 變成 0 (root 的 user id)，但其他的環境變數並沒有跟著改變。<br><img src="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-09-01%20%E4%B8%8A%E5%8D%8811.31.45.png?raw=true" alt></p>
+<p>若是單純要以 root 權限做一些更改檔案的小變動，用這個指令就夠了。但是如果需要進行·以較複雜的系統管理，牽涉到許多 root 帳號的環境變數 (例如 <code>PATH</code> 或 <code>MAIL</code>)時，就要改用下面的方式</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su -</span><br></pre></td></tr></table></figure>
+
+<p>這個指令相當於用 root 重新登入一樣，進入一個完整的 shell 環境。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/%E6%88%AA%E5%9C%96%202020-09-01%20%E4%B8%8A%E5%8D%8811.40.30.png?raw=true" alt></p>
+<p>使用以上兩種方式，都會開啟一個新的 shell 環境，完成工作後需要輸入 <code>exit</code> 才會離開該環境。若你的操作並不複雜可以使用 -c 參數，後面接著你想執行的 shell 指令，如此的話不會進入新的 shell 環境，而是使用 root 權限執行完該指令後，回到原先的帳號 shell 環境。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">su - -c <span class="string">'env | grep root'</span></span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment"># USER=root</span></span><br><span class="line"><span class="comment"># PWD=/root</span></span><br><span class="line"><span class="comment"># HOME=/root</span></span><br><span class="line"><span class="comment"># LOGNAME=root</span></span><br></pre></td></tr></table></figure>
+
+<p>除了讓一般使用者可以使用 root 權限以外，也可以取得其他非 root 帳號的權限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su -l dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>該指令可以取得 <code>dylan.liu237</code> 這個帳號的權限，而這裡的密碼就必須輸入這個帳號的密碼。如果是以 root 身份執行則不需要輸入密碼。</p>
+<h4 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h4><p>sudo 類似 su 指令，也是用來取得 root 或是其他帳號權限，但他在使用上是輸入自己的密碼，而不是 root 或其他帳號的密碼，使用上更方便。</p>
+<blockquote>
+<p>Ubuntu Linux 系統預設在安裝時基於安全考量，並不會啟用 root 帳號，無法用 root 直接登入系統，所有的系統管理動作都是透過 sudo 來取得 root 權限。</p>
+</blockquote>
+<p>參數：</p>
+<ul>
+<li>-l：印出自己(執行 sudo 的使用者)的權限</li>
+<li>-V：列出 sudo 的版本資訊</li>
+<li>-u <user>：以另一個 user 身份執行指令</user></li>
+<li>-s：執行環境變數中的 SHELL 所指定的 shell，或 /etc/passwd 裡所指定的 shell</li>
+</ul>
+<p>sudo 用起來和 <code>su -c</code> 很類似，執行完指令後會自動離開 root 的 shell 環境</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看環境變數，因為使用 sudo 指令，輸出的變數為 root 的環境變數</span></span><br><span class="line">sudo <span class="string">'env | grep root'</span></span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment"># USER=root</span></span><br><span class="line"><span class="comment"># PWD=/root</span></span><br><span class="line"><span class="comment"># HOME=/root</span></span><br><span class="line"><span class="comment"># LOGNAME=root</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要查看 <code>dylan.liu237</code> 這個帳號的環境變數，可以切換到該帳號權限，再做查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">sudo -u dylan.liu237 env | grep dylan.liu237</span><br><span class="line"><span class="comment"># output:</span></span><br><span class="line"><span class="comment"># HOME=/home/dylan.liu237</span></span><br><span class="line"><span class="comment"># MAIL=/var/mail/dylan.liu237</span></span><br><span class="line"><span class="comment"># LOGNAME=dylan.liu237</span></span><br><span class="line"><span class="comment"># USER=dylan.liu237</span></span><br><span class="line"><span class="comment"># USERNAME=dylan.liu237</span></span><br><span class="line"><span class="comment"># SUDO_USER=dylan.liu237</span></span><br></pre></td></tr></table></figure>
+
+<p>也可以取得特定群組的權限，例如取的 adm 全組權限後，看系統記錄檔</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo -g adm view /ver/<span class="built_in">log</span>/syslog</span><br></pre></td></tr></table></figure>
+
+<p>實用範例：</p>
+<p>透過這個指令可以利用 sudo 不需要輸入密碼的特性，開啟一個 root 的 shell 環境，很常在 Ubuntu Linux 中使用。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo su -</span><br></pre></td></tr></table></figure>
+
+<p>補充：</p>
+<p>sudo 可以不需要 root 密碼情況下取得 root 權限，在正常情況下當然不可能讓任何使用者都可以使用 root 權限，他是依據 <code>/etc/sudoers</code> 設定檔來控管的。只有在這個檔案中有被特別設定的使用者才可以使用 sudo 指令。</p>
+<blockquote>
+<p>編輯 <code>/etc/sudoers</code> 時，建議使用 <code>visudo</code> 指令來開啟 vi 編輯器進行編輯，系統將在編輯完成時檢查語法是否正確，避免錯誤語法造成 sudo 無法使用。<br>使用指令： <code>sudo visudo -f /etc/sudoers</code></p>
+</blockquote>
+<p>/etc/sudoers` 對個別使用者的設定與法格式如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">帳號名稱	來源主機=(可切換帳號) 可執行命令</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>帳號名稱</th>
+<th>來源主機</th>
+<th>可切換帳號</th>
+<th>可執行命令</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>可以使用 <code>sudo</code> 的帳號名稱</td>
+<td>限制使用者從特定網路主機連線時，才能使用 <code>sudo</code> 指令，可用來防止入侵者從不明的主機登入攻擊。若指定為 ALL 則代表不限制來源主機。</td>
+<td>可以取得哪些帳號的權限。若指定為 <code>ALL</code> 則代表可以取得任何帳號的權限。</td>
+<td>在取得特殊權限後，可以執行的指令。若指定為 <code>ALL</code> 則代表可以執行任何令。</td>
+</tr>
+</tbody></table>
+<p>個別使用者設定：</p>
+<p>若要讓 <code>dylan.liu237</code> 帳號可以使用 sudo 執行所有指令，需在 /etc/sudoers 加入此行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dylan.liu237	ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<p>允許使用者使用 sudo 指令取的 root 權限，就等於讓使用者成為系統管理者，並不建議這樣做。<br>理想的情況，可以建立一個使用者專門管理其他使用者密碼的，可以把它定義為一個密碼管理員帳號，可以透過以下方式實現</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">accmgr	ALL=(root) /usr/bin/passwd</span><br></pre></td></tr></table></figure>
+
+<p>上面這樣的寫法有一個問題，就是該使用者也可以更改 root 的密碼，如果 root 帳號可以被更改，代表整個該帳號可以透過更改 root 密碼來取得系統的最高管理權限，可以加上以下設定防止</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">accmgr  ALL=(root) !/usr/bin/passwd, /usr/bin/passwd [A-Za-z]*, !/usr/bin/passwd root</span><br></pre></td></tr></table></figure>
+
+<p>以上設定加上了更多限制 - <code>!/usr/bin/passwd</code>： 不許該帳號使用 /usr/bin/passwd 指令 - <code>/usr/bin/passwd [A-Za-z]</code>： 只允許更改一般使用者密碼 - <code>!/usr/bin/passwd root</code>： 禁止更改 root 密碼</p>
+<p>群組設定：</p>
+<p>對特定群組底下帳號一次開放權限，可以直接對特定群組進行定義</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%群組名稱    來源主機=(可切換帳號) 可執行的指令</span><br></pre></td></tr></table></figure>
+
+<p>群組設定和使用者設定只差在群組名稱前的 % 前綴，其他欄位皆相同。如果要讓 groupa 群組下的所有使用者都可以用 sudo 指令，可以這樣設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">%groupa    ALL=(ALL) ALL</span><br></pre></td></tr></table></figure>
+
+<p>不需輸入密碼：</p>
+<p>想讓特定群組或使用者可以在不須輸入密碼的情況下，直接使用 sudo，可以加入 <code>NOPASSWD</code> 設定</p>
+<blockquote>
+<p>沒有加入 <code>NOPASSWD</code> 設定，預設五分鐘後必須再次輸入密碼</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 使用者</span><br><span class="line">dylan.liu237	ALL=(ALL) NOPASSWD:ALL</span><br><span class="line">// 群組</span><br><span class="line">％groupa	ALL=(ALL) NOPASSWD:ALL</span><br></pre></td></tr></table></figure>
+
+<p>使用 Alias：<br>有些情況 <code>/etc/sudoers</code> 的設定比較複雜，例如同時設定多個使用者或是多個允許指令，可以用 alias 做到類似變數的概念來管理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">User_Alias MYACC = acc1, acc2, acc3</span><br><span class="line">Cmnd_Alias MYEXE = !/usr/bin/passwd, /usr/bin/passwd [A-Za-z]*, !/usr/bin/passwd root</span><br><span class="line">MYACC   ALL=(root)  MYEXE</span><br></pre></td></tr></table></figure>
+
+<h4 id="passwd"><a href="#passwd" class="headerlink" title="passwd"></a>passwd</h4><p>更改使用者密碼</p>
+<p>passwd 指令可以變更使用者密碼，對於非 root 使用者而言，執行 passwd 後需輸入現行密碼後才可以更改密碼;如果是 root 則不需要，並可以更改所有使用者的密碼，包含 root 自己。</p>
+<blockquote>
+<ul>
+<li><code>/etc/passwd</code> 目錄儲存的是作業系統使用者訊息，該檔案為所有使用者可見。</li>
+<li><code>/etc/shadow</code> 被稱為 <code>/etc/passwd</code> 的影子檔案。它們之間的內容是互補的。shadow 內容包括使用者及被加密的密碼以及其它 <code>/etc/passwd</code> 不能包括的訊息，比如使用者的有效期限等。</li>
+</ul>
+</blockquote>
+<p>#</p>
+<p>參數：</p>
+<ul>
+<li>-S：顯示密碼狀態資訊</li>
+<li>-aS：顯示所有帳號訊息</li>
+<li>-d：移除使用者密碼</li>
+<li>-e：設定密碼過期狀態</li>
+<li>-l：鎖定使用者密碼</li>
+<li>-u：解除鎖定使用者密碼</li>
+<li>-n <number>：設定每隔多久才能變更一次密碼</number></li>
+<li>-x <number>：設定每隔多久需要更換一次密碼</number></li>
+<li>-w <number>：過期前幾天給予使用者變更密碼警告</number></li>
+<li>-i <number>：設定寬限期，在過期後幾天使用者還是可以照常登入，過期後帳號即無法登入</number></li>
+</ul>
+<p>範例：</p>
+<p>修改自己的密碼，需要輸入現行密碼(root 修改自己的密碼也是一樣的指令，但是不需輸入密碼)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">passwd</span><br><span class="line"><span class="comment"># (current) UNIX password:</span></span><br><span class="line"><span class="comment"># Enter new UNIX password:</span></span><br><span class="line"><span class="comment"># Retype new UNIX password:</span></span><br><span class="line"><span class="comment"># passwd: password updated successfully</span></span><br></pre></td></tr></table></figure>
+
+<p>root 使用者更改其他使用者密碼，不需輸入現行密碼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd dylan.liu237</span><br><span class="line"><span class="comment"># Enter new UNIX password:</span></span><br><span class="line"><span class="comment"># Retype new UNIX password:</span></span><br><span class="line"><span class="comment"># passwd: password updated successfully</span></span><br></pre></td></tr></table></figure>
+
+<p>顯示密碼狀態資訊</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查看自己的密碼資訊</span></span><br><span class="line">passwd -S</span><br><span class="line"></span><br><span class="line"><span class="comment"># 以 root 帳號查看其他使用者密碼資訊</span></span><br><span class="line">sudo passed -S dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>印出結果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dylan.liu237 L 07/17/2020 0 99999 7 -1</span><br></pre></td></tr></table></figure>
+
+<p>輸出七個欄位，對應的資訊如下</p>
+<ol>
+<li>帳號名稱</li>
+<li>密碼狀態，狀態包含鎖定密碼（L）、無密碼（NP）與可用密碼（P。</li>
+<li>上次修改密碼的時間。</li>
+<li>密碼最短使用期限（minimum password age），單位為天。</li>
+<li>密碼最長使用期限（maximum password age），單位為天。</li>
+<li>密碼過期前警告期間（password warning period），單位為天。</li>
+<li>密碼過期後可使用的期間（password inactivity period），單位為天。</li>
+</ol>
+<p>顯示所有帳號密碼資訊 (root 權限)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -aS</span><br></pre></td></tr></table></figure>
+
+<p>移除使用者密碼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -d dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>變更密碼過期狀態。有時候因為某些原因，例如重新設定密碼後，會希望使用者立刻更改自己的密碼，這時候可以使用 -e 參數</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -e dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd: password expiry information changed.</span><br></pre></td></tr></table></figure>
+
+<p>接著檢查狀態資訊</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -S dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dylan.liu237 P 01/01/1970 0 99999 7 -1</span><br></pre></td></tr></table></figure>
+
+<p>這時候如果使用者使用 SSH 登入的話，系統就會強制更新密碼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh dylan.liu237@34.80.206.16</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">*** System restart required ***</span><br><span class="line">Last login: Tue Sep  1 07:33:24 2020 from 211.21.120.39</span><br><span class="line">WARNING: Your password has expired.</span><br><span class="line">You must change your password now and login again!</span><br><span class="line">Changing password for dylan.liu237.</span><br><span class="line">(current) UNIX password:</span><br><span class="line">Enter new UNIX password:</span><br><span class="line">Retype new UNIX password:</span><br><span class="line">passwd: password updated successfully</span><br></pre></td></tr></table></figure>
+
+<p>鎖定使用者密碼。使用參數 <code>-l</code> 可以鎖定使用者密碼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -l dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>檢查使用者狀態</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -S dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dylan.liu237 L 09/01/2020 0 99999 7 -1</span><br></pre></td></tr></table></figure>
+
+<p>在鎖定之後，系統會在 <code>/etc/shadow</code> 的密碼欄位之前加上 <code>!</code>，在這個情況下該使用者無法更新自己的密碼</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dylan.liu237:!$6$aihNuUv/$c9jjnkmLa376aJ08gYXITIje8KECL25NMdVVGLOk4O4RVYEP5BrDEcTSAfAyjpV7wSABq7P89fUH.5b9cMrTN/:18506:0:99999:7:::</span><br></pre></td></tr></table></figure>
+
+<p>解除鎖定可以使用 <code>-u</code> 參數</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -u dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>設定密碼期限，至少每隔三天才可以變更一次密碼，設置為 0 代表可以任意變更密碼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -n 3 dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>設定密碼有效期限，每 30 天需要更換一次密碼</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -x 30 dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>密碼過期前 7 天警告</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -w 7 dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<p>當使用者密碼過期後，會有一段寬限期(inactivity period)，過了以後就無法登入，可以透過 <code>-i</code> 參數設定該時間</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo passwd -i 10 dylan.liu237</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-其他"><a href="#4-其他" class="headerlink" title="4.其他"></a>4.其他</h3><h4 id="man"><a href="#man" class="headerlink" title="man"></a>man</h4><p>查詢指令說明</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 查詢 ls 指令說明</span></span><br><span class="line">man ls</span><br></pre></td></tr></table></figure>
+
+<h4 id="history"><a href="#history" class="headerlink" title="history"></a>history</h4><p>列出歷史指令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">history</span><br></pre></td></tr></table></figure>
+
+<h2 id="快捷鍵"><a href="#快捷鍵" class="headerlink" title="快捷鍵"></a>快捷鍵</h2><h3 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h3><h4 id="Ctrl-C"><a href="#Ctrl-C" class="headerlink" title="Ctrl + C"></a>Ctrl + C</h4><p>中斷目前畫面上操作 (中斷前景程序 process)</p>
+<h4 id="Ctrl-D"><a href="#Ctrl-D" class="headerlink" title="Ctrl + D"></a>Ctrl + D</h4><p>離開 (等同 exit 指令 + Enter)</p>
+<h4 id="Ctrl-Z"><a href="#Ctrl-Z" class="headerlink" title="Ctrl + Z"></a>Ctrl + Z</h4><p>將目前畫面上操作切到背景 (不中斷操作)</p>
+<h4 id="Ctrl-L"><a href="#Ctrl-L" class="headerlink" title="Ctrl + L"></a>Ctrl + L</h4><p>清理畫面 (等同 clear 指令)</p>
+<h4 id="Ctrl-R"><a href="#Ctrl-R" class="headerlink" title="Ctrl + R"></a>Ctrl + R</h4><p>根據關鍵字查詢過往輸入的 Linux 指令</p>
+<h3 id="移動光標"><a href="#移動光標" class="headerlink" title="移動光標"></a>移動光標</h3><h4 id="Ctrl-A"><a href="#Ctrl-A" class="headerlink" title="Ctrl + A"></a>Ctrl + A</h4><p>移到行首</p>
+<h4 id="Ctrl-E"><a href="#Ctrl-E" class="headerlink" title="Ctrl + E"></a>Ctrl + E</h4><p>移到行尾</p>
+<h4 id="Ctrl-XX"><a href="#Ctrl-XX" class="headerlink" title="Ctrl + XX"></a>Ctrl + XX</h4><p>在命令行尾和光標間切換</p>
+<h3 id="刪除字"><a href="#刪除字" class="headerlink" title="刪除字"></a>刪除字</h3><h4 id="Ctrl-W"><a href="#Ctrl-W" class="headerlink" title="Ctrl + W"></a>Ctrl + W</h4><p>刪除光標前的一個單字，這樣就不用每次都要按折 delete 一個一個字刪除了</p>
+<h4 id="Ctrl-K"><a href="#Ctrl-K" class="headerlink" title="Ctrl + K"></a>Ctrl + K</h4><p>刪除光標後所有字，搭配 Ctrl + A 可以刪除整行</p>
+<h4 id="Ctrl-U"><a href="#Ctrl-U" class="headerlink" title="Ctrl + U"></a>Ctrl + U</h4><p>刪除光標前所有字，搭配 Ctrl + E 可以刪除整行</p>
+<h4 id="⌥-左右箭頭-MAC"><a href="#⌥-左右箭頭-MAC" class="headerlink" title="⌥ + 左右箭頭 (MAC)"></a>⌥ + 左右箭頭 (MAC)</h4><p>以單字為單位前後切換光標</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ul>
+<li><a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener">Linux 指令大全</a></li>
+<li><a href="http://it.givemepower.net/linux-command-cp-copy-files-and-directories/" target="_blank" rel="noopener">Linux 常用指令-cp-複製檔案與目錄</a></li>
+<li><a href="https://blog.xuite.net/chingwei/blog/16285667-%E3%80%90%EF%BC%AC%E3%80%91Linux+%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4%E9%9B%86" target="_blank" rel="noopener">【Ｌ】Linux 常用指令集</a></li>
+<li><a href="https://blog.gtwang.org/linux/unix-linux-find-command-examples/" target="_blank" rel="noopener">Unix/Linux 的 find 指令使用教學、技巧與範例整理</a></li>
+<li><a href="https://blog.gtwang.org/linux/linux-chown-command-tutorial/" target="_blank" rel="noopener">Linux 更改檔案擁有者與群組，chown 指令使用教學與範例</a></li>
+<li><a href="https://blog.gtwang.org/linux/sudo-su-command-tutorial-examples/" target="_blank" rel="noopener">Linux 的 su 與 sudo 指令教學與範例</a></li>
+<li><a href="https://blog.gtwang.org/linux/sudo-su-command-tutorial-examples/" target="_blank" rel="noopener">Linux 的 su 與 sudo 指令教學與範例</a></li>
+<li><a href="https://blog.gtwang.org/linux/linux-passwd-command-examples/" target="_blank" rel="noopener">Linux 的 passwd 指令範例教學</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/docker.html" rel="next" title="Docker 入門紀錄">
+                <i class="fa fa-chevron-left"></i> Docker 入門紀錄
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux-檔案系統架構"><span class="nav-number">1.</span> <span class="nav-text">Linux 檔案系統架構</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#根目錄-底下的目錄"><span class="nav-number">1.1.</span> <span class="nav-text">根目錄(/)底下的目錄</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本指令"><span class="nav-number">2.</span> <span class="nav-text">基本指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-資料夾與檔案處理"><span class="nav-number">2.1.</span> <span class="nav-text">1. 資料夾與檔案處理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mkdir"><span class="nav-number">2.1.1.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rm"><span class="nav-number">2.1.2.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ls"><span class="nav-number">2.1.3.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cd"><span class="nav-number">2.1.4.</span> <span class="nav-text">cd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#pwd"><span class="nav-number">2.1.5.</span> <span class="nav-text">pwd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cp"><span class="nav-number">2.1.6.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mv"><span class="nav-number">2.1.7.</span> <span class="nav-text">mv</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rm-1"><span class="nav-number">2.1.8.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find"><span class="nav-number">2.1.9.</span> <span class="nav-text">find</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#diff"><span class="nav-number">2.1.10.</span> <span class="nav-text">diff</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-文本處理"><span class="nav-number">2.2.</span> <span class="nav-text">2. 文本處理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#cat"><span class="nav-number">2.2.1.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#echo"><span class="nav-number">2.2.2.</span> <span class="nav-text">echo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#grep"><span class="nav-number">2.2.3.</span> <span class="nav-text">grep</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#wc"><span class="nav-number">2.2.4.</span> <span class="nav-text">wc</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sort"><span class="nav-number">2.2.5.</span> <span class="nav-text">sort</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-系統管理"><span class="nav-number">2.3.</span> <span class="nav-text">3. 系統管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#chmod"><span class="nav-number">2.3.1.</span> <span class="nav-text">chmod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chown"><span class="nav-number">2.3.2.</span> <span class="nav-text">chown</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#su"><span class="nav-number">2.3.3.</span> <span class="nav-text">su</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sudo"><span class="nav-number">2.3.4.</span> <span class="nav-text">sudo</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#passwd"><span class="nav-number">2.3.5.</span> <span class="nav-text">passwd</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-其他"><span class="nav-number">2.4.</span> <span class="nav-text">4.其他</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#man"><span class="nav-number">2.4.1.</span> <span class="nav-text">man</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#history"><span class="nav-number">2.4.2.</span> <span class="nav-text">history</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#快捷鍵"><span class="nav-number">3.</span> <span class="nav-text">快捷鍵</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常用"><span class="nav-number">3.1.</span> <span class="nav-text">常用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-C"><span class="nav-number">3.1.1.</span> <span class="nav-text">Ctrl + C</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-D"><span class="nav-number">3.1.2.</span> <span class="nav-text">Ctrl + D</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-Z"><span class="nav-number">3.1.3.</span> <span class="nav-text">Ctrl + Z</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-L"><span class="nav-number">3.1.4.</span> <span class="nav-text">Ctrl + L</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-R"><span class="nav-number">3.1.5.</span> <span class="nav-text">Ctrl + R</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#移動光標"><span class="nav-number">3.2.</span> <span class="nav-text">移動光標</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-A"><span class="nav-number">3.2.1.</span> <span class="nav-text">Ctrl + A</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-E"><span class="nav-number">3.2.2.</span> <span class="nav-text">Ctrl + E</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-XX"><span class="nav-number">3.2.3.</span> <span class="nav-text">Ctrl + XX</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#刪除字"><span class="nav-number">3.3.</span> <span class="nav-text">刪除字</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-W"><span class="nav-number">3.3.1.</span> <span class="nav-text">Ctrl + W</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-K"><span class="nav-number">3.3.2.</span> <span class="nav-text">Ctrl + K</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Ctrl-U"><span class="nav-number">3.3.3.</span> <span class="nav-text">Ctrl + U</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#⌥-左右箭頭-MAC"><span class="nav-number">3.3.4.</span> <span class="nav-text">⌥ + 左右箭頭 (MAC)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/linux-basic.html';
+          this.page.identifier = 'linux-basic.html';
+          this.page.title = 'Linux 基本認識與常用指令整理';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

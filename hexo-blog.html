@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="圖片來源： 網路  開始寫學習筆記大概三個月，之前一直使用 github issue 來放文章，它可以支援 markdown 語法，有簡單的分類標籤，不需要架設，登入即用，能滿足最基本的要求，缺點大概是他本來就不是拿來當部落格用的，文章如果多找一些資料蠻不方便的，另外也無法被搜尋引擎找到。  為什麼轉戰 hexo   支援分類、站內搜尋功能 Next 主題會自動幫你生成文章大綱 支援 Markd">
+<meta name="keywords" content="Hexo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 部落格架設流程紀錄">
+<meta property="og:url" content="https://dylan237.github.io/hexo-blog.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:description" content="圖片來源： 網路  開始寫學習筆記大概三個月，之前一直使用 github issue 來放文章，它可以支援 markdown 語法，有簡單的分類標籤，不需要架設，登入即用，能滿足最基本的要求，缺點大概是他本來就不是拿來當部落格用的，文章如果多找一些資料蠻不方便的，另外也無法被搜尋引擎找到。  為什麼轉戰 hexo   支援分類、站內搜尋功能 Next 主題會自動幫你生成文章大綱 支援 Markd">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://titangene.github.io/images/cover/hexo.jpg">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1558666842782.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1558666940950.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/tempsnip.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/tempsnip2.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.434Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo 部落格架設流程紀錄">
+<meta name="twitter:description" content="圖片來源： 網路  開始寫學習筆記大概三個月，之前一直使用 github issue 來放文章，它可以支援 markdown 語法，有簡單的分類標籤，不需要架設，登入即用，能滿足最基本的要求，缺點大概是他本來就不是拿來當部落格用的，文章如果多找一些資料蠻不方便的，另外也無法被搜尋引擎找到。  為什麼轉戰 hexo   支援分類、站內搜尋功能 Next 主題會自動幫你生成文章大綱 支援 Markd">
+<meta name="twitter:image" content="https://titangene.github.io/images/cover/hexo.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/hexo-blog.html">
+
+
+
+
+
+  <title>Hexo 部落格架設流程紀錄 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/hexo-blog.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Hexo 部落格架設流程紀錄</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-05-24T12:03:34+08:00">
+                2019-05-24
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">Hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/hexo-blog.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="hexo-blog.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="https://titangene.github.io/images/cover/hexo.jpg" alt style="max-width:70%;display:block;margin:0 auto">
+<div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">圖片來源： 網路</div>
+
+<p>開始寫學習筆記大概三個月，之前一直使用 github issue 來放文章，它可以支援 <code>markdown</code> 語法，有簡單的分類標籤，不需要架設，登入即用，能滿足最基本的要求，缺點大概是他本來就不是拿來當部落格用的，文章如果多找一些資料蠻不方便的，另外也無法被搜尋引擎找到。</p>
+<blockquote>
+<p>為什麼轉戰 hexo</p>
+</blockquote>
+<ul>
+<li>支援分類、站內搜尋功能</li>
+<li>Next 主題會自動幫你生成文章大綱</li>
+<li>支援 Markdown</li>
+<li>簡單美觀</li>
+<li>可以做些客製化</li>
+<li>可做 SEO</li>
+</ul>
+<p>對我而言，寫筆記主要的用途是幫助自己在未來遇到相同問題時可以很快透過過去的經驗找到解答，在撰寫的過程中透過大量的查找資料，無形中也更加深觀念。Hexo 的分類、標籤、站內搜尋和文章目錄功能都可以幫助我很快的過濾我需要的資訊，這點真的非常方便！<br>網路上 Hexo 的架站教學非常豐富完整，只要照著文章做，30 分鐘就能做出個基本可用的部落格了，後面再花些時間去加入一些你自己想要的功能就可以開始使用了。</p>
+<a id="more"></a>
+
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><ul>
+<li>Node.js 環境</li>
+<li>Git 環境以及基本 Github 使用</li>
+</ul>
+<h2 id="基本建置"><a href="#基本建置" class="headerlink" title="基本建置"></a>基本建置</h2><h3 id="安裝-Node-js-環境"><a href="#安裝-Node-js-環境" class="headerlink" title="安裝 Node.js 環境"></a>安裝 Node.js 環境</h3><p>如果是沒有使用過 <code>Node.js</code> 的人可能會比較辛苦，需要花點時間學習一下，建議先了解看看基本概念和使用方式。</p>
+<ul>
+<li>Node.js 有兩種安裝方式<ul>
+<li>直接前往<a href="https://nodejs.org/en/" target="_blank" rel="noopener">Node.js 官網</a>下載</li>
+<li><a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">nvm</a> 可以切換管理 node 版本</li>
+</ul>
+</li>
+</ul>
+<p>如果是剛接觸的朋友可以先到官網直接下載來先試試，但未來建議使用 <code>nvm</code> 來安裝， node.js 隨著版本更新會有些版本上的差異，有時這個專案是這個版本，那個專案又是別的版本，會有一些不相容的問題。nvm 只要使用簡單的指令 <code>nvm install :版本號</code> + <code>nvm use :版本號</code>，就可以自如切換 node 版本。</p>
+<h3 id="安裝-Hexo"><a href="#安裝-Hexo" class="headerlink" title="安裝 Hexo"></a>安裝 Hexo</h3><p>使用 npm 安裝 hexo ( npm 是安裝 node.js 會一併附給你的套件管理工具 )</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>安裝成功後，查詢版本</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="創建部落格"><a href="#創建部落格" class="headerlink" title="創建部落格"></a>創建部落格</h3><p>初始化</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo init blog</span><br></pre></td></tr></table></figure>
+
+<p>移動到剛剛創建的資料夾</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> blog</span><br></pre></td></tr></table></figure>
+
+<p>安裝相關套件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+
+<h3 id="將-Hexo-上傳到-Github"><a href="#將-Hexo-上傳到-Github" class="headerlink" title="將 Hexo 上傳到 Github"></a>將 Hexo 上傳到 Github</h3><ol>
+<li><p>首先先到 <a href="https://github.com/" target="_blank" rel="noopener">Github</a> 新增一個 repository<br><img src="https://github.com/dylan237/images_source/blob/master/1558666842782.jpg?raw=true" alt></p>
+</li>
+<li><p>將 repository 名稱命名為 <code>:你的帳號.github.io</code>， 像我的帳號是 dylan237，那就輸入</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dylan237.github.io</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/1558666940950.jpg?raw=true" alt></p>
+<h3 id="配置-config-yml"><a href="#配置-config-yml" class="headerlink" title="配置 _config.yml"></a>配置 _config.yml</h3><p>檔案路徑<code>./_config.yml</code>，這個檔案是 Hexo 的全域配置文檔，在上面進行 <code>hexo init blog</code> 步驟的時候就會自動生成了。</p>
+<p>開啟之後拉到檔案最底部</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span></span><br></pre></td></tr></table></figure>
+
+<p>將它修改為</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line"><span class="attr">  type:</span> <span class="string">git</span></span><br><span class="line"><span class="attr">  repository:</span> <span class="attr">https://github.com/dylan237/dylan237.github.io.git</span></span><br><span class="line"><span class="attr">  branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure>
+
+<p>這邊以我自己的帳號作範例，帳號部分記得要換成自己的。且注意 <code>:</code> 後一定要有一個空格。</p>
+<h3 id="部屬"><a href="#部屬" class="headerlink" title="部屬"></a>部屬</h3><p>先安裝 Hexo Git</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<p>使用 Hexo 的指令編譯你的部落格，並且快速部屬到你的 Github，指令是：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
+
+<p>啟動本機服務</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+
+<p>接著就可以到　<code>https://dylan237.github.io/</code> 查看是否部屬成功</p>
+<h3 id="Next-主題"><a href="#Next-主題" class="headerlink" title="Next 主題"></a>Next 主題</h3><p><a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">官方文檔</a></p>
+<ul>
+<li>安裝</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cd</span> blog</span><br><span class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>配置</li>
+</ul>
+<p>開啟站點配置文件，<code>./themes/next/_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">theme:</span> <span class="string">next</span></span><br></pre></td></tr></table></figure>
+
+<p>到此，NexT 主題安裝完成。下一步我們將驗證主題是否正確啟用。在切換主題之後、驗證之前，我們最好使用這個語法來清除 Hexo 的緩存。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>主題設定</li>
+</ul>
+<p>檔案同樣是 <code>./themes/next/_config.yml</code></p>
+<p>Scheme 的切換通過更改主題配置文件，搜索 scheme 關鍵字。你會看到有三行 scheme 的配置，將你需用啟用的 scheme 前面註釋 # 去除即可。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#scheme: Muse</span></span><br><span class="line"><span class="comment">#scheme: Mist</span></span><br><span class="line"><span class="attr">scheme:</span> <span class="string">Pisces</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="發布及刪除文章"><a href="#發布及刪除文章" class="headerlink" title="發布及刪除文章"></a>發布及刪除文章</h3><p><strong>創建文章</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new :文章名稱</span><br></pre></td></tr></table></figure>
+
+<p>前往 source / _post 資料夾中，打開 <code>:文章名稱.md</code> 文件，在最下面新增 Markdown 語法的內容。</p>
+<p>修改完後，執行以下指令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g    <span class="comment"># d = 部署, g = 生成</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>刪除文章</strong></p>
+<p>進入到 <code>source / _post</code> 資料夾中，找到欲刪除文件，在本地直接執行刪除。</p>
+<p>執行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo clean    <span class="comment"># 清除快取檔案和已產生的靜態檔案。</span></span><br><span class="line">$ hexo d -g     <span class="comment"># d = deploy, g = generate</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="額外功能"><a href="#額外功能" class="headerlink" title="額外功能"></a>額外功能</h2><h3 id="新增站內搜尋功能"><a href="#新增站內搜尋功能" class="headerlink" title="新增站內搜尋功能"></a>新增站內搜尋功能</h3><p><a href="http://theme-next.iissnan.com/third-party-services.html#local-search" target="_blank" rel="noopener">參考文章</a></p>
+<p>首先安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install hexo-generator-searchdb --save</span><br></pre></td></tr></table></figure>
+
+<p>編輯站點配置文件 <code>./_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">search:</span></span><br><span class="line"><span class="attr">  path:</span> <span class="string">search.xml</span></span><br><span class="line"><span class="attr">  field:</span> <span class="string">post</span></span><br><span class="line"><span class="attr">  format:</span> <span class="string">html</span></span><br><span class="line"><span class="attr">  limit:</span> <span class="number">10000</span></span><br></pre></td></tr></table></figure>
+
+<p>編輯主題配置文件 <code>./themes/next/_config.yml</code></p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Local search</span></span><br><span class="line"><span class="attr">local_search:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="新增分類功能"><a href="#新增分類功能" class="headerlink" title="新增分類功能"></a>新增分類功能</h3><p><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/" target="_blank" rel="noopener">參考文章</a></p>
+<p>首先安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page categories</span><br></pre></td></tr></table></figure>
+
+<p>成功後會提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Created: ~/Documents/blog/source/categories/index.md</span><br></pre></td></tr></table></figure>
+
+<p>根據以上路徑找到 <code>index.md</code>文件，打開後會看到預設是</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2017-05-27 13:47:40</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>添加 <code>type: &quot;categories&quot;</code> 到內容中，並存檔</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2017-05-27 13:47:40</span><br><span class="line">type: 'categories'</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>開啟 <code>./themes/next/_config.yml</code> 搜尋，menu 找尋相關配置，將 categories 註解取消</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<p>之後在 <code>./source/_post</code> 新增 Markdown 文章都可以添加 <code>categories</code>屬性</p>
+<blockquote>
+<p>注意： hexo 一篇文章只能屬於一個分類，舉例來說如果在 <code>- web前端</code> 下方添加 <code>- JavaScript</code>， hexo 不會產生兩個分類，而是把 <code>- JavaScript</code> 分類歸在 <code>- web前端</code> 分類下。</p>
+</blockquote>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 表單的操作及應用</span><br><span class="line">date: 2017-05-26 12:12:57</span><br><span class="line">categories:</span><br><span class="line">  - web前端</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>到這邊，就成功增加分類了，點擊首頁的分類可以看到該分類下的所有文章，只有添加了 <code>categories: xxx</code>的文章才會被收錄到首頁的分類中</p>
+<h3 id="新增標籤功能"><a href="#新增標籤功能" class="headerlink" title="新增標籤功能"></a>新增標籤功能</h3><p>首先安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
+
+<p>成功後會提示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">INFO  Created: ~/Documents/blog/source/tags/index.md</span><br></pre></td></tr></table></figure>
+
+<p>根據以上路徑找到 <code>index.md</code>文件，打開後會看到預設是</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2017-05-27 13:47:40</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>添加 <code>type: &quot;tags&quot;</code> 到內容中，並存檔</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: tags</span><br><span class="line">date: 2017-05-27 13:47:40</span><br><span class="line">type: 'tags'</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<p>開啟<code>./themes/next/_config.yml</code> 搜尋，menu 找尋相關配置，將 tags 註解取消</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line">  <span class="comment">#about: /about/ || user</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br><span class="line">  <span class="comment">#schedule: /schedule/ || calendar</span></span><br><span class="line">  <span class="comment">#sitemap: /sitemap.xml || sitemap</span></span><br><span class="line">  <span class="comment">#commonweal: /404/ || heartbeat</span></span><br></pre></td></tr></table></figure>
+
+<p>之後在 <code>./source/_post</code> 新增 Markdown 文章可以添加 <code>tags</code>屬性</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 表單的操作及應用</span><br><span class="line">date: 2017-05-26 12:12:57</span><br><span class="line">categories:</span><br><span class="line">  - web前端</span><br><span class="line">tags:</span><br><span class="line">  - 表格</span><br><span class="line">  - 表單驗證</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="作者相關設定"><a href="#作者相關設定" class="headerlink" title="作者相關設定"></a>作者相關設定</h3><h4 id="大頭照"><a href="#大頭照" class="headerlink" title="大頭照"></a>大頭照</h4><p>新增一個資料夾來放照片</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mkdir <span class="built_in">source</span>/uploads</span><br></pre></td></tr></table></figure>
+
+<p>將照片丟進資料夾裡，並且設定在設定檔 <code>themes/next/_config.yml</code>設定路徑</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">avatar:</span> <span class="string">/uploads/avatar.jpg</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h4><p>在根目錄的網站設定 <code>/_config.yml</code>中設定名字、標題和副標題</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">&lt;標題&gt;</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">&lt;副標題&gt;</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">&lt;描述&gt;</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">&lt;你的名字&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="社群媒體連結"><a href="#社群媒體連結" class="headerlink" title="社群媒體連結"></a>社群媒體連結</h4><p>在主題設定 <code>themes/next/_config.yml</code>中新增社群網路連結</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Social links</span></span><br><span class="line"><span class="attr">social:</span></span><br><span class="line"><span class="attr">  GitHub:</span> <span class="comment">#url</span></span><br><span class="line"><span class="attr">  Twitter:</span> <span class="comment">#url</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="About-Me-Page"><a href="#About-Me-Page" class="headerlink" title="About Me Page"></a>About Me Page</h4><p>新建關於我頁面</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page <span class="string">"about"</span></span><br></pre></td></tr></table></figure>
+
+<p>在 <code>themes/next/_config.yml</code>搜尋 menu 找到相關設定，並且將 about 註解去除</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags</span></span><br><span class="line"><span class="attr">  about:</span> <span class="string">/about</span></span><br></pre></td></tr></table></figure>
+
+<p>可以開始編輯關於我頁面囉 <code>source/about/index.md</code></p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: 關於我</span><br><span class="line">date: 2019-05-27 09:57:05</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="section"># 關於我</span></span><br><span class="line"></span><br><span class="line">大家好，我是 Dylan .......</span><br></pre></td></tr></table></figure>
+
+<h3 id="Disqus-留言功能"><a href="#Disqus-留言功能" class="headerlink" title="Disqus 留言功能"></a>Disqus 留言功能</h3><ol>
+<li>先到<a href="https://disqus.com/" target="_blank" rel="noopener">Disqus</a>註冊服務</li>
+<li>選擇 I want to install Disqus on my site<br><img src="https://github.com/dylan237/images_source/blob/master/tempsnip.jpg?raw=true" alt></li>
+<li>自訂一個 Website Name<br><img src="https://github.com/dylan237/images_source/blob/master/tempsnip2.jpg?raw=true" alt></li>
+<li>回到 <code>themes/next/_config.yml</code> 搜尋 disqus，填入以下資訊</li>
+</ol>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">disqus:</span></span><br><span class="line"><span class="attr">  enable:</span> <span class="literal">true</span></span><br><span class="line"><span class="attr">  shortname:</span> <span class="comment">#你的Website Name</span></span><br><span class="line"><span class="attr">  count:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>未來你的所有文章會預設開啟評論功能，如果要關閉可以在該文章表頭設定</li>
+</ol>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">...略</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="文章預設表頭模板"><a href="#文章預設表頭模板" class="headerlink" title="文章預設表頭模板"></a>文章預設表頭模板</h3><p>打開 <code>./scaffolds/post.md</code>， 可以設置新文章的模板，在執行 <code>hexo new :文章名</code> 後，新文章會根據該模板添加預設的預設值。</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123; &#123; title &#125; &#125;</span><br><span class="line">date: &#123; &#123; date &#125; &#125;</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
+
+<h3 id="首頁文章顯示自訂摘要"><a href="#首頁文章顯示自訂摘要" class="headerlink" title="首頁文章顯示自訂摘要"></a>首頁文章顯示自訂摘要</h3><p>這邊承接上面的模板功能，打開 <code>./scaffolds/post.md</code>，在下方新增配置</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: &#123; &#123; title &#125; &#125;</span><br><span class="line">date: &#123; &#123; date &#125; &#125;</span><br><span class="line">categories:</span><br><span class="line">tags:</span><br><span class="line">---</span><br><span class="line"></span><br><span class="line"><span class="xml"><span class="comment">&lt;!-- more --&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>從表頭結尾的 <code>---</code>開始到 <code>&lt;!-- more --&gt;</code>中間可以撰寫該文章的摘要，當瀏覽部落格首頁時，hexo 只會顯示該摘要而不會顯示文章的全文，如此可以讓首頁更加整潔好閱讀。</p>
+<h2 id="常用指令整理"><a href="#常用指令整理" class="headerlink" title="常用指令整理"></a>常用指令整理</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line">hexo new post &lt;title&gt;</span><br><span class="line">hexo new page tags</span><br><span class="line">hexo server</span><br><span class="line">hexo server -p 8000 --debug</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure>
+
+<h2 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h2><h3 id="將-Next-自訂配置分離"><a href="#將-Next-自訂配置分離" class="headerlink" title="將 Next 自訂配置分離"></a>將 Next 自訂配置分離</h3><p>目前升級 NexT 主題的時候並非是非常的流暢。若使用 <code>git pull</code>的方式，很多時候可能會產生衝突;而下載新版本覆蓋安裝的方式又需要手動合併主題的 <code>_config.yml</code>文件。</p>
+<p>在此修改之前，NexT 建議將配置分離，一部分在站點的配置文件中，另外一部分在主題的配置文件中。將需要自定的選項放置在站點配置文件中，從而脫離避免更新主題時可能遇到的麻煩這種方式是可行，但是有一些缺點：</p>
+<ol>
+<li>配置分離成了兩個部分</li>
+<li>用戶可能會疑惑一些選項該放置在哪裡比較合適</li>
+</ol>
+<p>為了解決這個問題，NexT 將會使用 Hexo 的 <a href="https://hexo.io/docs/data-files.html" target="_blank" rel="noopener">Data 文件</a>。然而由於數據文件是在 Hexo 3 版本時引進的，所以要使用這個特性，需要 Hexo 的版本不低於 3。</p>
+<p>若你比較喜歡 Hexo 2.x 版本，可以繼續使用原先的配置方式.NEXT 保持著向下兼容。</p>
+<h4 id="優點"><a href="#優點" class="headerlink" title="優點"></a>優點</h4><p>通過這個特性，你可以將所有的主題配置放置在站點的 <code>source/_data/next.yml</code>文件中。原先放置在站點配置文件中的選項可以遷移到新的位置，同時，主題配置文件可以不用做任何修改。若後續版本有配置相關的改動時，僅需你在 <code>next.yml</code>中做相應調整即可。</p>
+<h4 id="如何使用此功能"><a href="#如何使用此功能" class="headerlink" title="如何使用此功能"></a>如何使用此功能</h4><ol>
+<li>請先確保你所使用的 Hexo 版本在 3 以上</li>
+<li>站點在的 <code>source/_data</code>目錄下新建 <code>next.yml</code>文件（_data 目錄可能需要手動新建）</li>
+<li>將 NexT 主題設定檔 <code>_config.yml</code>複製到 <code>next.yml</code>。</li>
+</ol>
+<h4 id="參考來源"><a href="#參考來源" class="headerlink" title="參考來源"></a>參考來源</h4><p><a href="https://github.com/iissnan/hexo-theme-next/issues/932" target="_blank" rel="noopener">远程仓库无法备份 theme/next 主题的问题</a><br><a href="https://github.com/iissnan/hexo-theme-next/issues/328" target="_blank" rel="noopener">Theme configurations using Hexo data files</a><br><a href="https://swibinchter.github.io/2017/01/11/Hexo%E5%8D%9A%E5%AE%A2%E4%B8%BB%E9%A2%98%E6%96%87%E4%BB%B6%E5%A4%B9%E6%97%A0%E6%B3%95%E5%AE%8C%E6%95%B4push%E5%8F%8Aclone/" target="_blank" rel="noopener">Hexo 博客主题文件夹无法完整 push 及 clone</a></p>
+<h3 id="SEO-搜尋引擎優化"><a href="#SEO-搜尋引擎優化" class="headerlink" title="SEO 搜尋引擎優化"></a>SEO 搜尋引擎優化</h3><p>由於篇幅過長，請直接參考文章</p>
+<ul>
+<li><a href="https://yogapan.github.io/2017/08/11/%E7%94%A8Hexo-Github-Pages%E6%90%AD%E5%BB%BA%E5%80%8B%E4%BA%BA%E9%83%A8%E8%90%BD%E6%A0%BC/#Google-SEO" target="_blank" rel="noopener">用 Hexo-Github-Pages 搭建個人部落格</a></li>
+<li><a href="https://hoxis.github.io/Hexo+Next%20SEO%E4%BC%98%E5%8C%96.html" target="_blank" rel="noopener">Hexo 博客 Next 主题 SEO 优化方法</a></li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://yaoandy107.github.io/hexo-tutorial/" target="_blank" rel="noopener">Hexo+GitHub，新手也可以快速建立部落格</a><br><a href="https://yogapan.github.io/2017/08/11/%E7%94%A8Hexo-Github-Pages%E6%90%AD%E5%BB%BA%E5%80%8B%E4%BA%BA%E9%83%A8%E8%90%BD%E6%A0%BC/" target="_blank" rel="noopener">用 Hexo-Github-Pages 搭建個人部落格</a><br><a href="https://linlif.github.io/2017/05/27/Hexo%E4%BD%BF%E7%94%A8%E6%94%BB%E7%95%A5-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E5%8F%8A%E6%A0%87%E7%AD%BE/" target="_blank" rel="noopener">Hexo 使用攻略-添加分类及标签</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hexo/" rel="tag"># Hexo</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/http-game.html" rel="next" title="Lidemy HTTP Challenge 紀錄">
+                <i class="fa fa-chevron-left"></i> Lidemy HTTP Challenge 紀錄
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/xss-attack.html" rel="prev" title="認識 XSS 攻擊及防範方案">
+                認識 XSS 攻擊及防範方案 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本建置"><span class="nav-number">2.</span> <span class="nav-text">基本建置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Node-js-環境"><span class="nav-number">2.1.</span> <span class="nav-text">安裝 Node.js 環境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝-Hexo"><span class="nav-number">2.2.</span> <span class="nav-text">安裝 Hexo</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#創建部落格"><span class="nav-number">2.3.</span> <span class="nav-text">創建部落格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#將-Hexo-上傳到-Github"><span class="nav-number">2.4.</span> <span class="nav-text">將 Hexo 上傳到 Github</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置-config-yml"><span class="nav-number">2.5.</span> <span class="nav-text">配置 _config.yml</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#部屬"><span class="nav-number">2.6.</span> <span class="nav-text">部屬</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Next-主題"><span class="nav-number">2.7.</span> <span class="nav-text">Next 主題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#發布及刪除文章"><span class="nav-number">2.8.</span> <span class="nav-text">發布及刪除文章</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#額外功能"><span class="nav-number">3.</span> <span class="nav-text">額外功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#新增站內搜尋功能"><span class="nav-number">3.1.</span> <span class="nav-text">新增站內搜尋功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增分類功能"><span class="nav-number">3.2.</span> <span class="nav-text">新增分類功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增標籤功能"><span class="nav-number">3.3.</span> <span class="nav-text">新增標籤功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#作者相關設定"><span class="nav-number">3.4.</span> <span class="nav-text">作者相關設定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#大頭照"><span class="nav-number">3.4.1.</span> <span class="nav-text">大頭照</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#作者"><span class="nav-number">3.4.2.</span> <span class="nav-text">作者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#社群媒體連結"><span class="nav-number">3.4.3.</span> <span class="nav-text">社群媒體連結</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#About-Me-Page"><span class="nav-number">3.4.4.</span> <span class="nav-text">About Me Page</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disqus-留言功能"><span class="nav-number">3.5.</span> <span class="nav-text">Disqus 留言功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文章預設表頭模板"><span class="nav-number">3.6.</span> <span class="nav-text">文章預設表頭模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首頁文章顯示自訂摘要"><span class="nav-number">3.7.</span> <span class="nav-text">首頁文章顯示自訂摘要</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用指令整理"><span class="nav-number">4.</span> <span class="nav-text">常用指令整理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#補充"><span class="nav-number">5.</span> <span class="nav-text">補充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#將-Next-自訂配置分離"><span class="nav-number">5.1.</span> <span class="nav-text">將 Next 自訂配置分離</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#優點"><span class="nav-number">5.1.1.</span> <span class="nav-text">優點</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何使用此功能"><span class="nav-number">5.1.2.</span> <span class="nav-text">如何使用此功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#參考來源"><span class="nav-number">5.1.3.</span> <span class="nav-text">參考來源</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SEO-搜尋引擎優化"><span class="nav-number">5.2.</span> <span class="nav-text">SEO 搜尋引擎優化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">6.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/hexo-blog.html';
+          this.page.identifier = 'hexo-blog.html';
+          this.page.title = 'Hexo 部落格架設流程紀錄';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

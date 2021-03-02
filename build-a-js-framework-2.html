@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,克服JS的奇怪部分,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="JavaScript,克服JS的奇怪部分">
+<meta property="og:type" content="article">
+<meta property="og:title" content="實作一個 JavaScript 迷你框架 (二)">
+<meta property="og:url" content="https://dylan237.github.io/build-a-js-framework-2.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1551080138598.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1551142593279.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1551086394197.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.431Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="實作一個 JavaScript 迷你框架 (二)">
+<meta name="twitter:image" content="https://github.com/dylan237/images_source/blob/master/1551080138598.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/build-a-js-framework-2.html">
+
+
+
+
+
+  <title>實作一個 JavaScript 迷你框架 (二) | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/build-a-js-framework-2.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">實作一個 JavaScript 迷你框架 (二)</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-02-28T15:13:20+08:00">
+                2019-02-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/克服JS的奇怪部分/" itemprop="url" rel="index">
+                    <span itemprop="name">克服JS的奇怪部分</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/build-a-js-framework-2.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="build-a-js-framework-2.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <img src="" alt="" style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px"> -->
+
+<a id="more"></a>
+
+<!-- <div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="javascript:;">
+    網路
+  </a>
+</div>
+<br /> -->
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前一篇<a href="https://dylan237.github.io/build-a-js-framework-1.html">筆記</a>，我們完成的需求有：</p>
+<ul>
+<li><p><del>是一個可重複使用的 library/framework，也就是說，每一個安裝此 framework 的人可以直接使用，不會和它原本程式碼有所衝突</del>。</p>
+</li>
+<li><p><del>和 jQuery 只需要輸入 <code>$( )</code> 一樣，我們可以使用 <code>G$()</code> 來建立物件</del>。</p>
+</li>
+</ul>
+<p>剩下的需求有：</p>
+<ul>
+<li><p>當我們告訴它我們的姓（lastname）名（firstname）還有選擇的語言（language）時，它可以用正式（formal）和非正式（informal）的方式和我們打招呼。</p>
+</li>
+<li><p>支援英文（English）和中文（Chinese）兩種語言。</p>
+</li>
+<li><p>支援 jQuery，可以把 greetr 產生的訊息直接顯示於HTML中。</p>
+</li>
+</ul>
+<br>
+
+<h2 id="新增一些變數-amp-方法"><a href="#新增一些變數-amp-方法" class="headerlink" title="新增一些變數 &amp; 方法"></a>新增一些變數 &amp; 方法</h2><h3 id="建立全域環境無法取用的變數"><a href="#建立全域環境無法取用的變數" class="headerlink" title="建立全域環境無法取用的變數"></a>建立全域環境無法取用的變數</h3><p>在開始建立<strong>方法（method）</strong>前，我想要先建立一些<strong>變數</strong>是我之後可以在<strong>方法</strong>中使用的，但這些變數又不會和外層的 <strong>global environment</strong> 有所衝突也不能被外層所取用，要如何達到呢？</p>
+<blockquote>
+<p>參考：<br><a href="https://pjchender.blogspot.com/2015/12/javascriptscope-chainouter-environment.html" target="_blank" rel="noopener">[筆記] JavaScript中Scope Chain和outer environment的概念</a><br><a href="https://pjchender.blogspot.com/2016/05/javascriptclosures.html" target="_blank" rel="noopener">[筆記] 談談JavaScript中closure的概念 – Part 1</a></p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">global, $</span>)</span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> Greetr = <span class="function"><span class="keyword">function</span>(<span class="params">firstname, lastname, language</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Greetr.init(firstname, lastname, language);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> supportedLangs = [<span class="string">'en'</span>, <span class="string">'ch'</span>]   <span class="comment">/* 看這邊就好 */</span></span><br><span class="line">  </span><br><span class="line">    Greetr.prototype = &#123;&#125;</span><br><span class="line">  </span><br><span class="line">    Greetr.init = <span class="function"><span class="keyword">function</span>(<span class="params">firstname, lastname, language</span>)</span>&#123;</span><br><span class="line">  </span><br><span class="line">      <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">      self.firstname = firstname || <span class="string">''</span>;</span><br><span class="line">      self.lastname = lastname || <span class="string">''</span>;</span><br><span class="line">      self.language = language || <span class="string">'ch'</span>;</span><br><span class="line">  </span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">  &#125;)(<span class="built_in">window</span>, jQuery)</span><br></pre></td></tr></table></figure>
+
+<p>我們不用放在 <strong>prototype</strong> 或 <strong>function constructor</strong> 裡面，這樣會<strong>佔據額外的記憶體位置</strong>。</p>
+<p>直接將變數建立在 <strong>IIFE裡</strong> 就可以了，通過 <strong>scope chain</strong>的特性，<strong>外部環境</strong> <em>(這邊相對於IIFE的外部環境就是window)</em> 是參照不到這個 IIFE 內的變數的。<br>透過以上程式碼其實我們已經產生一個<strong>閉包 Closure</strong>。透過這種方法，我們可以讓使用 framework 的人沒有辦法去改這些變數的值，但是在使用 <code>method</code> 的時候，仍然可以參考到這些變數。</p>
+<br>
+
+<p>建立更多變數</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params">global, $</span>)</span>&#123;</span><br><span class="line">  </span><br><span class="line">    <span class="keyword">var</span> Greetr = <span class="function"><span class="keyword">function</span>(<span class="params">firstname, lastname, language</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> Greetr.init(firstname, lastname, language);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 看這邊就好 */</span></span><br><span class="line">    <span class="keyword">var</span> supportedLangs = [<span class="string">'en'</span>, <span class="string">'ch'</span>] ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> greetings = &#123;</span><br><span class="line">        en: <span class="string">'Hello'</span>,</span><br><span class="line">        ch: <span class="string">'你好'</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> formalGreetings = &#123;</span><br><span class="line">        en: <span class="string">'Greetings'</span>,</span><br><span class="line">        ch: <span class="string">'您好'</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> logMessages = &#123;</span><br><span class="line">        en: <span class="string">'Logged in'</span>,</span><br><span class="line">        ch: <span class="string">'已登入'</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="comment">/* 看這邊就好 */</span></span><br><span class="line">  </span><br><span class="line">    <span class="comment">// ...略</span></span><br><span class="line"></span><br><span class="line">  &#125;)(<span class="built_in">window</span>, jQuery)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h3 id="開始建立方法-method"><a href="#開始建立方法-method" class="headerlink" title="開始建立方法(method)"></a>開始建立方法(method)</h3><h4 id="方法該寫在哪"><a href="#方法該寫在哪" class="headerlink" title="方法該寫在哪 ?"></a>方法該寫在哪 ?</h4><p>有兩個地方可以放置我們想要的方法，分別是如下圖的（1）和 （2）。但是如果放在這個 <strong>function constructor</strong> 中（2），變成每一個所建立的物件都會直接帶有這個方法，如此會佔據相當多的記憶體空間；所以比較好的方式是利用原型的概念，把根據這個 function constructor 所建立的物件，都可以使用到的方法，放到（1） 的 <strong>prototype</strong> 當中。</p>
+<blockquote>
+<p>參考：<br><a href="https://dylan237.github.io/function-constructor.html">JS的原型繼承(方法1) － 函數建構子 與「new」</a> - 我們不該把方法放在 function constructor 中</p>
+</blockquote>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1551080138598.jpg?raw=true" alt></p>
+<h4 id="開始撰寫程式碼"><a href="#開始撰寫程式碼" class="headerlink" title="開始撰寫程式碼"></a>開始撰寫程式碼</h4><p>接著，我們要在 prototype 中開始建立一些 framework 裡面可以使用的方法，就像是jQuery的 <code>animate()</code> 或 <code>attr()</code> 這類的自訂函數。</p>
+<p>我們先來看一下建立完方法後完整的程式碼長什麼樣子，這些程式碼都是放在<code>Greetr.prototype</code> 內，接著我們再來分別解釋每個方法的意義</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 屬性 */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> supportedLangs = [<span class="string">'en'</span>,<span class="string">'ch'</span>]</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> greetings = &#123;</span><br><span class="line">    en: <span class="string">'Hello'</span>,</span><br><span class="line">    ch: <span class="string">'你好'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> formalGreetings = &#123;</span><br><span class="line">    en: <span class="string">'Greetings'</span>,</span><br><span class="line">    ch: <span class="string">'您好'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> logMessages = &#123;</span><br><span class="line">    en: <span class="string">'Logged in'</span>,</span><br><span class="line">    ch: <span class="string">'已登入'</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 方法 */</span></span><br><span class="line"></span><br><span class="line">Greetr.prototype = &#123;</span><br><span class="line"></span><br><span class="line">    fullName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.firstname + <span class="string">' '</span> +  <span class="keyword">this</span>.lastname;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    validate: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (supportedLangs.indexOf(<span class="keyword">this</span>.language) === <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="string">"Invalid language"</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    greeting: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> greetings[<span class="keyword">this</span>.language] + <span class="string">' '</span> + <span class="keyword">this</span>.firstname + <span class="string">'!'</span>;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    formalGreetings: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> formalGreetings[<span class="keyword">this</span>.language] + <span class="string">','</span> + <span class="keyword">this</span>.fullName();</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    greet: <span class="function"><span class="keyword">function</span>(<span class="params">formal</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> msg;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (formal) &#123;</span><br><span class="line">            msg = <span class="keyword">this</span>.formalGreetings();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            msg = <span class="keyword">this</span>.greeting();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">console</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(msg);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    log: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">console</span>) &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(logMessages[<span class="keyword">this</span>.language] + <span class="string">': '</span> + <span class="keyword">this</span>.fullName());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;,</span><br><span class="line"></span><br><span class="line">    setLang: <span class="function"><span class="keyword">function</span>(<span class="params">lang</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.language = lang;</span><br><span class="line">        <span class="keyword">this</span>.validate();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="方法解析"><a href="#方法解析" class="headerlink" title="方法解析"></a>方法解析</h4><h5 id="fullName-全名字串組合"><a href="#fullName-全名字串組合" class="headerlink" title="fullName() - 全名字串組合"></a>fullName() - 全名字串組合</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fullName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstname + <span class="string">' '</span> +  <span class="keyword">this</span>.lastname;</span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+
+<p>這個比較單純，就是印出<strong>物件實體</strong>的名字屬性。</p>
+<br>
+
+<h5 id="validate-驗證語言"><a href="#validate-驗證語言" class="headerlink" title="validate() - 驗證語言"></a>validate() - 驗證語言</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">validate: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">if</span> (supportedLangs.indexOf(<span class="keyword">this</span>.language) === <span class="number">-1</span>) &#123;</span><br><span class="line">              <span class="keyword">throw</span> <span class="string">"Invalid language"</span>;</span><br><span class="line">          &#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>用來檢測使用者所輸入的語言有沒有支援，我們剛剛新增了一個陣列<code>supportedLangs = [&#39;en&#39;, &#39;ch&#39;]</code>，我們可以透過 <code>indexOf</code> 來檢測該物件的語言<code>this.language</code>，如果沒有與陣列中任何一個值吻合，<code>indexOf</code> 會回傳 <code>-1</code>，並透過 <code>throw</code> 在 console 裡丟出錯誤訊息。</p>
+<blockquote>
+<p><code>indexOf</code>： 如果有吻合會回傳對應的陣列位置，例如輸入<code>supportedLangs.indexOf(&#39;en&#39;)</code>，因為吻合<code>supportedLangs = [&#39;en&#39;, &#39;ch&#39;]</code> 該陣列的第0個物件，所以會回傳 <code>0</code> 。</p>
+</blockquote>
+<br>
+
+<h5 id="greeting-非正式招呼"><a href="#greeting-非正式招呼" class="headerlink" title="greeting() - 非正式招呼"></a>greeting() - 非正式招呼</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">greeting: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">              <span class="keyword">return</span> greetings[<span class="keyword">this</span>.language] + <span class="string">' '</span> + <span class="keyword">this</span>.firstname + <span class="string">'!'</span>;</span><br><span class="line">          &#125;</span><br></pre></td></tr></table></figure>
+
+<p>這樣寫的目的是要取得 <code>該物件的語言</code> ，並對應到剛剛宣告的物件 <code>greetings = {en: &#39;Hello&#39;,ch: &#39;你好&#39;}</code> ，把<strong>值</strong>給抓出來，如果 <code>該物件的語言</code>的語言設定成 <code>en</code> 就抓出<code>Hello</code>；<code>ch</code>就抓出<code>你好</code>。</p>
+<br>
+
+<h5 id="formalGreetings-正式招呼"><a href="#formalGreetings-正式招呼" class="headerlink" title="formalGreetings() - 正式招呼"></a>formalGreetings() - 正式招呼</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">formalGreetings: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">                      <span class="keyword">return</span> formalGreetings[<span class="keyword">this</span>.language] + <span class="string">','</span> + <span class="keyword">this</span>.fullName();</span><br><span class="line">                  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>基本上和上一個非正式招呼一樣，值得注意的是名字的部分它呼叫了<code>this.fullName()</code>，這邊記得要加上<code>this</code>，因為這個方法存在於這個物件的原型裡，而不是環境中。</p>
+<br>
+
+<h5 id="greet-合併正式與非正式招呼。"><a href="#greet-合併正式與非正式招呼。" class="headerlink" title="greet() - 合併正式與非正式招呼。"></a>greet() - 合併正式與非正式招呼。</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">greet: <span class="function"><span class="keyword">function</span>(<span class="params">formal</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> msg;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (formal) &#123;</span><br><span class="line">        msg = <span class="keyword">this</span>.formalGreetings();</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        msg = <span class="keyword">this</span>.greeting();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">console</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(msg);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>透過 greet 這個方法，我可以直接控制我要使用的是 <code>greeting()</code> 或 <code>formalGreeting()</code> ，而不用打出這兩個方法。</p>
+<ul>
+<li>如果我們給予的參數 <code>formal</code> 存在的話( if會型轉為<code>true</code>，然後執行程式碼 )，那麼執行 <code>formalGreeting()</code>，否則使用 <code>greeting()</code>。</li>
+<li>為了避免有些IE版本不支援 console 這個物件，我們用 <code>if(console)</code>，意思是如果有 console 這個物件的話，再幫我輸出。</li>
+<li>最重要的是 <code>return this</code> ，這是在模仿<strong>jQuery</strong>的<strong>鏈式 methods chainning</strong>，而這裡的 <code>this</code> 指的也就是我們的<strong>物件</strong>，因此透過這個 <code>return this</code>，它可以先針對物件進行欲要進行的方法後，最後再次將它回傳成一個物件，於是，它就可以繼續在接著下一個方法，形成一個方法鍊的作法。</li>
+</ul>
+<blockquote>
+<p>(方法鏈)鏈式簡易範例：</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = &#123;</span><br><span class="line">    name: <span class="string">'Dylan'</span>,</span><br><span class="line">    method1: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">'Eva'</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;,</span><br><span class="line">     method2: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.name = <span class="string">'John'</span>;</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">person.method1().method2();</span><br></pre></td></tr></table></figure>
+
+<p><code>person.method()</code> 執行後 <code>person.name</code> 會被改為 <code>Eva</code>，然後透過<code>return this</code> 回傳一個改名後的新物件，再接著執行<code>新物件.method2()</code>。</p>
+<br>
+
+<h5 id="log-針對不同語言，在console印出登入訊息-使用者名字"><a href="#log-針對不同語言，在console印出登入訊息-使用者名字" class="headerlink" title="log() - 針對不同語言，在console印出登入訊息+使用者名字"></a>log() - 針對不同語言，在console印出登入訊息+使用者名字</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">log: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">console</span>) &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(logMessages[<span class="keyword">this</span>.language] + <span class="string">': '</span> + <span class="keyword">this</span>.fullName());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用的技巧和上面重複。</p>
+<br>
+
+<h5 id="setLans-更改所設定的語言"><a href="#setLans-更改所設定的語言" class="headerlink" title="setLans() - 更改所設定的語言"></a>setLans() - 更改所設定的語言</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">setLang: <span class="function"><span class="keyword">function</span>(<span class="params">lang</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.language = lang;</span><br><span class="line">    <span class="keyword">this</span>.validate();</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>設定新語言，呼叫上面寫過的 <code>validate()</code> 驗證語言是否支援，且一樣使用<strong>鏈式</strong>的 <code>return this</code>。</p>
+<br>
+
+<h2 id="測試功能"><a href="#測試功能" class="headerlink" title="測試功能"></a>測試功能</h2><blockquote>
+<p>接著在 app.js 中，我們可以試著來測試一下所建立的 framework 。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = G$(<span class="string">'Dylan'</span>, <span class="string">'Liu'</span>);   <span class="comment">//  language 預設是 ch</span></span><br><span class="line">person.greet().setLang(<span class="string">'en'</span>).greet(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>我就可以得到以下的結果。因為我們有使用了<strong>鏈式</strong>的技巧，所以我可以一個接著一個方法的使用，當中我又用了 <code>setLang()</code> 這個方法，把預設的語言改成英文：</p>
+<p>結果</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1551142593279.jpg?raw=true" alt></p>
+<br>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = G$(<span class="string">'Eva'</span>, <span class="string">'Lin'</span>);   <span class="comment">//  language的預設是ch</span></span><br><span class="line">person.log().setLang(<span class="string">'jp'</span>).greet(<span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+
+<p>首先會回傳登入的訊息，接著因為我把語言設成 “jp” ，但框架並不支援日語，所以回拋出錯誤的訊息。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1551086394197.jpg?raw=true" alt></p>
+<br>
+
+<h2 id="完整程式碼"><a href="#完整程式碼" class="headerlink" title="完整程式碼"></a>完整程式碼</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="function"><span class="keyword">function</span> (<span class="params">global, $</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> Greetr = <span class="function"><span class="keyword">function</span> (<span class="params">firstname, lastname, language</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Greetr.init(firstname, lastname, language);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> supportedLangs = [<span class="string">'en'</span>,<span class="string">'ch'</span>]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> greetings = &#123;</span><br><span class="line">        en: <span class="string">'Hello'</span>,</span><br><span class="line">        ch: <span class="string">'你好'</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> formalGreetings = &#123;</span><br><span class="line">        en: <span class="string">'Greetings'</span>,</span><br><span class="line">        ch: <span class="string">'您好'</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> logMessages = &#123;</span><br><span class="line">        en: <span class="string">'Logged in'</span>,</span><br><span class="line">        ch: <span class="string">'已登入'</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    Greetr.prototype = &#123;</span><br><span class="line"></span><br><span class="line">        fullName: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.firstname + <span class="string">' '</span> +  <span class="keyword">this</span>.lastname;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        validate: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (supportedLangs.indexOf(<span class="keyword">this</span>.language) === <span class="number">-1</span>) &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="string">"Invalid language"</span>;</span><br><span class="line">            &#125;;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        greeting: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> greetings[<span class="keyword">this</span>.language] + <span class="string">' '</span> + <span class="keyword">this</span>.firstname + <span class="string">'!'</span>;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        formalGreetings: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> formalGreetings[<span class="keyword">this</span>.language] + <span class="string">','</span> + <span class="keyword">this</span>.fullName();</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        greet: <span class="function"><span class="keyword">function</span>(<span class="params">formal</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> msg;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (formal) &#123;</span><br><span class="line">                msg = <span class="keyword">this</span>.formalGreetings();</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                msg = <span class="keyword">this</span>.greeting();</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">console</span>) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(msg);</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        log: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">console</span>) &#123;</span><br><span class="line">                <span class="built_in">console</span>.log(logMessages[<span class="keyword">this</span>.language] + <span class="string">': '</span> + <span class="keyword">this</span>.fullName());</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        setLang: <span class="function"><span class="keyword">function</span>(<span class="params">lang</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.language = lang;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">this</span>.validate();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    Greetr.init = <span class="function"><span class="keyword">function</span> (<span class="params">firstname, lastname, language</span>) </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">        self.firstname = firstname || <span class="string">''</span>;</span><br><span class="line">        self.lastname = lastname || <span class="string">''</span>;</span><br><span class="line">        self.language = language || <span class="string">'ch'</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Greetr.init.prototype = Greetr.prototype;</span><br><span class="line"></span><br><span class="line">    global.Greetr = global.G$ = Greetr;</span><br><span class="line"></span><br><span class="line">&#125;)(<span class="built_in">window</span>, jQuery);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><ul>
+<li><a href="https://pjchender.blogspot.com/2016/07/javascript-frameworklibrary_22.html" target="_blank" rel="noopener">PJChender - 親手打造屬於你自己的 JavaScript Framework/Library（中）</a></li>
+<li><a href="https://www.udemy.com/javascriptjs/" target="_blank" rel="noopener">JavaScript 全攻略：克服JS的奇怪部分 9-76</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/克服JS的奇怪部分/" rel="tag"># 克服JS的奇怪部分</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/build-a-js-framework-1.html" rel="next" title="實作一個 JavaScript 迷你框架 (一)">
+                <i class="fa fa-chevron-left"></i> 實作一個 JavaScript 迷你框架 (一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/build-a-js-framework-3.html" rel="prev" title="實作一個 JavaScript 迷你框架 (三)">
+                實作一個 JavaScript 迷你框架 (三) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#新增一些變數-amp-方法"><span class="nav-number">2.</span> <span class="nav-text">新增一些變數 &amp; 方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立全域環境無法取用的變數"><span class="nav-number">2.1.</span> <span class="nav-text">建立全域環境無法取用的變數</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#開始建立方法-method"><span class="nav-number">2.2.</span> <span class="nav-text">開始建立方法(method)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方法該寫在哪"><span class="nav-number">2.2.1.</span> <span class="nav-text">方法該寫在哪 ?</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#開始撰寫程式碼"><span class="nav-number">2.2.2.</span> <span class="nav-text">開始撰寫程式碼</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#方法解析"><span class="nav-number">2.2.3.</span> <span class="nav-text">方法解析</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#fullName-全名字串組合"><span class="nav-number">2.2.3.1.</span> <span class="nav-text">fullName() - 全名字串組合</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#validate-驗證語言"><span class="nav-number">2.2.3.2.</span> <span class="nav-text">validate() - 驗證語言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#greeting-非正式招呼"><span class="nav-number">2.2.3.3.</span> <span class="nav-text">greeting() - 非正式招呼</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#formalGreetings-正式招呼"><span class="nav-number">2.2.3.4.</span> <span class="nav-text">formalGreetings() - 正式招呼</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#greet-合併正式與非正式招呼。"><span class="nav-number">2.2.3.5.</span> <span class="nav-text">greet() - 合併正式與非正式招呼。</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#log-針對不同語言，在console印出登入訊息-使用者名字"><span class="nav-number">2.2.3.6.</span> <span class="nav-text">log() - 針對不同語言，在console印出登入訊息+使用者名字</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#setLans-更改所設定的語言"><span class="nav-number">2.2.3.7.</span> <span class="nav-text">setLans() - 更改所設定的語言</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#測試功能"><span class="nav-number">3.</span> <span class="nav-text">測試功能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#完整程式碼"><span class="nav-number">4.</span> <span class="nav-text">完整程式碼</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#資料來源"><span class="nav-number">5.</span> <span class="nav-text">資料來源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/build-a-js-framework-2.html';
+          this.page.identifier = 'build-a-js-framework-2.html';
+          this.page.title = '實作一個 JavaScript 迷你框架 (二)';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

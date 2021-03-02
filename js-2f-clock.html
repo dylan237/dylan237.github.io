@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,JS地下城,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="JavaScript,JS地下城">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 地下城挑戰 - 2F 時鐘">
+<meta property="og:url" content="https://dylan237.github.io/js-2f-clock.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://i.udemycdn.com/redactor/raw/2019-01-30_13-18-28-195293e3bf74ddd9c719081954bb75e2.png">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1560996936501.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1560999347278.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1561002398962.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1561008358656.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1561010568488.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1561011075425.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1561011605950.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 地下城挑戰 - 2F 時鐘">
+<meta name="twitter:image" content="https://i.udemycdn.com/redactor/raw/2019-01-30_13-18-28-195293e3bf74ddd9c719081954bb75e2.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/js-2f-clock.html">
+
+
+
+
+
+  <title>JS 地下城挑戰 - 2F 時鐘 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/js-2f-clock.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JS 地下城挑戰 - 2F 時鐘</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-06-20T09:17:59+08:00">
+                2019-06-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/JS地下城/" itemprop="url" rel="index">
+                    <span itemprop="name">JS地下城</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/js-2f-clock.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="js-2f-clock.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="https://i.udemycdn.com/redactor/raw/2019-01-30_13-18-28-195293e3bf74ddd9c719081954bb75e2.png" alt style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px">
+
+<a id="more"></a>
+
+<div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="https://www.hexschool.com/" target="_blank" rel="noopener">
+    六角學院
+  </a>
+</div>
+<br>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這關 UI 的部分可以選擇用 CSS 手刻或是直接使用現成的圖片。大部分的時間在處理 UI 的部分，有一個關鍵的 CSS 屬性 <code>transform-origin</code>，稍後會介紹到，時鐘運作的 JavaScript 相對來說就比較不這麼繁瑣，做一些數學加減運算，配合 <code>Date物件</code> 取得時分秒參數即可。</p>
+<p><a href="https://dylan237.github.io/JS_2F_clock/">Demo</a><br><a href="https://github.com/dylan237/JS_2F_clock" target="_blank" rel="noopener">Github</a></p>
+<h2 id="關卡資訊"><a href="#關卡資訊" class="headerlink" title="關卡資訊"></a>關卡資訊</h2><p><a href="https://xd.adobe.com/spec/43be2f02-1d11-4dfb-4e3d-5c4df1df3896-358f/screen/e7b79d5d-37bb-41f7-8ca2-9df3811589e9/003-clock/" target="_blank" rel="noopener">UI設計稿</a></p>
+<ul>
+<li>【特定技術】需使用 JS 原生語法的 <code>getDate()</code> 撈取時間，不可用套件</li>
+<li>【特定技術】需使用 JS 原生語法的 <code>setTimeout()</code> 或 <code>setInterval()</code>，持續讓秒針、分針、時針能夠以台北時區移動  </li>
+<li>【特定技術】介面請全部用 <code>CSS2</code>、<code>CSS3</code> 手寫繪製，什麼…？你說太強人所難？？那..用圖片也不是不行辣</li>
+<li>你攻略此 BOSS 的攻略過程心得</li>
+</ul>
+<h2 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h2><h3 id="時鐘輪廓"><a href="#時鐘輪廓" class="headerlink" title="時鐘輪廓"></a>時鐘輪廓</h3><p>將時鐘的輪廓刻出來</p>
+<p>HTML</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clock"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clock__inner"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>SCSS</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">%centerJustify &#123;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">  <span class="attribute">transform</span>: translate(-<span class="number">50%</span>, -<span class="number">50%</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.clock</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">350px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">350px</span>;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">100%</span>;</span><br><span class="line">  @<span class="keyword">extend</span> %centerJustify;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#a06ee1</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: <span class="number">8px</span> <span class="number">8px</span> <span class="number">15px</span> <span class="number">#0000007d</span>;</span><br><span class="line"></span><br><span class="line">  &amp;__inner &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">90%</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">90%</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">position</span>: relative;</span><br><span class="line">    @<span class="keyword">extend</span> %centerJustify;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">2px</span> solid <span class="number">#212F0B</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#421b9b</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/1560996936501.jpg?raw=true" alt></p>
+<h3 id="時鐘刻度"><a href="#時鐘刻度" class="headerlink" title="時鐘刻度"></a>時鐘刻度</h3><p>接著我們需要把刻度做出來，先不管刻度的樣式和大小，我們知道時鐘總共有 <code>60</code> 個刻度，但是這個設計稿有加一些設計在裡面，每個小時的刻度內各多一個菱形的刻度設計，所以總共的刻度有 <code>60+12=72</code> 個。再來我們需要算出每個小刻度佔幾度，一個圓 360 度，除以刻度數量，得一個刻度為 <code>360/72=5</code>。</p>
+<p>來寫刻度的 CSS 吧，先設定一個父元素 <code>.scale</code>，裡面會有 72個小刻度 <code>.scale__unit</code>，不過之後我們會使用 JS 迴圈方式來跑 72 次，不會寫死在 <code>HTML</code> 中，所以先寫一個來設定 CSS 樣式即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clock"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"clock__inner"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scale"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"scale__unit"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.scale</span> &#123;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line"></span><br><span class="line">  &amp;__unit &#123;</span><br><span class="line">    <span class="attribute">transform</span>: rotate(<span class="number">180deg</span>) translateY(<span class="number">120px</span>); <span class="comment">// 由於每個刻度的rotate角度不同，這個 CSS 之後會透過 JS 來產生。</span></span><br><span class="line">    <span class="attribute">width</span>: <span class="number">2px</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">24px</span>;</span><br><span class="line">    <span class="attribute">border-radius</span>: <span class="number">100%</span>;</span><br><span class="line">    <span class="attribute">position</span>: absolute;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">transform-origin</span>: <span class="number">0</span> <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">`</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/1560999347278.jpg?raw=true" alt></p>
+<h3 id="transform-origin"><a href="#transform-origin" class="headerlink" title="transform-origin"></a>transform-origin</h3><p>上面的程式碼有一個關鍵語法 <code>transform-origin</code>，可以帶入兩個參數( % )，分別代表 X 與 Y ，這個語法可以改變元素<strong>transform 的基準點</strong>，若沒有特別設定在 CSS 中，預設的基準點為元素的正中心(下圖第一個例子)。可以參考下面兩個連結，會更容易理解。</p>
+<p><a href="https://codepen.io/Dylan_Liu/pen/wLoRyV" target="_blank" rel="noopener">transform-origin Demo</a><br><a href="https://codepen.io/Dylan_Liu/pen/WqRvwx" target="_blank" rel="noopener">clock Demo</a></p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1561002398962.jpg?raw=true" alt></p>
+<h3 id="時鐘刻度處理及細節"><a href="#時鐘刻度處理及細節" class="headerlink" title="時鐘刻度處理及細節"></a>時鐘刻度處理及細節</h3><p>跑迴圈產生 72 個刻度 DOM</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">renderClockUnit</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> unit_wrap = <span class="built_in">document</span>.querySelector(<span class="string">'.scale'</span>); <span class="comment">// 父元素 DOM</span></span><br><span class="line">  <span class="keyword">let</span> deg = <span class="number">180</span>;                                      <span class="comment">//刻度的旋轉角度，180度為12時的位置</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;<span class="number">72</span>; i++) &#123;</span><br><span class="line">    <span class="keyword">const</span> unit = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>); <span class="comment">// 創造刻度DOM</span></span><br><span class="line">    unit.classList.add(<span class="string">'scale__unit'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 小時的刻度處理</span></span><br><span class="line">    <span class="keyword">if</span>(i%<span class="number">6</span> == <span class="number">0</span>) &#123;</span><br><span class="line">      unit.style.transform = <span class="string">`rotate(<span class="subst">$&#123;deg&#125;</span>deg) translateY(110px)`</span>;</span><br><span class="line">    <span class="comment">// 其他刻度處理</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      unit.style.transform = <span class="string">`rotate(<span class="subst">$&#123;deg&#125;</span>deg) translateY(120px)`</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    deg += <span class="number">5</span>;</span><br><span class="line">    unit_wrap.appendChild(unit);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>小時刻度 &amp; 裝飾刻度樣式</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.scale__unit</span>:nth-child(6n+1) &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">24px</span>;</span><br><span class="line">  <span class="attribute">width</span>: .<span class="number">5px</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#cef9e2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.scale__unit</span>:nth-child(6n+4)::before &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">'★'</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">3px</span>;</span><br><span class="line">  <span class="attribute">top</span>: -<span class="number">7px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#CEF9E2</span>;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">2px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到這步，時鐘的刻度算是處理完囉!
+<img src="https://github.com/dylan237/images_source/blob/master/1561008358656.jpg?raw=true" alt></p>
+<h3 id="製作時鐘上的數字"><a href="#製作時鐘上的數字" class="headerlink" title="製作時鐘上的數字"></a>製作時鐘上的數字</h3><p>設計稿上有二十四時制及十二時制的時間，我們先宣告兩個變數分別代表它們</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> twelve_hours = <span class="number">0</span>;    <span class="comment">// 十二時制</span></span><br><span class="line"><span class="keyword">let</span> twenty_hours = <span class="number">12</span>;   <span class="comment">// 二十四時制</span></span><br></pre></td></tr></table></figure>
+
+<p>接著，只有在小時刻度時會有數字顯示， 接續上面的程式碼，if 陳述句 <code>i%6 == 0</code> 即代表每小時刻度，我們在該條件成立時需渲染時鐘上的數字。<br>渲染起始點為 12 點的位置，因此當 <code>twelve_hour</code> 跑第一次迴圈時應該為 <code>12</code>，<code>twenty_hours</code> 則為 <code>24</code>，其他情況則帶入變數，且每次迴圈變數都要 <code>+1</code>。</p>
+<p>根據上面的代碼，再加入新的功能</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">if</span>(i%<span class="number">6</span> == <span class="number">0</span>) &#123;</span><br><span class="line">      unit.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">      &lt;span class="twelve"&gt;<span class="subst">$&#123; i == <span class="number">0</span> ? <span class="number">12</span> : twelve_hours &#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">      &lt;span class="twenty"&gt;<span class="subst">$&#123; i == <span class="number">0</span> ? <span class="number">24</span> : twenty_hours &#125;</span>&lt;/span&gt;</span></span><br><span class="line"><span class="string">      `</span>;</span><br><span class="line">      twelve_hours++;</span><br><span class="line">      twenty_hours++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><code>i == 0 ? 12 : twelve_hours</code> 是 JS 的三元運算子，部份情況下可以用簡短的語句取代冗長的 <code>if else</code> ，結構為 <code>[條件] ? [若true回傳此值] : [false則回傳此值]</code><br>我們可以解釋為，當 <code>i == 0</code> ( 即第一次迴圈時 )，我要在 <code>.twelve</code> DOM 中輸出 12，其他的情況輸出 <code>twelve_hours</code> 變數當前的值。</p>
+</blockquote>
+<p>CSS 樣式</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.twelve</span>, <span class="selector-class">.twenty</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">position</span>: absolute;</span><br><span class="line">  <span class="attribute">left</span>: -<span class="number">5px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.twelve</span> &#123;</span><br><span class="line">  <span class="attribute">top</span>: -<span class="number">20px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.twenty</span> &#123;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">25px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到目前我們的時鐘長這樣，好像還差一點點<br><img src="https://github.com/dylan237/images_source/blob/master/1561010568488.jpg?raw=true" alt></p>
+<h3 id="將時鐘的數字轉正"><a href="#將時鐘的數字轉正" class="headerlink" title="將時鐘的數字轉正"></a>將時鐘的數字轉正</h3><p>這.. 好像很簡單啊? 把 <code>.twelve</code> 和 <code>.twenty</code> 旋轉 180度好像就可以了 ?</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.twelve</span>, <span class="selector-class">.twenty</span> &#123;</span><br><span class="line">  <span class="comment">/* ... 略 */</span></span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">rotate</span>(180deg);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/1561011075425.jpg?raw=true" alt></p>
+<p>記得我們剛剛在處理刻度時，每一個小刻度轉了多少度嗎 ? <code>5度</code>，而每一個小時間隔 6 個小刻度，記得吧? 如果要轉正該怎麼做呢 ?</p>
+<p>先將剛剛 <code>.twelve</code> 和 <code>.twenty</code> 的 CSS 刪除，我們用迴圈來產生 CSS，首先一樣迴圈起點為旋轉 180 度。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> time_deg = <span class="number">180</span>;</span><br></pre></td></tr></table></figure>
+
+<p>每小時間隔 6 個小刻度，每個小刻度為 5 度，因此一次迴圈需要將角度減去 <code>6*5=30</code> 度。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(i%<span class="number">6</span> == <span class="number">0</span>) &#123;</span><br><span class="line">  unit.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">  &lt;span class="twelve" style="transform:rotate(<span class="subst">$&#123; time_deg &#125;</span>deg)"&gt; 略... &lt;/span&gt;</span></span><br><span class="line"><span class="string">  &lt;span class="twenty" style="transform:rotate(<span class="subst">$&#123; time_deg &#125;</span>deg)"&gt; 略... &lt;/span&gt;</span></span><br><span class="line"><span class="string">  `</span>;</span><br><span class="line"></span><br><span class="line">  time_deg -= <span class="number">30</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>好的！目前的時鐘長這樣<br><img src="https://github.com/dylan237/images_source/blob/master/1561011605950.jpg?raw=true" alt></p>
+<h3 id="製作指針"><a href="#製作指針" class="headerlink" title="製作指針"></a>製作指針</h3><p>指針部分重點和刻度一樣，善用 <code>transform-origin</code> 來改變 transform 基準點即可。詳細製作過程就不在這邊敘述囉~ 請參考 <a href="https://codepen.io/Dylan_Liu/pen/bPBZmx" target="_blank" rel="noopener">UI 樣板</a></p>
+<h3 id="時鐘邏輯撰寫"><a href="#時鐘邏輯撰寫" class="headerlink" title="時鐘邏輯撰寫"></a>時鐘邏輯撰寫</h3><p>UI 部分搞定了，接著來讓時鐘跑起來吧！！</p>
+<p>將指針的 DOM 宣告起來</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hour_hand = <span class="built_in">document</span>.querySelector(<span class="string">'.hand-hour'</span>);</span><br><span class="line"><span class="keyword">const</span> min_hand = <span class="built_in">document</span>.querySelector(<span class="string">'.hand-min'</span>);</span><br><span class="line"><span class="keyword">const</span> sec_hand = <span class="built_in">document</span>.querySelector(<span class="string">'.hand-sec'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>透過 JS 的 <code>Date</code> 物件抓取時分秒參數</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> time = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">const</span> hour = time.getHours();</span><br><span class="line"><span class="keyword">const</span> min = time.getMinutes();</span><br><span class="line"><span class="keyword">const</span> sec = time.getSeconds();</span><br></pre></td></tr></table></figure>
+
+<p>再來是最關鍵的，將抓到的參數換算成 CSS 的角度，讓時鐘可以正常運作</p>
+<ul>
+<li><p>秒針<br><code>sec</code> 變數值的範圍介於 <code>0 ~ 60(秒)</code>，圓為 <code>360度</code>，可以換算得每分鐘的角度為 <code>360/60=6 度</code>。最後需要再扣掉 <code>180度</code>，讓位置以 12 點鐘方向為起點。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> sec_deg = sec*<span class="number">6</span> - <span class="number">180</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>分針<br>分針的概念和秒針相似，不過分針另外還會受到秒數的影響，需另外加上 <code>sec*6/60</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> min_deg = min*<span class="number">6</span> + sec*<span class="number">6</span>/<span class="number">60</span> - <span class="number">180</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>時針<br>每小時為 <code>360/12=30度</code>，另外加上分鐘數的影響 <code>min*6/60</code>即可。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> hour_deg = (hour*<span class="number">30</span> + min*<span class="number">30</span>/<span class="number">60</span>) - <span class="number">180</span>;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>透過 transform: rotate 為指針 DOM 套用角度</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hour_hand.style.transform = <span class="string">`rotate(<span class="subst">$&#123; hour_deg &#125;</span>deg)`</span>;</span><br><span class="line">min_hand.style.transform = <span class="string">`rotate(<span class="subst">$&#123; min_deg &#125;</span>deg)`</span>;</span><br><span class="line">sec_hand.style.transform = <span class="string">`rotate(<span class="subst">$&#123; sec_deg &#125;</span>deg)`</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="setInterval-重複執行"><a href="#setInterval-重複執行" class="headerlink" title="setInterval 重複執行"></a>setInterval 重複執行</h3><p>將上面整理的邏輯包裝成函式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clockPrimaryFeature</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> hour_hand = <span class="built_in">document</span>.querySelector(<span class="string">'.hand-hour'</span>);</span><br><span class="line">  <span class="keyword">const</span> min_hand = <span class="built_in">document</span>.querySelector(<span class="string">'.hand-min'</span>);</span><br><span class="line">  <span class="keyword">const</span> sec_hand = <span class="built_in">document</span>.querySelector(<span class="string">'.hand-sec'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> time = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line">  <span class="keyword">const</span> hour = time.getHours();</span><br><span class="line">  <span class="keyword">const</span> min = time.getMinutes();</span><br><span class="line">  <span class="keyword">const</span> sec = time.getSeconds();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> hour_deg = (hour*<span class="number">30</span> + min*<span class="number">30</span>/<span class="number">60</span>) - <span class="number">180</span>;</span><br><span class="line">  <span class="keyword">const</span> min_deg = min*<span class="number">6</span> + sec*<span class="number">6</span>/<span class="number">60</span> - <span class="number">180</span>;</span><br><span class="line">  <span class="keyword">const</span> sec_deg = sec*<span class="number">6</span> - <span class="number">180</span>;</span><br><span class="line"></span><br><span class="line">  hour_hand.style.transform = <span class="string">`rotate(<span class="subst">$&#123; hour_deg &#125;</span>deg)`</span>;</span><br><span class="line">  min_hand.style.transform = <span class="string">`rotate(<span class="subst">$&#123; min_deg &#125;</span>deg)`</span>;</span><br><span class="line">  sec_hand.style.transform = <span class="string">`rotate(<span class="subst">$&#123; sec_deg &#125;</span>deg)`</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>執行</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runClock</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">  renderClockUnit();</span><br><span class="line">  callback();</span><br><span class="line">  setInterval(callback, <span class="number">1000</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">runClock(clockPrimaryFeature);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Codepen-Demo"><a href="#Codepen-Demo" class="headerlink" title="Codepen Demo"></a>Codepen Demo</h2><p class="codepen" data-height="481" data-theme-id="0" data-default-tab="result" data-user="Dylan_Liu" data-slug-hash="YoNPGe" style="height: 481px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="JS地下城 - 2F 時鐘 VanillaJS">
+  <span>See the Pen <a href="https://codepen.io/Dylan_Liu/pen/YoNPGe/" target="_blank" rel="noopener">
+  JS地下城 - 2F 時鐘 VanillaJS</a> by Dylan (<a href="https://codepen.io/Dylan_Liu" target="_blank" rel="noopener">@Dylan_Liu</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/JS地下城/" rel="tag"># JS地下城</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/js-4f-timezone.html" rel="next" title="JS 地下城挑戰 - 4F 時區">
+                <i class="fa fa-chevron-left"></i> JS 地下城挑戰 - 4F 時區
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/clone-deep.html" rel="prev" title="談談 JavaScript 的深拷貝及淺拷貝">
+                談談 JavaScript 的深拷貝及淺拷貝 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關卡資訊"><span class="nav-number">2.</span> <span class="nav-text">關卡資訊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#解題"><span class="nav-number">3.</span> <span class="nav-text">解題</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#時鐘輪廓"><span class="nav-number">3.1.</span> <span class="nav-text">時鐘輪廓</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#時鐘刻度"><span class="nav-number">3.2.</span> <span class="nav-text">時鐘刻度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transform-origin"><span class="nav-number">3.3.</span> <span class="nav-text">transform-origin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#時鐘刻度處理及細節"><span class="nav-number">3.4.</span> <span class="nav-text">時鐘刻度處理及細節</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#製作時鐘上的數字"><span class="nav-number">3.5.</span> <span class="nav-text">製作時鐘上的數字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#將時鐘的數字轉正"><span class="nav-number">3.6.</span> <span class="nav-text">將時鐘的數字轉正</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#製作指針"><span class="nav-number">3.7.</span> <span class="nav-text">製作指針</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#時鐘邏輯撰寫"><span class="nav-number">3.8.</span> <span class="nav-text">時鐘邏輯撰寫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setInterval-重複執行"><span class="nav-number">3.9.</span> <span class="nav-text">setInterval 重複執行</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Codepen-Demo"><span class="nav-number">4.</span> <span class="nav-text">Codepen Demo</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/js-2f-clock.html';
+          this.page.identifier = 'js-2f-clock.html';
+          this.page.title = 'JS 地下城挑戰 - 2F 時鐘';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

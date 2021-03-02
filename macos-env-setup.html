@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="開發環境,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Command Line Tools在安裝 MacOS 的套件管理工具 homebrew 前需要先安裝 Command Line Tools。登入Apple Developer 搜尋 Command Line Tools, 下載符合你 Mac 系統的版本的 dmg 並安裝">
+<meta name="keywords" content="開發環境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端開發 MacOS 環境安裝">
+<meta property="og:url" content="https://dylan237.github.io/macos-env-setup.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:description" content="Command Line Tools在安裝 MacOS 的套件管理工具 homebrew 前需要先安裝 Command Line Tools。登入Apple Developer 搜尋 Command Line Tools, 下載符合你 Mac 系統的版本的 dmg 並安裝">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/373F02A1-EB69-4F89-9495-361667B87C37.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/iterm2-themes-import.gif?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/B4CFAF51-1105-4362-8AD8-63C5FE4F85E6.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端開發 MacOS 環境安裝">
+<meta name="twitter:description" content="Command Line Tools在安裝 MacOS 的套件管理工具 homebrew 前需要先安裝 Command Line Tools。登入Apple Developer 搜尋 Command Line Tools, 下載符合你 Mac 系統的版本的 dmg 並安裝">
+<meta name="twitter:image" content="https://github.com/dylan237/images_source/blob/master/373F02A1-EB69-4F89-9495-361667B87C37.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/macos-env-setup.html">
+
+
+
+
+
+  <title>前端開發 MacOS 環境安裝 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/macos-env-setup.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">前端開發 MacOS 環境安裝</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-09-28T11:29:45+08:00">
+                2019-09-28
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/uncategorized/" itemprop="url" rel="index">
+                    <span itemprop="name">uncategorized</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/macos-env-setup.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="macos-env-setup.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <img src="" alt="" style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px"> -->
+
+<h2 id="Command-Line-Tools"><a href="#Command-Line-Tools" class="headerlink" title="Command Line Tools"></a>Command Line Tools</h2><p>在安裝 MacOS 的套件管理工具 <code>homebrew</code> 前需要先安裝 Command Line Tools。<br>登入<a href="https://developer.apple.com/download/more/" target="_blank" rel="noopener">Apple Developer</a> 搜尋 Command Line Tools, 下載符合你 Mac 系統的版本的 dmg 並安裝<br><img src="https://github.com/dylan237/images_source/blob/master/373F02A1-EB69-4F89-9495-361667B87C37.jpg?raw=true" alt></p>
+<a id="more"></a>
+
+<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><blockquote>
+<p><a href="https://brew.sh/index_zh-tw" target="_blank" rel="noopener">Homebrew 官網</a></p>
+</blockquote>
+<p>Command Line Tools 安裝成功後後, 打開終端機輸入指令</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>出現 Installation successful 即安裝成功 </p>
+<p>確認版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="Iterm2-終端機"><a href="#Iterm2-終端機" class="headerlink" title="Iterm2 終端機"></a>Iterm2 終端機</h2><p>Iterm2 是可以取代 Mac OSX 的預設 Terminal 的套件，提供了比 terminal 更多樣化的功能，透過安裝 zsh shell 及 zsh 的管理套件 oh-my-zsh，讓我們可以輕鬆的管理 zsh 的設定檔，並且支援許多 plugin 及 theme。</p>
+<p>安裝</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install iterm2</span><br></pre></td></tr></table></figure>
+
+<p>另外 iterm2 還提供了多樣了配色樣式, 可以到 <a href="https://github.com/mbadolato/iTerm2-Color-Schemes" target="_blank" rel="noopener">iTerm2-Color-Schemes</a> 挑選喜歡的配色, 右上角有下載的標示可以整包下載下來，解壓縮後在 <code>schemes</code> 資料夾中有許多副檔名為 <code>.itermcolors</code> 的配色檔可以使用, 透過以下操作將檔案 import 進去使用</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/iterm2-themes-import.gif?raw=true" alt></p>
+<h2 id="zsh"><a href="#zsh" class="headerlink" title="zsh"></a>zsh</h2><p>接著我們要安裝 ZSH ，這是用來取代 BASH 的一種工具，打開 Terminal 輸入</p>
+<p>安裝</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install zsh zsh-completions</span><br></pre></td></tr></table></figure>
+
+<p>確認版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zsh --version</span><br></pre></td></tr></table></figure>
+
+<p>接著要將預設終端機窗口改為 ZSH，一樣在終端機輸入</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chsh -s /bin/zsh</span><br></pre></td></tr></table></figure>
+
+<p>接者要重啟 Iterm2，接著輸入以下指令確認是否設定成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo $SHELL</span><br></pre></td></tr></table></figure>
+
+<p>應該會看到顯示 <code>/usr/local/bin/zsh</code></p>
+<h2 id="oh-my-zsh"><a href="#oh-my-zsh" class="headerlink" title="oh-my-zsh"></a>oh-my-zsh</h2><p><a href="https://ohmyz.sh/" target="_blank" rel="noopener">oh-my-zsh</a> 是一個用來管理 ZSH 設定檔（configuration）的框架，提供了很多的外掛和主題可以選擇。</p>
+<p>安裝</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></span><br></pre></td></tr></table></figure>
+
+<p>套用主題</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>接著會打開 zsh 的設定檔，找到 <code>ZSH_THEME= &quot;…&quot;</code>，將這段的內容改成下面這段後存檔</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ZSH_THEME=<span class="string">"agnoster"</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="字體修改"><a href="#字體修改" class="headerlink" title="字體修改"></a>字體修改</h2><p>安裝字型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew tap caskroom/fonts</span><br><span class="line">// 若出現錯誤也可以試試</span><br><span class="line">brew tap homebrew/cask-fonts</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew cask install font-hack-nerd-font</span><br></pre></td></tr></table></figure>
+
+<p>設定下載的字型</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">itrem2 -&gt; Preferences -&gt; profiles -&gt; text -&gt; font -&gt; 選擇 Hack nerd font</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>另外 VScode 可能因為預設字體不支援的關係, 在內建整合的終端機使用 zsh 會有亂碼問題, 我們可以使用 <a href="https://github.com/powerline/fonts" target="_blank" rel="noopener">Powerline fonts @ github</a> 字型包解決</p>
+<p>安裝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># clone 複製</span><br><span class="line">git clone https://github.com/powerline/fonts.git --depth=1</span><br><span class="line"># install 安裝</span><br><span class="line">cd fonts </span><br><span class="line">./install.sh</span><br></pre></td></tr></table></figure>
+
+<p>開啟 VScode, 使用快捷鍵 command + shift + p 搜尋並開啟 <code>setting.json</code> 設定檔案並貼上</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"terminal.integrated.fontFamily"</span>: <span class="string">"Meslo LG M for Powerline"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="powerlevel9k-主題"><a href="#powerlevel9k-主題" class="headerlink" title="powerlevel9k 主題"></a>powerlevel9k 主題</h2><p>這部分可以依照個人喜好, 可做可不做</p>
+<p><code>powerlevel9k</code> 風格是承襲 agnoster ，不同的地方是新增了一些小功能像是版控資訊、電池狀態、硬碟狀況、ip位置、時間、還有小圖icon …等讓使用者自行設定。</p>
+<p>安裝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/bhilburn/powerlevel9k.git ~/.oh-my-zsh/custom/themes/powerlevel9k</span><br></pre></td></tr></table></figure>
+
+<p>開啟設定檔案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open  ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<p>貼上以下設定 (貼在<code>ZSH_THEME=&quot;agnoster&quot;</code> 後即可 ), 若需要更多客製設定可至<a href="https://github.com/Powerlevel9k/powerlevel9k" target="_blank" rel="noopener">官網</a>查看文件</p>
+<figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用powerlevel9k主題亦可選擇使用agnoster或預設robbyrussell</span></span><br><span class="line">ZSH_THEME=<span class="string">"powerlevel9k/powerlevel9k"</span></span><br><span class="line"><span class="comment"># 隱藏用戶名稱(user@hostname)</span></span><br><span class="line">DEFAULT_USER=`id -un`</span><br><span class="line"><span class="comment"># CLI 左邊想顯示的內容(資料夾路徑、資料夾讀寫狀態、版本控制資訊)</span></span><br><span class="line">POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir dir_writable vcs)</span><br><span class="line"><span class="comment"># CLI 右邊想顯示的內容(狀態、時間)</span></span><br><span class="line">POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)</span><br><span class="line"><span class="comment"># 含有icon的字型(依喜好)</span></span><br><span class="line">POWERLEVEL9K_MODE=<span class="string">'nerdfont-complete'</span></span><br></pre></td></tr></table></figure>
+
+<p>成果大概會是這個樣子<br><img src="https://github.com/dylan237/images_source/blob/master/B4CFAF51-1105-4362-8AD8-63C5FE4F85E6.jpg?raw=true" alt></p>
+<h2 id="其他-zsh-外掛"><a href="#其他-zsh-外掛" class="headerlink" title="其他 zsh 外掛"></a>其他 zsh 外掛</h2><h3 id="Autojump-資料夾路徑提示"><a href="#Autojump-資料夾路徑提示" class="headerlink" title="Autojump 資料夾路徑提示"></a>Autojump 資料夾路徑提示</h3><p>安裝 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install autojump</span><br></pre></td></tr></table></figure>
+
+<h3 id="Autosuggestions"><a href="#Autosuggestions" class="headerlink" title="Autosuggestions"></a>Autosuggestions</h3><p><a href="https://github.com/zsh-users/zsh-autosuggestions#oh-my-zsh" target="_blank" rel="noopener">Autosuggestions</a> 會根據過去所輸入的指令來提示你的工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-autosuggestions $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-autosuggestions</span><br></pre></td></tr></table></figure>
+
+<h3 id="zsh-syntax-highlighting"><a href="#zsh-syntax-highlighting" class="headerlink" title="zsh-syntax-highlighting"></a>zsh-syntax-highlighting</h3><p>程式碼高亮工具</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $&#123;ZSH_CUSTOM:-~/.oh-my-zsh/custom&#125;/plugins/zsh-syntax-highlighting</span><br></pre></td></tr></table></figure>
+
+<hr>
+<blockquote>
+<p>最後還需要設定 iterm2 的 <code>zshrc</code> 設定檔</p>
+</blockquote>
+<p>進入設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open ~/.zshrc</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">plugins=(</span><br><span class="line">git</span><br><span class="line">osx</span><br><span class="line">npm</span><br><span class="line">autojump</span><br><span class="line">zsh-autosuggestions</span><br><span class="line">zsh-syntax-highlighting</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<h2 id="nvm-amp-node-js"><a href="#nvm-amp-node-js" class="headerlink" title="nvm &amp; node.js"></a>nvm &amp; node.js</h2><p>安裝</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.34.0/install.sh | bash</span><br></pre></td></tr></table></figure>
+
+<p>查詢 node 有哪些版本 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm ls-remote</span><br></pre></td></tr></table></figure>
+
+<p>下載指定版本 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvn install 10.14.1</span><br></pre></td></tr></table></figure>
+
+<p>切換版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvm use 10.14.1</span><br></pre></td></tr></table></figure>
+
+<p>查詢是否安裝成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br><span class="line">npm -v</span><br></pre></td></tr></table></figure>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://pjchender.blogspot.com/2017/02/mac-terminal-iterm-2-oh-my-zsh.html" target="_blank" rel="noopener">PJCHENder 那些沒告訴你的小細節</a><br><a href="https://medium.com/@hazelwu/%E7%94%A8oh-my-zsh%E6%8A%8Aiterm%E8%AE%8A%E7%BE%8E%E7%BE%8E-8a18daa8eac" target="_blank" rel="noopener">用Oh My Zsh把iTerm變美美</a><br><a href="https://www.youtube.com/watch?v=2ZOtH2YugIw" target="_blank" rel="noopener">[ Alex 宅幹嘛 ] 👨‍💻 網頁前端開發的 Macbook 初始化安裝</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/開發環境/" rel="tag"># 開發環境</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/ntfs-for-mac.html" rel="next" title="使用 MacOS 原生方法讀寫 NTFS 格式">
+                <i class="fa fa-chevron-left"></i> 使用 MacOS 原生方法讀寫 NTFS 格式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/nodejs-message-book.html" rel="prev" title="用 Node.js 製作簡易的留言版">
+                用 Node.js 製作簡易的留言版 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Command-Line-Tools"><span class="nav-number">1.</span> <span class="nav-text">Command Line Tools</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#homebrew"><span class="nav-number">2.</span> <span class="nav-text">homebrew</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Iterm2-終端機"><span class="nav-number">3.</span> <span class="nav-text">Iterm2 終端機</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#zsh"><span class="nav-number">4.</span> <span class="nav-text">zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#oh-my-zsh"><span class="nav-number">5.</span> <span class="nav-text">oh-my-zsh</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#字體修改"><span class="nav-number">6.</span> <span class="nav-text">字體修改</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#powerlevel9k-主題"><span class="nav-number">7.</span> <span class="nav-text">powerlevel9k 主題</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他-zsh-外掛"><span class="nav-number">8.</span> <span class="nav-text">其他 zsh 外掛</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Autojump-資料夾路徑提示"><span class="nav-number">8.1.</span> <span class="nav-text">Autojump 資料夾路徑提示</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Autosuggestions"><span class="nav-number">8.2.</span> <span class="nav-text">Autosuggestions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zsh-syntax-highlighting"><span class="nav-number">8.3.</span> <span class="nav-text">zsh-syntax-highlighting</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nvm-amp-node-js"><span class="nav-number">9.</span> <span class="nav-text">nvm &amp; node.js</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">10.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/macos-env-setup.html';
+          this.page.identifier = 'macos-env-setup.html';
+          this.page.title = '前端開發 MacOS 環境安裝';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

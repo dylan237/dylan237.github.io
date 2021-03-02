@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue,Animation,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Vue 封裝好的　transition 元件提供開發者在插入、更新、移除 DOM 時，添加動畫轉場的效果。它提供三種應用方式:  CSS 轉場 (CSS transition) &amp;amp; CSS 動畫 (CSS animation) 搭配第三方動畫套件，如 Animation.css 搭配專用的 JavaScript 鉤子函式">
+<meta name="keywords" content="Vue,Animation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 動畫 - Transitions 及 Animation">
+<meta property="og:url" content="https://dylan237.github.io/vue-transitions.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:description" content="Vue 封裝好的　transition 元件提供開發者在插入、更新、移除 DOM 時，添加動畫轉場的效果。它提供三種應用方式:  CSS 轉場 (CSS transition) &amp;amp; CSS 動畫 (CSS animation) 搭配第三方動畫套件，如 Animation.css 搭配專用的 JavaScript 鉤子函式">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://cn.vuejs.org/images/transition.png">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/20190708_154717.gif?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/20190708_155623.gif?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/20190708_161406.gif?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.440Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 動畫 - Transitions 及 Animation">
+<meta name="twitter:description" content="Vue 封裝好的　transition 元件提供開發者在插入、更新、移除 DOM 時，添加動畫轉場的效果。它提供三種應用方式:  CSS 轉場 (CSS transition) &amp;amp; CSS 動畫 (CSS animation) 搭配第三方動畫套件，如 Animation.css 搭配專用的 JavaScript 鉤子函式">
+<meta name="twitter:image" content="https://cn.vuejs.org/images/transition.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/vue-transitions.html">
+
+
+
+
+
+  <title>Vue 動畫 - Transitions 及 Animation | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/vue-transitions.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Vue 動畫 - Transitions 及 Animation</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-07-08T09:48:22+08:00">
+                2019-07-08
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Vue/" itemprop="url" rel="index">
+                    <span itemprop="name">Vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/vue-transitions.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="vue-transitions.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <img src="" alt="" style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px"> -->
+<p>Vue 封裝好的　<code>transition</code> 元件提供開發者在插入、更新、移除 DOM 時，添加動畫轉場的效果。它提供三種應用方式:</p>
+<ul>
+<li>CSS 轉場 (CSS transition) &amp; CSS 動畫 (CSS animation)</li>
+<li>搭配第三方動畫套件，如 Animation.css</li>
+<li>搭配專用的 JavaScript 鉤子函式<a id="more"></a>
+
+</li>
+</ul>
+<!-- <div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="javascript:;">
+    網路
+  </a>
+</div>
+<br /> -->
+
+<h2 id="使用條件"><a href="#使用條件" class="headerlink" title="使用條件"></a>使用條件</h2><ul>
+<li>使用 <code>v-if</code></li>
+<li>使用 <code>v-show</code></li>
+<li>動態元件 (Dynamic Components)，如使用 <code>:is</code> ，透過字串變數進行元件切換</li>
+<li>元件的根節點（Component Root Nodes）</li>
+</ul>
+<h2 id="方法1-CSS-轉場-amp-CSS-動畫"><a href="#方法1-CSS-轉場-amp-CSS-動畫" class="headerlink" title="方法1 - CSS 轉場 &amp; CSS 動畫"></a>方法1 - CSS 轉場 &amp; CSS 動畫</h2><h3 id="預設的轉場類名"><a href="#預設的轉場類名" class="headerlink" title="預設的轉場類名"></a>預設的轉場類名</h3><p>使用 <code>&lt;transition&gt;</code> 時，Vue 會在特定時間點將對應的 class 加到元素中，然後再移除，產生進入和離開的漸變效果。</p>
+<ol>
+<li><p><code>v-enter</code><br><strong>進入轉場</strong>開始的狀態。在元素插入前生效，在元素被插入後的下一幀移除</p>
+</li>
+<li><p><code>v-enter-active</code><br><strong>進入轉場</strong>過程的狀態。在整個進入轉場的階段中應用，在轉場完成之後移除。在這裡可以定義轉場的過程時間，延遲。如: <code>transition: opacity .5s</code></p>
+</li>
+<li><p><code>v-enter-to</code><br><strong>進入轉場</strong>結束的狀態。在元素被插入之後下一幀生效(與此同時 v-enter 被移除)，在轉場完成之後移除 (2.1.8版以上)</p>
+</li>
+<li><p><code>v-leave</code><br><strong>離開轉場</strong>的開始狀態。在離開轉場被觸發時立即生效，下一幀被移除</p>
+</li>
+<li><p><code>v-leave-active</code><br><strong>離開轉場</strong>生效時的狀態。在整個離開轉場的階段中應用，在轉場完成之後移除。在這裡可以定義轉場的過程時間，延遲。如: <code>transition: opacity .5s</code></p>
+</li>
+<li><p><code>v-leave-to</code><br><strong>離開轉場</strong>結束的狀態。在 <code>v-leave</code> 被觸發之後下一幀生效(與此同時 v-leave 被移除)，在轉場完成之後移除 (2.1.8版以上)</p>
+</li>
+</ol>
+<p><img src="https://cn.vuejs.org/images/transition.png" alt><br>來源: <a href="https://cn.vuejs.org/v2/guide/transitions.html" target="_blank" rel="noopener">Vue 官方文件</a></p>
+<p>若無自行定義類別的前綴詞，預設是 <code>v-</code> (如上)。若有自行定義需求，則可以在 <code>&lt;transition&gt;</code> 標籤添加 name 屬性，並且將預設類別 <code>v-</code> 的 v 改為自定義名稱。</p>
+<h3 id="CSS-轉場"><a href="#CSS-轉場" class="headerlink" title="CSS 轉場"></a>CSS 轉場</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show = !show"</span>&gt;</span>Toggle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"show"</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    show: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fade-enter-active</span>, <span class="selector-class">.fade-leave-active</span> &#123;</span><br><span class="line">  <span class="attribute">transition</span>: opacity .<span class="number">5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.fade-enter</span>, <span class="selector-class">.fade-leave-to</span> &#123;</span><br><span class="line">  <span class="attribute">opacity</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<!-- ![](https://github.com/dylan237/images_source/blob/master/20190708_100853.gif?raw=true) -->
+
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="result" data-user="dylan_demo" data-slug-hash="RzeYmR" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="RzeYmR">
+  <span>See the Pen <a href="https://codepen.io/dylan_demo/pen/RzeYmR/" target="_blank" rel="noopener">
+  RzeYmR</a> by Dylan (<a href="https://codepen.io/dylan_demo" target="_blank" rel="noopener">@dylan_demo</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h3 id="流程敘述"><a href="#流程敘述" class="headerlink" title="流程敘述"></a>流程敘述</h3><ul>
+<li>第一次點擊按鈕，變數 <code>show</code> 被更改為 <code>false</code>，此時元素移除，同時觸發 <code>leave</code> → <code>leave-active</code> → <code>leave-to</code></li>
+<li>第二次點擊按鈕，變數 <code>show</code> 被更改為 <code>true</code>，此時元素插入，同時觸發 <code>enter</code> → <code>enter-active</code> → <code>enter-to</code></li>
+</ul>
+<p>另外 <code>v-if</code> 也可以改為 <code>v-show</code>，後者並不會移除元素，而是以 <code>display: block</code> 和 <code>display: none</code> 做切換。</p>
+<h3 id="CSS-動畫"><a href="#CSS-動畫" class="headerlink" title="CSS 動畫"></a>CSS 動畫</h3><p>使用 CSS animation 和 CSS transition 基本上沒有太大差異，區別是在動畫中 <code>v-enter</code> 在節點插入 DOM 後不會立即刪除，而是在 <code>animationend</code> 事件觸發時刪除。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show = !show"</span>&gt;</span>Toggle show<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"bounce"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"show"</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    show: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.bounce-enter-active</span> &#123;</span><br><span class="line">  <span class="attribute">animation</span>: bounce-in .<span class="number">5s</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.bounce-leave-active</span> &#123;</span><br><span class="line">  <span class="attribute">animation</span>: bounce-in .<span class="number">5s</span> reverse;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">keyframes</span> bounce-in &#123;</span><br><span class="line">  0% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(0);</span><br><span class="line">  &#125;</span><br><span class="line">  50% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(1.5);</span><br><span class="line">  &#125;</span><br><span class="line">  100% &#123;</span><br><span class="line">    <span class="attribute">transform</span>: <span class="built_in">scale</span>(1);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="result" data-user="dylan_demo" data-slug-hash="qzJMzB" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="qzJMzB">
+  <span>See the Pen <a href="https://codepen.io/dylan_demo/pen/qzJMzB/" target="_blank" rel="noopener">
+  qzJMzB</a> by Dylan (<a href="https://codepen.io/dylan_demo" target="_blank" rel="noopener">@dylan_demo</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
+<h2 id="方法2-搭配第三方動畫套件-Animate-css"><a href="#方法2-搭配第三方動畫套件-Animate-css" class="headerlink" title="方法2 - 搭配第三方動畫套件 (Animate.css)"></a>方法2 - 搭配第三方動畫套件 (Animate.css)</h2><p>客製化的方式除了方法一之外，Vue 也提供了另外一種方式。我們可以直接在 <code>＜transition&gt;</code> 標籤內插入屬性，值則為第三方庫寫好的 Class Name。以下範例使用 <a href="https://daneden.github.io/animate.css/" target="_blank" rel="noopener">Animate.css 動畫庫</a>做範例。</p>
+<h3 id="預設的轉場屬性"><a href="#預設的轉場屬性" class="headerlink" title="預設的轉場屬性"></a>預設的轉場屬性</h3><p>我們可以通過以下屬性來自定義轉場類名，時間點可以對應到上面提到的<code>預設的轉場類名</code>：</p>
+<ul>
+<li><code>enter-class</code></li>
+<li><code>enter-active-class</code></li>
+<li><code>enter-to-class</code> (2.1.8+)</li>
+<li><code>leave-class</code></li>
+<li><code>leave-active-class</code></li>
+<li><code>leave-to-class</code> (2.1.8+)</li>
+</ul>
+<h3 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show = !show"</span>&gt;</span>Toggle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span></span></span><br><span class="line"><span class="tag">    <span class="attr">name</span>=<span class="string">"custom-classes-transition"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">enter-active-class</span>=<span class="string">"animated tada"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">leave-active-class</span>=<span class="string">"animated bounceOutRight"</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"show"</span>&gt;</span>hello<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    show: <span class="literal">true</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="result" data-user="dylan_demo" data-slug-hash="XLxPLG" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="XLxPLG">
+  <span>See the Pen <a href="https://codepen.io/dylan_demo/pen/XLxPLG/" target="_blank" rel="noopener">
+  XLxPLG</a> by Dylan (<a href="https://codepen.io/dylan_demo" target="_blank" rel="noopener">@dylan_demo</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="方法3-JavaScript-鉤子函式"><a href="#方法3-JavaScript-鉤子函式" class="headerlink" title="方法3 - JavaScript 鉤子函式"></a>方法3 - JavaScript 鉤子函式</h2><p>另一種方法則是在 <code>&lt;transition&gt;</code> 元素行內綁定鉤子，可以搭配 <code>CSS 轉場</code>和 <code>CSS 動畫</code>使用，也可單獨使用。</p>
+<h3 id="預設鉤子"><a href="#預設鉤子" class="headerlink" title="預設鉤子"></a>預設鉤子</h3><ol>
+<li><p><code>beforeEnter(el)</code><br><strong>進入轉場/動畫</strong>前啟動</p>
+</li>
+<li><p><code>enter(el, callback)</code><br><strong>進入轉場/動畫</strong>之元素插入時啟動。<code>done callback</code> 則在結束時呼叫，可傳可不傳。<br>與<code>方法2</code>所對應的時間點為 <code>enter-class</code></p>
+</li>
+<li><p><code>afterEnter(el)</code><br><strong>進入轉場/動畫</strong>時啟動。<br>與<code>方法2</code>所對應的時間點為 <code>enter-to-class</code></p>
+</li>
+<li><p><code>enterCancelled(el)</code><br>在未完成<strong>進入轉場/動畫</strong>時取消動作。</p>
+</li>
+<li><p><code>beforeLeave(el)</code><br><strong>離開轉場/動畫</strong>前啟動</p>
+</li>
+<li><p><code>leave(el, callback)</code><br><strong>離開轉場/動畫</strong>之元素插入時啟動。<code>done callback</code> 則在結束時呼叫，可傳可不傳。<br>與<code>方法2</code>所對應的時間點為 <code>leave-class</code></p>
+</li>
+<li><p><code>afterLeave(el)</code><br><strong>離開轉場/動畫</strong>時啟動。</p>
+</li>
+<li><p><code>leaveCancelled(el)</code><br>在未完成<strong>離開轉場/動畫</strong>時取消動作。<br>與<code>方法2</code>所對應的時間點為 <code>leave-to-class</code></p>
+</li>
+</ol>
+<blockquote>
+<p>補充：當只用JavaScript 轉場的時候，在enter和leave中必須使用done進行callback。否則，它們將被同步呼叫，轉場會立即完成。</p>
+</blockquote>
+<blockquote>
+<p>補充：推薦對於僅使用 JavaScript 轉場的元素添加 <code>:css=&quot;false&quot;</code>，Vue 會跳過 CSS 的檢測。這也可以避免過渡過程中 CSS 的影響。</p>
+</blockquote>
+<h3 id="範例-1"><a href="#範例-1" class="headerlink" title="範例"></a>範例</h3><p>一個使用 <code>Velocity.js</code> 函式庫的簡單例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show = !show"</span>&gt;</span></span><br><span class="line">    Toggle</span><br><span class="line">  <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">before-enter</span>=<span class="string">"beforeEnter"</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">enter</span>=<span class="string">"enter"</span></span></span><br><span class="line"><span class="tag">    @<span class="attr">leave</span>=<span class="string">"leave"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:css</span>=<span class="string">"false"</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-if</span>=<span class="string">"show"</span>&gt;</span></span><br><span class="line">      Demo</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    show: <span class="literal">false</span></span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    beforeEnter(el) &#123;</span><br><span class="line">      el.style.opacity = <span class="number">0</span></span><br><span class="line">      el.style.transformOrigin = <span class="string">'left'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    enter(el, done) &#123;</span><br><span class="line">      Velocity(el, &#123; <span class="attr">opacity</span>: <span class="number">1</span>, <span class="attr">fontSize</span>: <span class="string">'1.4em'</span> &#125;, &#123; <span class="attr">duration</span>: <span class="number">300</span> &#125;)</span><br><span class="line">      Velocity(el, &#123; <span class="attr">fontSize</span>: <span class="string">'1em'</span> &#125;, &#123; <span class="attr">complete</span>: done &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    leave(el, done) &#123;</span><br><span class="line">      Velocity(el, &#123; <span class="attr">translateX</span>: <span class="string">'15px'</span>, <span class="attr">rotateZ</span>: <span class="string">'50deg'</span> &#125;, &#123; <span class="attr">duration</span>: <span class="number">300</span> &#125;)</span><br><span class="line">      Velocity(el, &#123; <span class="attr">rotateZ</span>: <span class="string">'100deg'</span> &#125;, &#123; <span class="attr">loop</span>: <span class="number">2</span> &#125;)</span><br><span class="line">      Velocity(el, &#123;</span><br><span class="line">        rotateZ: <span class="string">'45deg'</span>,</span><br><span class="line">        translateY: <span class="string">'30px'</span>,</span><br><span class="line">        translateX: <span class="string">'30px'</span>,</span><br><span class="line">        opacity: <span class="number">0</span></span><br><span class="line">      &#125;, &#123; <span class="attr">complete</span>: done &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="result" data-user="dylan_demo" data-slug-hash="YoJJKq" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="YoJJKq">
+  <span>See the Pen <a href="https://codepen.io/dylan_demo/pen/YoJJKq/" target="_blank" rel="noopener">
+  YoJJKq</a> by Dylan (<a href="https://codepen.io/dylan_demo" target="_blank" rel="noopener">@dylan_demo</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="兩個元素的過場動畫"><a href="#兩個元素的過場動畫" class="headerlink" title="兩個元素的過場動畫"></a>兩個元素的過場動畫</h2><p>透過 <code>v-if</code> 同時讓兩個元素進行過場。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show = !show"</span>&gt;</span>toggle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">"show"</span>&gt;</span>element1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h2</span> <span class="attr">v-else</span>&gt;</span>element12<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/20190708_154717.gif?raw=true" alt></p>
+<p>我們會發現，在動畫執行階段兩個元素會在同個時間交集，造成空間互相擠壓的問題。這並不是我們想要的結果。<br>而 Vue 的 transition 元件提供了一個解法，我們可以為　transition 標籤加上另一個屬性 <code>mode</code>。 </p>
+<ul>
+<li><code>in-out</code>： 新的元素先執行 <code>enter</code>，待完成後舊元素才執行 <code>leave</code></li>
+<li><code>out-in</code>：舊元素先執行 <code>leave</code>，待完成後新元素才執行 <code>enter</code> (一般符合預期的狀況)</li>
+</ul>
+<p>稍作修改</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span> <span class="attr">mode</span>=<span class="string">"out-in"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/20190708_155623.gif?raw=true" alt></p>
+<p>另外有一點需要特別注意，剛剛的例子使用的是兩個不同元素(h1及h2)，是可以正常執行的，但是如果兩個元素是相同的就會出現一些問題。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show = !show"</span>&gt;</span>toggle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">"show"</span>&gt;</span>element1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span>&gt;</span>element12<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/20190708_161406.gif?raw=true" alt></p>
+<p>我們可以為 transition 標籤加上 <code>key</code>，來解決這個問題，key 內的值需要是<strong>唯一值</strong>，即每個元素的值不可重複，如此 Vue 才能判斷它為不同的元素，進而正常執行過場。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"show = !show"</span>&gt;</span>toggle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition</span> <span class="attr">name</span>=<span class="string">"fade"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-if</span>=<span class="string">"show"</span> <span class="attr">key</span>=<span class="string">"1"</span>&gt;</span>element1<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span> <span class="attr">v-else</span> <span class="attr">key</span>=<span class="string">"2"</span>&gt;</span>element12<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p class="codepen" data-height="265" data-theme-id="0" data-default-tab="result" data-user="dylan_demo" data-slug-hash="ydRRPr" style="height: 265px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="ydRRPr">
+  <span>See the Pen <a href="https://codepen.io/dylan_demo/pen/ydRRPr/" target="_blank" rel="noopener">
+  ydRRPr</a> by Dylan (<a href="https://codepen.io/dylan_demo" target="_blank" rel="noopener">@dylan_demo</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="多個元素的過場"><a href="#多個元素的過場" class="headerlink" title="多個元素的過場"></a>多個元素的過場</h2><p>前面的例子都是使用 <code>v-if</code> 來做過場效果，最多只有兩個元素，如果使用 <code>v-for</code> 產生的大量元素就必須使用 <code>transition-group</code> 元件。</p>
+<p><code>transition-group</code> 在編譯後預設會被轉換成 <code>span</code> 標籤，由這個標籤包住所有 <code>v-for</code> 渲染出來的元素。例如：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition-group</span> <span class="attr">name</span>=<span class="string">"fade"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">"num in 3"</span> <span class="attr">:key</span>=<span class="string">"num"</span>&gt;</span> num <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition-group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>編譯結果為：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>3<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>我們可以透過 <code>tag</code> 屬性將預設標籤改掉</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">transition-group</span> <span class="attr">name</span>=<span class="string">"fade"</span> <span class="attr">tag</span>=<span class="string">"div"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">"num in 3"</span> <span class="attr">:key</span>=<span class="string">"num"</span>&gt;</span> num <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">transition-group</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>編譯結果為：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>1<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>2<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>3<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>注意：和 <code>transition</code> 元件一樣，在 <code>transition-group</code> 的元素也必須為它加上 <code>key</code></p>
+</blockquote>
+<p>使用 <code>bootstrap</code> 卡片元件來製作一個簡易的新增刪除功能的表單，並且使用 <code>&lt;transition-group&gt;</code> 加上動畫效果吧。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"addCard"</span>&gt;</span>新增卡片<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">transition-group</span> <span class="attr">name</span>=<span class="string">"fade"</span> <span class="attr">tag</span>=<span class="string">"div"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card mb-3 fade-item"</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in data"</span> <span class="attr">:key</span>=<span class="string">"item.title"</span> <span class="attr">style</span>=<span class="string">"width: 18rem;"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">"card-img-top"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-body"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">"card-title"</span>&gt;</span> &#123;&#123;item.title&#125;&#125; <span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"card-text"</span>&gt;</span> &#123;&#123;item.text&#125;&#125; - &#123;&#123; item.timestamp &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> @<span class="attr">click</span>=<span class="string">"removeCard(item.timestamp)"</span>&gt;</span> Delete<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">transition-group</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    data: []</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addCard() &#123;</span><br><span class="line">      <span class="keyword">let</span> timestamp = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.floor(dateTime / <span class="number">100</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.data.push(&#123;</span><br><span class="line">        timestamp: timestamp(),</span><br><span class="line">        title: <span class="string">`標題 <span class="subst">$&#123;<span class="keyword">this</span>.data.length + <span class="number">1</span>&#125;</span>`</span>,</span><br><span class="line">        text: <span class="string">`我是一個內容 <span class="subst">$&#123;<span class="keyword">this</span>.data.length + <span class="number">1</span>&#125;</span>`</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    removeCard(title) &#123;</span><br><span class="line">      <span class="keyword">this</span>.data = <span class="keyword">this</span>.data.filter(<span class="function">(<span class="params">item</span>)=&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> item.timestamp !== title;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p class="codepen" data-height="365" data-theme-id="0" data-default-tab="result" data-user="dylan_demo" data-slug-hash="Rzevvx" style="height: 365px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="Rzevvx">
+  <span>See the Pen <a href="https://codepen.io/dylan_demo/pen/Rzevvx/" target="_blank" rel="noopener">
+  Rzevvx</a> by Dylan (<a href="https://codepen.io/dylan_demo" target="_blank" rel="noopener">@dylan_demo</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+
+<h2 id="重複利用動畫效果"><a href="#重複利用動畫效果" class="headerlink" title="重複利用動畫效果"></a>重複利用動畫效果</h2><p>可以使用元件及插槽(Slot)封裝你精心設計的動畫效果，下個專案可以重複利用，這邊使用上面卡片的範例來做。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"demo"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> @<span class="attr">click</span>=<span class="string">"addCard"</span>&gt;</span>新增卡片<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">list</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card mb-3 fade-item"</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in data"</span> <span class="attr">:key</span>=<span class="string">"item.title"</span> <span class="attr">style</span>=<span class="string">"width: 18rem;"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">"card-img-top"</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card-body"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">h5</span> <span class="attr">class</span>=<span class="string">"card-title"</span>&gt;</span> &#123;&#123;item.title&#125;&#125; <span class="tag">&lt;/<span class="name">h5</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"card-text"</span>&gt;</span> &#123;&#123;item.text&#125;&#125; - &#123;&#123; item.timestamp &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span> @<span class="attr">click</span>=<span class="string">"removeCard(item.timestamp)"</span>&gt;</span> Delete<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">list</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 區域元件 (二擇一)</span></span><br><span class="line"><span class="keyword">let</span> list = &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;transition-group name="fade" tag="div"&gt;</span></span><br><span class="line"><span class="string">      &lt;slot&gt;&lt;/slot&gt;</span></span><br><span class="line"><span class="string">    &lt;/transition-group&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 全域元件 (二擇一)</span></span><br><span class="line">Vue.component(<span class="string">'list'</span>, &#123;</span><br><span class="line">  template: <span class="string">`</span></span><br><span class="line"><span class="string">    &lt;transition-group name="fade" tag="div"&gt;\</span></span><br><span class="line"><span class="string">      &lt;slot&gt;&lt;/slot&gt;\</span></span><br><span class="line"><span class="string">    &lt;/transition-group&gt;</span></span><br><span class="line"><span class="string">  `</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#demo'</span>,</span><br><span class="line">  components: &#123;  <span class="comment">// 使用區域元件要加上元件物件</span></span><br><span class="line">    <span class="string">'list'</span>: list</span><br><span class="line">  &#125;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    data: []</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line">    addCard() &#123;</span><br><span class="line">      <span class="keyword">let</span> timestamp = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">const</span> dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>().getTime();</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.floor(dateTime / <span class="number">100</span>);</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">this</span>.data.push(&#123;</span><br><span class="line">        timestamp: timestamp(),</span><br><span class="line">        title: <span class="string">`標題 <span class="subst">$&#123;<span class="keyword">this</span>.data.length + <span class="number">1</span>&#125;</span>`</span>,</span><br><span class="line">        text: <span class="string">`我是一個內容 <span class="subst">$&#123;<span class="keyword">this</span>.data.length + <span class="number">1</span>&#125;</span>`</span>,</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">    removeCard(title) &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(title)</span><br><span class="line">      <span class="keyword">this</span>.data = <span class="keyword">this</span>.data.filter(<span class="function">(<span class="params">item</span>)=&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> item.timestamp !== title;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p class="codepen" data-height="365" data-theme-id="0" data-default-tab="result" data-user="dylan_demo" data-slug-hash="MMzGYp" style="height: 365px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;" data-pen-title="MMzGYp">
+  <span>See the Pen <a href="https://codepen.io/dylan_demo/pen/MMzGYp/" target="_blank" rel="noopener">
+  MMzGYp</a> by Dylan (<a href="https://codepen.io/dylan_demo" target="_blank" rel="noopener">@dylan_demo</a>)
+  on <a href="https://codepen.io" target="_blank" rel="noopener">CodePen</a>.</span>
+</p>
+<script async src="https://static.codepen.io/assets/embed/ei.js"></script>
+
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://cn.vuejs.org/v2/guide/transitions.html" target="_blank" rel="noopener">Vue 官方文件</a><br><a href="http://blog.tonycube.com/2017/06/vuejs-14-transition-animation.html" target="_blank" rel="noopener">Vue.js (14) - 過場效果及動畫</a><br><a href="https://cythilya.github.io/2017/05/28/vue-transitions/" target="_blank" rel="noopener">Vue.js: 樣式與漸變 Transitions</a><br><a href="https://cythilya.github.io/2017/06/01/vue-animations/" target="_blank" rel="noopener">Vue.js: 動畫 Animations</a><br><a href="https://cythilya.github.io/2017/06/09/vue-transition-effects/" target="_blank" rel="noopener">Vue.js: 進階過渡效果</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
+          
+            <a href="/tags/Animation/" rel="tag"># Animation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/vue-snippet-template.html" rel="next" title="在 VScode 自訂程式碼片段(Snippets)，以 Vue 單一元件檔基本架構為例">
+                <i class="fa fa-chevron-left"></i> 在 VScode 自訂程式碼片段(Snippets)，以 Vue 單一元件檔基本架構為例
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/user-agent-javascript.html" rel="prev" title="JavaScript - 使用 userAgent 判斷操作系統和瀏覽器類型">
+                JavaScript - 使用 userAgent 判斷操作系統和瀏覽器類型 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用條件"><span class="nav-number">1.</span> <span class="nav-text">使用條件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法1-CSS-轉場-amp-CSS-動畫"><span class="nav-number">2.</span> <span class="nav-text">方法1 - CSS 轉場 &amp; CSS 動畫</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#預設的轉場類名"><span class="nav-number">2.1.</span> <span class="nav-text">預設的轉場類名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-轉場"><span class="nav-number">2.2.</span> <span class="nav-text">CSS 轉場</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流程敘述"><span class="nav-number">2.3.</span> <span class="nav-text">流程敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS-動畫"><span class="nav-number">2.4.</span> <span class="nav-text">CSS 動畫</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法2-搭配第三方動畫套件-Animate-css"><span class="nav-number">3.</span> <span class="nav-text">方法2 - 搭配第三方動畫套件 (Animate.css)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#預設的轉場屬性"><span class="nav-number">3.1.</span> <span class="nav-text">預設的轉場屬性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#範例"><span class="nav-number">3.2.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法3-JavaScript-鉤子函式"><span class="nav-number">4.</span> <span class="nav-text">方法3 - JavaScript 鉤子函式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#預設鉤子"><span class="nav-number">4.1.</span> <span class="nav-text">預設鉤子</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#範例-1"><span class="nav-number">4.2.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#兩個元素的過場動畫"><span class="nav-number">5.</span> <span class="nav-text">兩個元素的過場動畫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多個元素的過場"><span class="nav-number">6.</span> <span class="nav-text">多個元素的過場</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重複利用動畫效果"><span class="nav-number">7.</span> <span class="nav-text">重複利用動畫效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">8.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/vue-transitions.html';
+          this.page.identifier = 'vue-transitions.html';
+          this.page.title = 'Vue 動畫 - Transitions 及 Animation';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

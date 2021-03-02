@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Nodejs,BackEnd,Express,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前我們使用原生 Node.js 製作了一個簡單的留言版應用程式, 現在讓我們把這個小練習用 Express 來改寫吧。  這篇部分程式碼和之前原生的版本是一樣的(如HTML), 有些細節在這篇就不再重複演示, 如有不夠清楚的地方, 可以搭配服用：用 Node.js 製作簡易的留言版">
+<meta name="keywords" content="Nodejs,BackEnd,Express">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Express 製作簡易的留言版">
+<meta property="og:url" content="https://dylan237.github.io/express-message-book.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:description" content="之前我們使用原生 Node.js 製作了一個簡單的留言版應用程式, 現在讓我們把這個小練習用 Express 來改寫吧。  這篇部分程式碼和之前原生的版本是一樣的(如HTML), 有些細節在這篇就不再重複演示, 如有不夠清楚的地方, 可以搭配服用：用 Node.js 製作簡易的留言版">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1570429169243.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1570429207440.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/20191002_150415.gif?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用 Express 製作簡易的留言版">
+<meta name="twitter:description" content="之前我們使用原生 Node.js 製作了一個簡單的留言版應用程式, 現在讓我們把這個小練習用 Express 來改寫吧。  這篇部分程式碼和之前原生的版本是一樣的(如HTML), 有些細節在這篇就不再重複演示, 如有不夠清楚的地方, 可以搭配服用：用 Node.js 製作簡易的留言版">
+<meta name="twitter:image" content="https://github.com/dylan237/images_source/blob/master/1570429169243.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/express-message-book.html">
+
+
+
+
+
+  <title>用 Express 製作簡易的留言版 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/express-message-book.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">用 Express 製作簡易的留言版</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-10-07T11:20:05+08:00">
+                2019-10-07
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nodejs/" itemprop="url" rel="index">
+                    <span itemprop="name">Nodejs</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Nodejs/Express/" itemprop="url" rel="index">
+                    <span itemprop="name">Express</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/express-message-book.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="express-message-book.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <img src="" alt="" style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px"> -->
+<p>之前我們使用原生 Node.js 製作了一個簡單的留言版應用程式, 現在讓我們把這個小練習用 Express 來改寫吧。</p>
+<blockquote>
+<p>這篇部分程式碼和之前原生的版本是一樣的(如HTML), 有些細節在這篇就不再重複演示, 如有不夠清楚的地方, 可以搭配服用：<a href="https://dylan237.github.io/nodejs-message-book.html">用 Node.js 製作簡易的留言版</a></p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="檔案結構"><a href="#檔案結構" class="headerlink" title="檔案結構"></a>檔案結構</h2><p>除了改寫 app.js 以外, 其他配置包含程式碼, 大部分都和之前 Node.js 原生版本一樣</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">— app.js</span><br><span class="line">— views</span><br><span class="line">　　∟ index.html</span><br><span class="line">　　∟ post.html</span><br><span class="line">　　∟ 404.html</span><br><span class="line">— public</span><br><span class="line">   ∟ lib</span><br><span class="line">     ∟ bootstrap.css</span><br></pre></td></tr></table></figure>
+
+<p>app.js</p>
+<ul>
+<li>後端邏輯程式碼</li>
+</ul>
+<p>views</p>
+<ul>
+<li>HTML 檔案, 分別是首頁、發表留言頁、404警告頁</li>
+</ul>
+<p>public</p>
+<ul>
+<li>靜態資源資料夾, 包含所有第三方套件、圖片、前端js檔、css檔, 這些在 HTML 標籤中, 如 <code>&lt;link&gt;</code> <code>&lt;script&gt;</code> <code>&lt;img&gt;</code> 所請求的資源</li>
+</ul>
+<h2 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h2><p>Express 服務基本配置, 並且配置首頁(index.html) 及發表留言頁(post.html) 路由。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> host = <span class="string">'127.0.0.1'</span></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">3000</span></span><br><span class="line"></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'首頁'</span>)</span><br><span class="line">&#125;)</span><br><span class="line">app.get(<span class="string">'/post'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'留言頁'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(port, host, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`app is runnig at <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="在-Express-中使用-art-template-模板引擎"><a href="#在-Express-中使用-art-template-模板引擎" class="headerlink" title="在 Express 中使用 art-template 模板引擎"></a>在 Express 中使用 art-template 模板引擎</h2><p>art-template 模板引擎套件也有提供一種 Express 框架可使用的版本, 詳細配置請參考文件： <a href="http://aui.github.io/art-template/express/" target="_blank" rel="noopener">art-template Express</a>。</p>
+<h3 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h3><figure class="highlight zsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install --save art-template</span><br><span class="line">npm install --save express-art-template</span><br></pre></td></tr></table></figure>
+
+<p><code>express-art-template</code> 是把 art-template 整合在 Express 中的套件。在 Express 中使用時, 不需要特別 <code>require(&#39;art-template&#39;)</code>, 但是必須要安裝, 因為 express-art-template 套件中有引入 art-template。</p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br><span class="line"><span class="keyword">const</span> host = <span class="string">'127.0.0.1'</span></span><br><span class="line"><span class="keyword">const</span> port = <span class="number">3000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// view engine setup (核心配置)</span></span><br><span class="line">app.engine(<span class="string">'html'</span>, <span class="built_in">require</span>(<span class="string">'express-art-template'</span>)); <span class="comment">// ##</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// routes</span></span><br><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'index.html'</span>) </span><br><span class="line">&#125;)</span><br><span class="line">app.get(<span class="string">'/post'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'post.html'</span>)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.listen(port, host, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`app is runnig at <span class="subst">$&#123;host&#125;</span>:<span class="subst">$&#123;port&#125;</span>`</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>engine()</code> 方法的第一個參數是在告訴模板引擎, 渲染 <code>.html</code> 附檔名的檔案時, 使用模板引擎渲染</li>
+<li>Express 原生就為 res 物件提供一個方法 <code>render</code>, 但預設是無法使用的, 需要搭配模板引擎後才能使用<ul>
+<li>參數： <code>res.render(&#39;html模板檔名&#39;, 欲渲染的資料(型別為物件, 可選參數))</code></li>
+<li>第一個參數不可寫路徑, 僅需提供檔名, 模板引擎預設會到 views 資料夾中尋找該模板檔案。 因此建議開發者建立一個 views 資料夾, 然後將 html 檔案都放到該資料夾中</li>
+<li>如果想要修改預設的資料夾，可以使用<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.set(<span class="string">'views'</span>, 新的資料夾名稱)</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="將資料帶入模板引擎"><a href="#將資料帶入模板引擎" class="headerlink" title="將資料帶入模板引擎"></a>將資料帶入模板引擎</h3><p>目前的程式碼只會回傳靜態的 index 頁面, 因此還需要使用模板引擎動態渲染留言的資料到 <code>index.html</code> 上。</p>
+<p>宣告一個處理留言資料的物件, 先寫死兩個留言資料, 屬性有 </p>
+<ul>
+<li><code>name 留言者</code></li>
+<li><code>message 留言內容</code></li>
+<li><code>dateTime 留言時間</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> comments = [</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'王曉明'</span>,</span><br><span class="line">    message: <span class="string">'今天天氣不錯'</span>,</span><br><span class="line">    dateTime: <span class="string">'2019-08-09 13:00:00'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    name: <span class="string">'王曉華'</span>,</span><br><span class="line">    message: <span class="string">'對阿'</span>,</span><br><span class="line">    dateTime: <span class="string">'2019-08-09 12:00:00'</span></span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<p>將資料帶入模板引擎渲染</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/post'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'post.html'</span>, &#123;</span><br><span class="line">    comments: comments</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="處理發表留言"><a href="#處理發表留言" class="headerlink" title="處理發表留言"></a>處理發表留言</h2><h3 id="使用-get-方法發送留言請求"><a href="#使用-get-方法發送留言請求" class="headerlink" title="使用 get 方法發送留言請求"></a>使用 get 方法發送留言請求</h3><p>表單 HTML</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/comment"</span> <span class="attr">method</span>=<span class="string">"get"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"input_name"</span>&gt;</span>你的大名<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">required</span> <span class="attr">minlength</span>=<span class="string">"2"</span> <span class="attr">maxlength</span>=<span class="string">"10"</span> <span class="attr">id</span>=<span class="string">"input_name"</span> <span class="attr">name</span>=<span class="string">"name"</span> <span class="attr">placeholder</span>=<span class="string">"請寫入你的姓名"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"form-group"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"textarea_message"</span>&gt;</span>留言內容<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">textarea</span> <span class="attr">class</span>=<span class="string">"form-control"</span> <span class="attr">name</span>=<span class="string">"message"</span> <span class="attr">id</span>=<span class="string">"textarea_message"</span> <span class="attr">cols</span>=<span class="string">"30"</span> <span class="attr">rows</span>=<span class="string">"10"</span> <span class="attr">required</span> <span class="attr">minlength</span>=<span class="string">"5"</span> <span class="attr">maxlength</span>=<span class="string">"20"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn btn-primary"</span>&gt;</span>發表<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>伺服器程式碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/comment'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 在 Express 中可以直接使用 req.query 取得 GET 請求所夾帶的 query, 且已自動將它處理成物件格式</span></span><br><span class="line">  <span class="keyword">var</span> newComment = req.query</span><br><span class="line">  newComment.dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString()</span><br><span class="line">  comments.unshift(newComment)</span><br><span class="line">  res.redirect(<span class="string">'/'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>原生的留言版練習中, 在使用者發表留言後作了以下處理</p>
+<ul>
+<li>設定狀態碼 <code>302</code> 告訴伺服器做臨時重新導向</li>
+<li>設定 Response Header 中的 <code>Location</code> 屬性, 告訴瀏覽器重新導向到哪裡</li>
+<li>結束響應</li>
+</ul>
+<p>而 Express 為我們提供 <code>res.redirect</code> 方法(帶入一個參數, 該參數帶入欲重新導向的路徑), 只要需要使用一個方法, 就可以將上述所有步驟全部都搞定。</p>
+<h3 id="使用-post-方法發送留言請求"><a href="#使用-post-方法發送留言請求" class="headerlink" title="使用 post 方法發送留言請求"></a>使用 post 方法發送留言請求</h3><p>到此, 已經改寫完 Express 版的留言板, 現在試著來做一個小練習, 將發表留言從 GET 請求改為 POST 請求。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">action</span>=<span class="string">"/comment"</span> <span class="attr">method</span>=<span class="string">"post"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>GET 請求可以使用 query 夾帶資料, 傳送到伺服器, 而 POST 無法這麼做, POST 方法必須透過 Request Body 來夾帶資料做傳送。因此後端無法用 <code>req.query</code> 取得資料, 必須要做改寫。</p>
+<p>修改程式碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/comment'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">'收到 POST 請求'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>發起一個 POST 請求<br><img src="https://github.com/dylan237/images_source/blob/master/1570429169243.jpg?raw=true" alt></p>
+<p>按下發送按鈕後, 查看開發者工具的 Network, 可以看到這次的請求所夾帶的資料<br><img src="https://github.com/dylan237/images_source/blob/master/1570429207440.jpg?raw=true" alt></p>
+<blockquote>
+<p>接下來的問題是, 如何在 Express 中取得 POST 請求所夾帶的 Request Body?</p>
+</blockquote>
+<h4 id="取得-POST-請求體-Request-Body"><a href="#取得-POST-請求體-Request-Body" class="headerlink" title="取得 POST 請求體(Request Body)"></a>取得 POST 請求體(Request Body)</h4><p>在 Express 中預設是無法直接取得表單 POST 方法的 Request Body 的, 需要透過第三方套件 <code>body-parser</code> 實現。</p>
+<p><a href="https://github.com/expressjs/body-parser" target="_blank" rel="noopener">body-parser 文件</a></p>
+<p>安裝</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save body-parser</span><br></pre></td></tr></table></figure>
+
+<p>配置</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> bodyParser = <span class="built_in">require</span>(<span class="string">'body-parser)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">app.use(bodyParser.urlencoded(&#123; extended: false &#125;))</span></span><br><span class="line"><span class="string">app.use(bodyParser.json())</span></span><br></pre></td></tr></table></figure>
+
+<p>接著就可以透過 <code>res.body</code> 取得 POST 方法所夾帶的 Request Body</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">app.post(<span class="string">'/comment'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> newComment = req.body</span><br><span class="line">  newComment.dateTime = <span class="keyword">new</span> <span class="built_in">Date</span>().toLocaleString()</span><br><span class="line">  cmds.unshift(newComment)</span><br><span class="line">  res.redirect(<span class="string">'/'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="DEMO"><a href="#DEMO" class="headerlink" title="DEMO"></a>DEMO</h2><p><img src="https://github.com/dylan237/images_source/blob/master/20191002_150415.gif?raw=true" alt></p>
+<p><a href="https://github.com/dylan237/nodejs-message-board/tree/master/express_version" target="_blank" rel="noopener">Github</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Nodejs/" rel="tag"># Nodejs</a>
+          
+            <a href="/tags/BackEnd/" rel="tag"># BackEnd</a>
+          
+            <a href="/tags/Express/" rel="tag"># Express</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/express-get-start.html" rel="next" title="建立第一支 Express 應用程式">
+                <i class="fa fa-chevron-left"></i> 建立第一支 Express 應用程式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/nodejs-dirname-and-filename.html" rel="prev" title="Node.js 中的 __dirname、__filename，以及使用相對路徑產生的問題">
+                Node.js 中的 __dirname、__filename，以及使用相對路徑產生的問題 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#檔案結構"><span class="nav-number">1.</span> <span class="nav-text">檔案結構</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#起手式"><span class="nav-number">2.</span> <span class="nav-text">起手式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Express-中使用-art-template-模板引擎"><span class="nav-number">3.</span> <span class="nav-text">在 Express 中使用 art-template 模板引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安裝"><span class="nav-number">3.1.</span> <span class="nav-text">安裝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">3.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#將資料帶入模板引擎"><span class="nav-number">3.3.</span> <span class="nav-text">將資料帶入模板引擎</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#處理發表留言"><span class="nav-number">4.</span> <span class="nav-text">處理發表留言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-get-方法發送留言請求"><span class="nav-number">4.1.</span> <span class="nav-text">使用 get 方法發送留言請求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-post-方法發送留言請求"><span class="nav-number">4.2.</span> <span class="nav-text">使用 post 方法發送留言請求</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#取得-POST-請求體-Request-Body"><span class="nav-number">4.2.1.</span> <span class="nav-text">取得 POST 請求體(Request Body)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#DEMO"><span class="nav-number">5.</span> <span class="nav-text">DEMO</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/express-message-book.html';
+          this.page.identifier = 'express-message-book.html';
+          this.page.title = '用 Express 製作簡易的留言版';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

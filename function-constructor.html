@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,克服JS的奇怪部分,原型繼承,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="JavaScript,克服JS的奇怪部分,原型繼承">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 的原型繼承(方法1) － 函數建構子與「new」">
+<meta property="og:url" content="https://dylan237.github.io/function-constructor.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550738337235.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550740063290.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550740063290.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550740800165.jpg?raw=true">
+<meta property="og:image" content="https://i.imgur.com/IGvFCJ5.png">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550797678685.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550797989046.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550798497181.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550798702885.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550799201345.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550799357897.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/425D33DA-E53F-4D66-A5E2-5604AA7BCB9D.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/674C4DE6-A8F7-4D6E-888C-42307CF1890C.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/C64CCE0D-0724-4DC2-A18C-4C50B33B9517.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/AF9DC7B1-734E-4004-871A-71792E4F2F77.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550742972035.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1550905135612.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.433Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 的原型繼承(方法1) － 函數建構子與「new」">
+<meta name="twitter:image" content="https://github.com/dylan237/images_source/blob/master/1550738337235.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/function-constructor.html">
+
+
+
+
+
+  <title>JS 的原型繼承(方法1) － 函數建構子與「new」 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/function-constructor.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JS 的原型繼承(方法1) － 函數建構子與「new」</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-02-21T17:09:00+08:00">
+                2019-02-21
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/克服JS的奇怪部分/" itemprop="url" rel="index">
+                    <span itemprop="name">克服JS的奇怪部分</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/function-constructor.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="function-constructor.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <img src="" alt="" style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px"> -->
+
+<a id="more"></a>
+
+<!-- <div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="javascript:;">
+    網路
+  </a>
+</div>
+<br /> -->
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在前幾篇的筆記中，我們已經對於<code>物件（object）</code>、<code>原型（prototype）</code>、<code>繼承（inheritance）</code>和<code>原型鏈</code>等等有更多的了解，現在讓我們來更深入的談論一下 JavaScript中 <strong>建立物件的方法</strong>。</p>
+<p>JavaScript語法本身其實已經有<code>物件實體</code>這個快速好用的建立物件方法，但追溯到早期 JavaScript剛被創造出來時，參考了其他語言的<strong>古典繼承</strong>的概念和 <code>new</code> 關鍵字，而與 <code>new</code>一起出現的用法就是 <code>function constructor函數建構子</code>。</p>
+<br>
+
+<h2 id="函數建構子-Function-constructor"><a href="#函數建構子-Function-constructor" class="headerlink" title="函數建構子 Function constructor"></a>函數建構子 Function constructor</h2><blockquote>
+<p>能用來新建物件的一種函式，透過與 <code>new</code>運算子一起使用，能創建出新物件並設定該物件的屬性與方法 </p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = <span class="string">'John'</span>;</span><br><span class="line">  <span class="keyword">this</span>.lastName = <span class="string">'Doe'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(john);</span><br></pre></td></tr></table></figure>
+
+<p>結果</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550738337235.jpg?raw=true" alt></p>
+<p>變數<code>john</code>指向了<code>new person()</code>創造出來的物件，印出<code>john</code>發現裏頭的屬性和<code>Person()</code>一致。</p>
+<p>在<a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/Operator_Precedence" target="_blank" rel="noopener">運算子表格</a>裡，可以得知<code>new</code>是一種運算子。</p>
+<br>
+
+<blockquote>
+<p>補充知識 - <strong>instance 物件實體</strong><br>由<strong>函數建構子</strong>創造出來的物件，稱為<strong>instance</strong>，由上例我可以說，<code>物件 john</code>是<code>函數建構子 Person</code>的<strong>物件實體</strong>。</p>
+</blockquote>
+<br>
+
+<h2 id="當使用new時背後發生什麼事"><a href="#當使用new時背後發生什麼事" class="headerlink" title="當使用new時背後發生什麼事 ?"></a>當使用new時背後發生什麼事 ?</h2><ol>
+<li>JS<code>直譯器 syantax parsor</code>會先建立一個空物件<code>{}</code>。</li>
+<li>接著呼叫<code>new</code>後面的<code>函式建構子</code>，當函式被呼叫時，創造函式<code>執行環境 Excusion content</code>，<code>this</code>關鍵字也隨之被創造出來。</li>
+<li>由於<code>this</code>被寫在<code>new</code>的後面，JS直譯器知道你在用<code>函數建構子</code>創造物件，因此<code>this</code>指向了剛被創造出來的空物件<code>{}</code>，所以<code>函式建構子</code>內的<code>this.xxx</code>被創造在這個空物件中。</li>
+</ol>
+<br>
+
+<p>我們先前知道，全域函式的<code>this</code>會指向全域物件，現在因為<code>new</code>關鍵字，<code>this</code>指向了<code>john</code>，我們可以將程式碼改成這樣，多加一個<code>console.log(this);</code>，看看會印出<code>window</code>還是<code>john</code>指向的這個物件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>) <span class="comment">// Person &#123;&#125;</span></span><br><span class="line">  <span class="keyword">this</span>.firstName = <span class="string">'John'</span>;</span><br><span class="line">  <span class="keyword">this</span>.lastName = <span class="string">'Doe'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(john);　<span class="comment">// Person &#123;firstName: "John", lastName: "Doe"&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>結果</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550740063290.jpg?raw=true" alt></p>
+<blockquote>
+<p>由此可以了解<code>new</code>會改變<code>this</code>的對象</p>
+</blockquote>
+<br>
+
+<h2 id="如果在函數建構子使用-return"><a href="#如果在函數建構子使用-return" class="headerlink" title="如果在函數建構子使用 return"></a>如果在函數建構子使用 return</h2><p>使用<code>new</code>的狀況下，<code>new</code>後方的函式預設不會回傳值，若故意在函式裡寫上<code>return</code>的話，函式反而會因為<code>return</code>回傳東西，依狀況決定是否把<code>this</code>創造的物件屬性蓋掉，看看例子</p>
+<h3 id="retrun一個字串"><a href="#retrun一個字串" class="headerlink" title="retrun一個字串"></a>retrun一個字串</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>)</span><br><span class="line">  <span class="keyword">this</span>.firstName = <span class="string">'John'</span>;</span><br><span class="line">  <span class="keyword">this</span>.lastName = <span class="string">'Doe'</span>;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">'this is return value'</span>  <span class="comment">//**</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(john);</span><br></pre></td></tr></table></figure>
+
+<p>結果</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550740063290.jpg?raw=true" alt></p>
+<p>雖然加了<code>return &#39;this is return value&#39;</code>但是物件輸出結果不受影響</p>
+<h3 id="retrun一個物件"><a href="#retrun一個物件" class="headerlink" title="retrun一個物件"></a>retrun一個物件</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = <span class="string">'John'</span>;</span><br><span class="line">  <span class="keyword">this</span>.lastName = <span class="string">'Doe'</span>;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="keyword">this</span>)   <span class="comment">//**</span></span><br><span class="line">  <span class="keyword">return</span> &#123; <span class="attr">name</span>: <span class="string">'this is return object test'</span> &#125;  <span class="comment">//**</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="built_in">console</span>.log(john);</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550740800165.jpg?raw=true" alt></p>
+<p>函式的最後若 return其他物件，則前面設定的物件內容會被覆蓋。</p>
+<br>
+
+<h2 id="容易出錯的地方"><a href="#容易出錯的地方" class="headerlink" title="容易出錯的地方"></a>容易出錯的地方</h2><blockquote>
+<p>需要注意的是，若是使用使用<code>函數建構子</code>不用<code>new</code>，就會變成一般的呼叫函式。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> john = Person();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>有用<code>new</code><ul>
+<li>建立物件，且 this指向變數<code>john</code>;</li>
+</ul>
+</li>
+<li>忘了用<code>new</code><ul>
+<li>單純呼叫函式 Person，且這時 this指向全域物件，因此設定的屬性會被設定到全域物件(window)裡。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<blockquote>
+<p>因此，如果使用函數建構子忘了放上 new可能會造成預期以外的錯誤，且它的樣子與一般的<strong>函數表示式 function ecpression</strong>長得無異，會非常難以 debug，因此人們習慣將所有<strong>函數建構子的首字以大寫表示</strong></p>
+</blockquote>
+<br>
+
+<h2 id="函數建構子和prototype的建立"><a href="#函數建構子和prototype的建立" class="headerlink" title="函數建構子和prototype的建立"></a>函數建構子和prototype的建立</h2><p>函式就是物件，它有一些隱藏屬性，像是函數的<strong>名稱(Name)</strong>及<strong>函數的內容(Code)</strong>，其中還有一個<code>專屬於function</code> 的屬性叫做<code>.prototype</code>，這個屬性會以<strong>空物件</strong>形式呈現。</p>
+<p>除非你是把 function 當做 function constructor 來使用，否則這個屬性就沒有特別的用途；但如果你是把它當做 function constructor，透過 new 這個關鍵字來執行這個 function 的話，它就有特別的意義了。</p>
+<p><img src="https://i.imgur.com/IGvFCJ5.png" alt><br>圖片來源： <a href="https://pjchender.blogspot.com/2016/06/javascriptfunction-constructorprototype.html?m=1" target="_blank" rel="noopener">PJCHENder那些沒告訴你的小細節</a></p>
+<p>要設定這個 function 的 prototype 屬性只要透過 <code>.prototype</code> 就可以了。</p>
+<p>然而，有一點很容易讓人困惑的地方，我們會以為使用 <code>.prototype</code> 時，就可以進入這個函數的原型，但實際上則不是這樣。</p>
+<p>函數當中的 <code>prototype</code> 屬性並不是指這個函數本身的 <code>prototype</code>，他指的是透過這個<strong>函數建構子</strong>所建立出來的物件 <code>__proto__</code>。</p>
+<br>
+
+<h3 id="function-中的-prototype-屬性一開始是空物件"><a href="#function-中的-prototype-屬性一開始是空物件" class="headerlink" title="function 中的 prototype 屬性一開始是空物件"></a>function 中的 prototype 屬性一開始是空物件</h3><p>看看以下程式碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">firstName, lastName</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">  <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person(<span class="string">'John'</span>, <span class="string">'Doe'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(john);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jane = <span class="keyword">new</span> Person(<span class="string">'Jane'</span>, <span class="string">'Doe'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(jane);</span><br></pre></td></tr></table></figure>
+
+<p>到 Google Chrome 的 console 中，輸入<code>Person.prototype</code> 會得到一個空物件。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550797678685.jpg?raw=true" alt></p>
+<br>
+
+<h3 id="透過-function-constructor-所建立的物件會繼承該-function-中-prototype-的內容"><a href="#透過-function-constructor-所建立的物件會繼承該-function-中-prototype-的內容" class="headerlink" title="透過 function constructor 所建立的物件會繼承該 function 中 prototype 的內容"></a>透過 function constructor 所建立的物件會繼承該 function 中 prototype 的內容</h3><p>接著，讓我們在 <code>Person.prototype</code> 裡面增加一個 <code>getFullName</code> 的函數</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">firstName, lastName</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">  <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.getFullName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;   <span class="comment">//**</span></span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person(<span class="string">'John'</span>, <span class="string">'Doe'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(john);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jane = <span class="keyword">new</span> Person(<span class="string">'Jane'</span>, <span class="string">'Doe'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(jane);</span><br></pre></td></tr></table></figure>
+
+<p>我們為 Person.prototype 添加了一個函式，所以當我們在 Google Chrome 的 console 視窗中呼叫 Person.prototype 時，會多了這個函式在內：</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550797989046.jpg?raw=true" alt></p>
+<p>剛剛，我們有提到很重要的一句話，<strong>「函式當中 prototype 這個屬性並不是這個函式本身的原型，它指的是所有透過這個它所建立出來之 <code>物件實體的原型</code>」</strong>。</p>
+<p>用程式概念可能比較好說明，這句話的意思是說 Person.prototype 並不是 <code>Person.__proto__</code>，但是所有透過 Person 這個所建立的物件實體，在該物件實例的 <code>__proto__</code> 中，會包含 Person.prototype 的內容。</p>
+<p>也就是說，當我們使用 <code>new</code> 這個運算子來執行函式建構式時，它會先建立一個<strong>空物件</strong>，同時將該建構子中 prototype，設置到該物件實例 <code>john.__proto__</code> 中。</p>
+<p>因此，當我們在 Google Chrome 的 console 中輸入 <code>john.__proto__</code> 時，我們就可以看到剛剛在<code>Person.prototype</code> 所建立的函式 <code>getFullName</code> 已經繼承在裡面了。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550798497181.jpg?raw=true" alt></p>
+<br>
+
+<h3 id="實際運用"><a href="#實際運用" class="headerlink" title="實際運用"></a>實際運用</h3><p>由於 <code>Person.prototype</code> 中的方法已經被繼承到由 <code>Person</code> 這個 <code>function constructor</code> 所建立的物件實例 <code>john</code> 中，所以這時侯，我們就可以順利的使用 <code>john.getFullName</code> 來呼叫這個方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">firstName, lastName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">  <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.getFullName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> john = <span class="keyword">new</span> Person(<span class="string">'John'</span>, <span class="string">'Doe'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(john);</span><br><span class="line"><span class="built_in">console</span>.log(john.getFullName());</span><br></pre></td></tr></table></figure>
+
+<p>如此，可以正確的執行 <code>getFullName</code> 這個函數並得到如下的結果</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550798702885.jpg?raw=true" alt></p>
+<br>
+
+<blockquote>
+<p><strong>我們不該把方法放在 function constructor 中。</strong></p>
+</blockquote>
+<p>透過以上的方法，我們可以讓所有根據這個函式建構式 <code>function constructor</code> 所建立的物件都包含有某些我們想要使用的方法。如果我們有 1000 個物件是根據這個函式建構式所建立，那麼我們只需要使用 <code>.prototype</code> 這樣的方法，就可以讓這 1000 個物件都可以使用到我們想要執行的某個 <code>method</code>。</p>
+<blockquote>
+<p>有的人可能會好奇說，為什麼我們不要把 getFullName 這個方法直接寫在函式建構式當中呢？</p>
+</blockquote>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550799201345.jpg?raw=true" alt><br><img src="https://github.com/dylan237/images_source/blob/master/1550799357897.jpg?raw=true" alt></p>
+<p>把 <code>method</code> 放在函數建構子內雖然程式仍可執行，但是如果今天有1000個物件都是根據這個函數建構子所建立，那麼這1000個方法將會各自佔據記憶體空間，相反的如果建立在 <code>prototype</code> 中，就只會有一個記憶體空間被佔據。</p>
+<p>所以，為了效能上的考量，最好的做法是　<code>屬性 property</code>放在建構子當中，　<code>方法 method</code>則放在 <code>prototype</code> 中。</p>
+<h2 id="原型繼承"><a href="#原型繼承" class="headerlink" title="原型繼承"></a>原型繼承</h2><p>沿用上一個例子，當我們希望有一個新的建構子 可以繼承另一個已存在的建構子的屬性及方法，能怎麼做</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">firstName, lastName</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.firstName = firstName;</span><br><span class="line">  <span class="keyword">this</span>.lastName = lastName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Person.prototype.getFullName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.firstName + <span class="string">' '</span> + <span class="keyword">this</span>.lastName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>現在我們要創造一個新的建構子 Teacher，老師會有名字也會有姓，但和其他人不一樣的是，老師可能還包含教授科目的資訊</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Teacher</span>(<span class="params">firstName, lastName, subject</span>) </span>&#123;</span><br><span class="line">  Person.call(<span class="keyword">this</span>, firstName, lastName)</span><br><span class="line">  <span class="keyword">this</span>.subject = subject</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="設定-Teacher-的原型與建構子參考"><a href="#設定-Teacher-的原型與建構子參考" class="headerlink" title="設定 Teacher() 的原型與建構子參考"></a>設定 Teacher() 的原型與建構子參考</h3><p>到這部其實還沒結束，目前 Teacher 所繼承的只有來自 Person 的屬性 ( firsName 和 lastName )，還沒有繼承來自 Person 的方法 (getFullName)</p>
+<p>來看看目前 Teacher 的原型確實還沒有 getFullName 方法<br><img src="https://github.com/dylan237/images_source/blob/master/425D33DA-E53F-4D66-A5E2-5604AA7BCB9D.jpg?raw=true" alt></p>
+<p>我們透過 <code>Object.crete()</code> 並搭配等同於 Person.prototype 的原型，建立新的 prototype 屬性值 (它本身就是物件，包含屬性與函式) ，並將之設定為 Teacher.prototype 的值。也就是說 Teacher.prototype 現在會繼承 Person.prototype 上的所有可用函式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype = <span class="built_in">Object</span>.create(Person.prototype)</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Object.create() 詳細的使用方法可以參考</p>
+<ul>
+<li><a href="https://dylan237.github.io/object-create.html">JS 的原型繼承(方法2)－Object.create()</a></li>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Object/create" target="_blank" rel="noopener">MDN</a></li>
+</ul>
+</blockquote>
+<br>
+
+<p>現在 Teacher 的原型鏈中已經可以找到 getFullName 方法了！</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/674C4DE6-A8F7-4D6E-888C-42307CF1890C.jpg?raw=true" alt></p>
+<br>
+
+<p>到目前為止看起來好像很完美了，但其實還沒有結束，現在如果試著輸入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype.constructor</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/C64CCE0D-0724-4DC2-A18C-4C50B33B9517.jpg?raw=true" alt></p>
+<br>
+
+<p>這樣可能會產生問題，所以要設定正確。你可回到自己的原始碼並在最下方加入下列程式碼：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype.constructor = Teacher</span><br></pre></td></tr></table></figure>
+
+<p>到這就算是完整的做完了一個原型繼承的流程<br><img src="https://github.com/dylan237/images_source/blob/master/AF9DC7B1-734E-4004-871A-71792E4F2F77.jpg?raw=true" alt></p>
+<br>
+
+<p>如果要給 Teacher 建構子擴充新的函式 …</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Teacher.prototype.greeting = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="ES5-原型繼承-DEMO"><a href="#ES5-原型繼承-DEMO" class="headerlink" title="ES5 原型繼承 DEMO"></a>ES5 原型繼承 DEMO</h2><ul>
+<li><a href="https://codepen.io/Dylan_Liu/pen/KKpNyBG" target="_blank" rel="noopener">Codepen</a></li>
+</ul>
+<h2 id="補充"><a href="#補充" class="headerlink" title="補充"></a>補充</h2><h3 id="建立物件實體後，再在函數建構子裡新增方法"><a href="#建立物件實體後，再在函數建構子裡新增方法" class="headerlink" title="建立物件實體後，再在函數建構子裡新增方法"></a>建立物件實體後，再在函數建構子裡新增方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">today</span>(<span class="params">food1,food2</span>)</span>&#123;  <span class="comment">// new出物件前設定</span></span><br><span class="line">  <span class="keyword">this</span>.lunch = food1;</span><br><span class="line">  <span class="keyword">this</span>.dinner = food2;</span><br><span class="line">&#125;</span><br><span class="line">today.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.lunch + <span class="string">' '</span> + <span class="keyword">this</span>.dinner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> Dylan = <span class="keyword">new</span> today(<span class="string">'雞絲麵'</span>, <span class="string">'麵包'</span>);</span><br><span class="line"></span><br><span class="line">today.prototype.eat2 = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;   <span class="comment">// new出物件後，再設定一個eat2()</span></span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>.lunch + <span class="string">' '</span> + <span class="keyword">this</span>.dinner;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(Dylan);</span><br></pre></td></tr></table></figure>
+
+<p>結果</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550742972035.jpg?raw=true" alt></p>
+<p>即使在使 new創造一個物件之後，才使用<code>.prototype</code>創造<code>eat2()</code>，物件實體的<code>__proto__</code>中依然可以找到該屬性，而這和JS的<strong>傳參考</strong>特性有關。</p>
+<br>
+
+<h3 id="封裝成函數，避免在使用函數建構子時忘記寫new"><a href="#封裝成函數，避免在使用函數建構子時忘記寫new" class="headerlink" title="封裝成函數，避免在使用函數建構子時忘記寫new"></a>封裝成函數，避免在使用函數建構子時忘記寫new</h3><p>在上面<code>容易出錯的地方</code>提到，在使用<strong>函數建構子</strong>如果忘了在前面加上 <code>new</code> 可能會造成一些很難發現的問題。這邊提供一個方式可以有效避免這個情況。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = name,</span><br><span class="line">  <span class="keyword">this</span>.age = age</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> $ = <span class="function"><span class="keyword">function</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> A(name, age)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我們設定了一個函數 <code>$</code> ，在這個函數中把創造物件的動作 <code>new</code>在裡面執行完畢後並且回傳，如此一來我們就不需要在每次創造<strong>物件實體 instance</strong>的時候都加上一次<code>new</code>，也可以不用擔心忘了加上<code>new</code>產生不好的結果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> person = $(<span class="string">'dylan'</span>, <span class="number">18</span>);</span><br><span class="line"><span class="built_in">console</span>.log(person)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://github.com/dylan237/images_source/blob/master/1550905135612.jpg?raw=true" alt></p>
+<br>
+
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><ul>
+<li><a href="https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/Objects/Inheritance" target="_blank" rel="noopener">MDN</a></li>
+<li><a href="https://pjchender.blogspot.com/2016/06/javascriptfunction-constructornew.html" target="_blank" rel="noopener">PJchender - 談談JavaScript中的function constructor和關鍵字new</a></li>
+<li><a href="https://ithelp.ithome.com.tw/articles/10194795" target="_blank" rel="noopener">SimonAllen - Day27　函式建構子與new</a></li>
+<li><a href="https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/prototype.html" target="_blank" rel="noopener">原型基礎物件導向</a></li>
+<li><a href="https://www.udemy.com/javascriptjs/" target="_blank" rel="noopener">JavaScript 全攻略：克服JS的奇怪部分 5-57</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/克服JS的奇怪部分/" rel="tag"># 克服JS的奇怪部分</a>
+          
+            <a href="/tags/原型繼承/" rel="tag"># 原型繼承</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/reflection-and-extend.html" rel="next" title="JS 的 Reflection and Extend">
+                <i class="fa fa-chevron-left"></i> JS 的 Reflection and Extend
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/buildin-constructor.html" rel="prev" title="JavaScript 的內建函數建構子">
+                JavaScript 的內建函數建構子 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函數建構子-Function-constructor"><span class="nav-number">2.</span> <span class="nav-text">函數建構子 Function constructor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#當使用new時背後發生什麼事"><span class="nav-number">3.</span> <span class="nav-text">當使用new時背後發生什麼事 ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如果在函數建構子使用-return"><span class="nav-number">4.</span> <span class="nav-text">如果在函數建構子使用 return</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#retrun一個字串"><span class="nav-number">4.1.</span> <span class="nav-text">retrun一個字串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#retrun一個物件"><span class="nav-number">4.2.</span> <span class="nav-text">retrun一個物件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#容易出錯的地方"><span class="nav-number">5.</span> <span class="nav-text">容易出錯的地方</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函數建構子和prototype的建立"><span class="nav-number">6.</span> <span class="nav-text">函數建構子和prototype的建立</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#function-中的-prototype-屬性一開始是空物件"><span class="nav-number">6.1.</span> <span class="nav-text">function 中的 prototype 屬性一開始是空物件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#透過-function-constructor-所建立的物件會繼承該-function-中-prototype-的內容"><span class="nav-number">6.2.</span> <span class="nav-text">透過 function constructor 所建立的物件會繼承該 function 中 prototype 的內容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#實際運用"><span class="nav-number">6.3.</span> <span class="nav-text">實際運用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#原型繼承"><span class="nav-number">7.</span> <span class="nav-text">原型繼承</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#設定-Teacher-的原型與建構子參考"><span class="nav-number">7.1.</span> <span class="nav-text">設定 Teacher() 的原型與建構子參考</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ES5-原型繼承-DEMO"><span class="nav-number">8.</span> <span class="nav-text">ES5 原型繼承 DEMO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#補充"><span class="nav-number">9.</span> <span class="nav-text">補充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#建立物件實體後，再在函數建構子裡新增方法"><span class="nav-number">9.1.</span> <span class="nav-text">建立物件實體後，再在函數建構子裡新增方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#封裝成函數，避免在使用函數建構子時忘記寫new"><span class="nav-number">9.2.</span> <span class="nav-text">封裝成函數，避免在使用函數建構子時忘記寫new</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#資料來源"><span class="nav-number">10.</span> <span class="nav-text">資料來源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/function-constructor.html';
+          this.page.identifier = 'function-constructor.html';
+          this.page.title = 'JS 的原型繼承(方法1) － 函數建構子與「new」';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

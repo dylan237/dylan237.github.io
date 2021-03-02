@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,RegEx,JS地下城,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="JavaScript,RegEx,JS地下城">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS 地下城挑戰 - 3F 計算機">
+<meta property="og:url" content="https://dylan237.github.io/js-3f-calculator.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://i.udemycdn.com/redactor/raw/2019-01-31_03-12-25-4ea01f46211a06f152a1bd7b19a1f1ae.png">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.435Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS 地下城挑戰 - 3F 計算機">
+<meta name="twitter:image" content="https://i.udemycdn.com/redactor/raw/2019-01-31_03-12-25-4ea01f46211a06f152a1bd7b19a1f1ae.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/js-3f-calculator.html">
+
+
+
+
+
+  <title>JS 地下城挑戰 - 3F 計算機 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/js-3f-calculator.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JS 地下城挑戰 - 3F 計算機</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-06-26T10:42:58+08:00">
+                2019-06-26
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/JS地下城/" itemprop="url" rel="index">
+                    <span itemprop="name">JS地下城</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/js-3f-calculator.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="js-3f-calculator.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="https://i.udemycdn.com/redactor/raw/2019-01-31_03-12-25-4ea01f46211a06f152a1bd7b19a1f1ae.png" alt style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px">
+
+<a id="more"></a>
+
+<div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： <a href="https://www.hexschool.com/" target="_blank" rel="noopener">六角學院</a>
+</div>
+<br>
+
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>這篇文章將會把重點放在兩個部分：</p>
+<ul>
+<li><code>eval()</code> 函式</li>
+<li>正規式 (Regular Expression)</li>
+</ul>
+<p>在寫這個題目以前，我沒有實際使用過正規式，這個概念大概是一個月以前才接觸的，最後雖然是有把功能寫出來，但是品質還有待加強，不過有小小進步這個挑戰很值得了，日後找機會再加強相關知識吧！</p>
+<p><a href="https://dylan237.github.io/JS_3F_calculator/">Demo</a><br><a href="https://github.com/dylan237/JS_3F_calculator" target="_blank" rel="noopener">Github</a><br><a href="https://codepen.io/Dylan_Liu/pen/PrpgYJ" target="_blank" rel="noopener">Codepen</a></p>
+<h2 id="關卡資訊"><a href="#關卡資訊" class="headerlink" title="關卡資訊"></a>關卡資訊</h2><p><a href="https://xd.adobe.com/spec/9dc81ec7-dd2e-46f6-5f76-5a64df413c97-ebf9/screen/3c3e8e4f-df7d-480d-8236-e60803d4645f/002-calculator/" target="_blank" rel="noopener">UI 設計稿</a></p>
+<ul>
+<li>【特定技術】數字位數過多時，不能因此而破版，計算機功能皆須齊全</li>
+<li>【自我學習】請在此關卡中「自學一個你原本不太會的技巧」，投稿時分享你透過哪些資源學習，並寫範例程式碼講解該技巧，以及你如何應用在此關卡上。</li>
+</ul>
+<h2 id="eval"><a href="#eval" class="headerlink" title="eval()"></a>eval()</h2><h3 id="語法"><a href="#語法" class="headerlink" title="語法"></a>語法</h3><p> <code>eval(string)</code></p>
+<h3 id="實例"><a href="#實例" class="headerlink" title="實例"></a>實例</h3><blockquote>
+<p>可帶入一組字串，並執行字串中的 JavaScript 程式碼，且程式碼內可以包含變數及已存在物件的屬性。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="string">'2 + 2'</span>)  <span class="comment">// 4</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//----------------------------</span></span><br><span class="line"><span class="keyword">let</span> x = <span class="number">10</span></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">'x + 20'</span>)  <span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//----------------------------</span></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">'x=10; y=20; console.log(x * y)'</span>)  <span class="comment">// 200</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//----------------------------</span></span><br><span class="line"><span class="keyword">let</span> obj = &#123; <span class="attr">name</span>: <span class="string">'Dylan'</span>, <span class="attr">age</span>: <span class="number">18</span> &#125;</span><br><span class="line"><span class="built_in">eval</span>(<span class="string">'console.log(obj.name)'</span>);  <span class="comment">// Dylan</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>如果 eval() 的參數不是字串，它將會將參數原封不動的返回該參數。</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span>(<span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"2 + 2"</span>)); <span class="comment">// String &#123;"2 + 2"&#125;</span></span><br><span class="line"><span class="built_in">eval</span>(<span class="string">"2 + 2"</span>);             <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<p>如果要避免這個情況你可以先將參數進行轉字串的處理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> expression = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"2 + 2"</span>);</span><br><span class="line"><span class="built_in">eval</span>(expression.toString());  <span class="comment">// 4</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="本次關卡應用"><a href="#本次關卡應用" class="headerlink" title="本次關卡應用"></a>本次關卡應用</h2><p>在了解 <code>eval()</code> 的用法後，可以開始思考開如何運用在計算機這個題目中？</p>
+<h3 id="數字及運算符號功能"><a href="#數字及運算符號功能" class="headerlink" title="數字及運算符號功能"></a>數字及運算符號功能</h3><p>我們可以先宣告一組字串，代表計算機等待被計算的算式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> formula = <span class="string">''</span></span><br></pre></td></tr></table></figure>
+
+<p>當我們按下按鍵後，應該要為 <code>formula</code> 字串增加該按鈕的值。為了達到這點，所有的數字按鍵和加減乘除都需要新增事件監聽。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>0<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>5<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>6<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>7<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>8<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>9<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>.<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>÷<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>×<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>+<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"button"</span>&gt;</span>-<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'.button'</span>).forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">  item.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123;</span><br><span class="line">    formula += event.target.innerText</span><br><span class="line">  &#125;, <span class="literal">false</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>可以開啟這個 <a href="https://jsbin.com/zoyukebace/edit?html,css,js,console,output" target="_blank" rel="noopener">domo</a> 操作一下，試著打一些簡單的加減乘除計算，再到 console 觀察 <code>formula</code> 變數的改變。到這個階段還有一個問題是可能會有一些不合規格的算式出現，如 <code>1+÷1</code> 這種無法被計算的情況，這就需要留到後面用正規式處理了。</p>
+<p>接著繼續新增剩下的按鈕功能</p>
+<h3 id="功能"><a href="#功能" class="headerlink" title="= 功能"></a>= 功能</h3><p>在使用者按下等於按鈕時將 <code>formula</code> 變數帶入 <code>eval()</code> 函數中，並將回傳值帶入 <code>result</code> 變數，也就是之後會渲染在計算機上的答案。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"equal"</span>&gt;</span>=<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result;</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'.equal'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  result = <span class="built_in">eval</span>(formula);</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="AC-功能"><a href="#AC-功能" class="headerlink" title="AC 功能"></a>AC 功能</h3><p>清空功能最單純，按下後將 <code>formula</code> 變數改為空字串即可。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"ac"</span>&gt;</span>AC<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'.ac'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  formula = <span class="string">''</span>;</span><br><span class="line">  result = <span class="number">0</span>;</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="⌫-功能"><a href="#⌫-功能" class="headerlink" title="⌫ 功能"></a>⌫ 功能</h3><p>點擊回上一步後，將 <code>formula</code> 字串的最後一個字元刪除。<br>做法是先用 <code>split(&#39;&#39;)</code> 將 <code>formula</code> 字串轉為陣列，舉例說如果 formula 當前值為 <code>1+1</code>，經過 <code>split(&#39;&#39;)</code> 處理會變成陣列<code>[&#39;1&#39;, &#39;+&#39;, &#39;1&#39;]</code>，再用 <code>pop()</code> 將陣列最後一元素移除，然後再透過 <code>join(&#39;&#39;)</code> 轉回字串，結果  <code>formula</code> 由 <code>1+1</code> 變成了 <code>1+</code>。</p>
+<blockquote>
+<p>參考： <a href="https://dylan237.github.io/array-methods.html">JavaScript 陣列處理常用方法</a></p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"del"</span>&gt;</span>⌫<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.querySelector(<span class="string">'.del'</span>).addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">let</span> toArr = formula.split(<span class="string">''</span>);</span><br><span class="line">  toArr.pop();</span><br><span class="line">  formula = toArr.join(<span class="string">''</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>)</span><br></pre></td></tr></table></figure>
+
+<p>到這裡所有按鈕的功能告一段落，可以用這個 <a href="https://jsbin.com/jitinedini/edit?html,css,js,output" target="_blank" rel="noopener">Demo</a> 操作看看。接著我們來講講如何用正規式來篩選掉不合計算機規則的算式。</p>
+<h2 id="使用正規式過濾掉不合法的算式排列"><a href="#使用正規式過濾掉不合法的算式排列" class="headerlink" title="使用正規式過濾掉不合法的算式排列"></a>使用正規式過濾掉不合法的算式排列</h2><p>如果對於正規式還不熟的朋友可以參考<a href="https://dylan237.github.io/learning-regexp.html">初探正規式</a>這篇。</p>
+<blockquote>
+<p>正規式是用來做什麼的呢？</p>
+</blockquote>
+<p>正規式也可稱正則表達式、正規表達式…etc，我自己對於它的第一個印象是，這..是機器語言吧？ 不覺得它是我能理解的東西，不過我們需要拋開偏見和恐懼，可以試著先去接觸看看，你會發現它是一個很棒的工具。</p>
+<p>舉個正規式常見的應用，當我們在註冊某些網站的帳號時，為什麼當我們再輸入 Email 時，這個網站都會提醒我的 Email 格式是正確或是錯誤的，它是怎麼判斷的呢？其實這就是利用正規式來做檢測的，請參考<a href="https://ithelp.ithome.com.tw/articles/10094951" target="_blank" rel="noopener">[Javascript] Regular Expression – Email 表單驗證</a>。</p>
+<h3 id="替換乘除符號"><a href="#替換乘除符號" class="headerlink" title="替換乘除符號"></a>替換乘除符號</h3><p>剛剛我們在實作時有一個小問題，當我們點擊 <code>÷</code> 和 <code>×</code> 時，會直接將這兩個字元帶入 <code>formula</code> 變數中，若變數值為 <code>6÷2</code>，按下 <code>=</code> 按鈕後，變數被帶入 <code>eval()</code> 函式處理，結果拋出錯誤 <code>&quot;SyntaxError: Invalid or unexpected toke</code>，原因是 <code>eval()</code> 函式是不認得 <code>×÷</code> 符號的，我們需要處理一下當使用者按下 <code>×÷</code> 時需要把它替換成 <code>*/</code>，試著用正規式來做吧。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formula.replace(<span class="regexp">/\÷/g</span>, <span class="string">`/`</span>).replace(<span class="regexp">/\×/g</span>, <span class="string">`*`</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="異常數字處理"><a href="#異常數字處理" class="headerlink" title="異常數字處理"></a>異常數字處理</h3><p>我們還需要排除開頭一個零以上和開頭零後面接數字的狀況，舉例說像式 <code>00123 + 01235</code> 的算式是不合理的，必須要做處理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formula.replace(<span class="regexp">/^0[0-9]+/</span>, <span class="string">`0`</span>).replace(<span class="regexp">/([/*+-])0\d+/g</span>, <span class="string">`$10`</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="異常運算符號排列處理"><a href="#異常運算符號排列處理" class="headerlink" title="異常運算符號排列處理"></a>異常運算符號排列處理</h3><p>正常的算式中不會出現相連的運算符號，比如 <code>1+-2</code>，或是運算符號出現在開頭的情況 <code>+ 123 + 321</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">formula.replace(<span class="regexp">/^[/*+-]+/</span>, <span class="string">``</span>).replace(<span class="regexp">/([/*+-])[/*+-]+/g</span>, <span class="string">`$1`</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="異常小數點處理"><a href="#異常小數點處理" class="headerlink" title="異常小數點處理"></a>異常小數點處理</h3><p>接著是比較複雜一點的小數點處理</p>
+<ul>
+<li>算式開頭不能有小數點 <code>.123 + 123</code></li>
+<li>不能有相連的小數點 <code>1..23 + 8</code></li>
+<li>不會有 <code>00.123</code> 這樣的情況</li>
+<li>運算符號後面不能出現小數點 <code>123 + .123</code></li>
+<li>同一組數字不會出現第二個小數點 <code>123.123.3</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">formula</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">const</span> newStr = formula.replace(<span class="regexp">/^\.*/</span>, <span class="string">``</span>);</span><br><span class="line">  <span class="keyword">const</span> _newStr = newStr.replace(<span class="regexp">/\.+/g</span>, <span class="string">`.`</span>);</span><br><span class="line">  <span class="keyword">const</span> __newStr = _newStr.replace(<span class="regexp">/\D00\.(\d+)/g</span>, <span class="string">`0.$1`</span>);</span><br><span class="line">  <span class="keyword">const</span> ___newStr = __newStr.replace(<span class="regexp">/([/*+-])\./g</span>, <span class="string">`$1`</span>);</span><br><span class="line">  <span class="keyword">return</span> ___newStr.replace(<span class="regexp">/(\d+)\.+(\d+)\.*/g</span>, <span class="string">`$1.$2`</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="千分位"><a href="#千分位" class="headerlink" title="千分位"></a>千分位</h3><p>最後需要套用千分位，把運算結果渲染到計算機上，如果數字是 <code>10000</code> 會被轉換成 <code>10,000</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">toCurrency</span>(<span class="params">formula</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> newStr = formula.toString().split(<span class="string">"."</span>);</span><br><span class="line">  newStr[<span class="number">0</span>] = newStr[<span class="number">0</span>].replace(<span class="regexp">/\B(?=(\d&#123;3&#125;)+(?!\d))/g</span>, <span class="string">","</span>);</span><br><span class="line">  <span class="keyword">return</span> newStr.join(<span class="string">"."</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>到這邊計算機的功能差不多完成了，可以到最後的 <a href="https://jsbin.com/fodagefudu/3/edit?html,js,console,output" target="_blank" rel="noopener">Demo</a> 試著操作看看，再來就剩下一些畫面和細節的處理，有興趣的話請參考<a href="https://codepen.io/Dylan_Liu/pen/PrpgYJ" target="_blank" rel="noopener">完整版</a>。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/RegEx/" rel="tag"># RegEx</a>
+          
+            <a href="/tags/JS地下城/" rel="tag"># JS地下城</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/js-parse-to-number.html" rel="next" title="使用 parseFloat()、parseInt()、Number() 轉換型別">
+                <i class="fa fa-chevron-left"></i> 使用 parseFloat()、parseInt()、Number() 轉換型別
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/form-validation-regexp.html" rel="prev" title="常見的 JavaScript 正規式表單驗證功能">
+                常見的 JavaScript 正規式表單驗證功能 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#關卡資訊"><span class="nav-number">2.</span> <span class="nav-text">關卡資訊</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#eval"><span class="nav-number">3.</span> <span class="nav-text">eval()</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#語法"><span class="nav-number">3.1.</span> <span class="nav-text">語法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#實例"><span class="nav-number">3.2.</span> <span class="nav-text">實例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本次關卡應用"><span class="nav-number">4.</span> <span class="nav-text">本次關卡應用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#數字及運算符號功能"><span class="nav-number">4.1.</span> <span class="nav-text">數字及運算符號功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#功能"><span class="nav-number">4.2.</span> <span class="nav-text">= 功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AC-功能"><span class="nav-number">4.3.</span> <span class="nav-text">AC 功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#⌫-功能"><span class="nav-number">4.4.</span> <span class="nav-text">⌫ 功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用正規式過濾掉不合法的算式排列"><span class="nav-number">5.</span> <span class="nav-text">使用正規式過濾掉不合法的算式排列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#替換乘除符號"><span class="nav-number">5.1.</span> <span class="nav-text">替換乘除符號</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#異常數字處理"><span class="nav-number">5.2.</span> <span class="nav-text">異常數字處理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#異常運算符號排列處理"><span class="nav-number">5.3.</span> <span class="nav-text">異常運算符號排列處理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#異常小數點處理"><span class="nav-number">5.4.</span> <span class="nav-text">異常小數點處理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#千分位"><span class="nav-number">5.5.</span> <span class="nav-text">千分位</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/js-3f-calculator.html';
+          this.page.identifier = 'js-3f-calculator.html';
+          this.page.title = 'JS 地下城挑戰 - 3F 計算機';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

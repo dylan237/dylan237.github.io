@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="RegEx,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="RegEx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初探正規式">
+<meta property="og:url" content="https://dylan237.github.io/learning-regexp.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://i1.wp.com/digitalfortress.tech/wp-content/uploads/2018/05/regex1.png?fit=526%2C526&ssl=1">
+<meta property="og:image" content="https://i.imgur.com/6o0d1Nl.jpg">
+<meta property="og:image" content="https://i.imgur.com/VTOAB5u.jpg">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1559532435221.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1559533409643.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1559552188255.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1559552219898.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初探正規式">
+<meta name="twitter:image" content="https://i1.wp.com/digitalfortress.tech/wp-content/uploads/2018/05/regex1.png?fit=526%2C526&ssl=1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/learning-regexp.html">
+
+
+
+
+
+  <title>初探正規式 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/learning-regexp.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">初探正規式</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-06-03T09:17:57+08:00">
+                2019-06-03
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/uncategorized/" itemprop="url" rel="index">
+                    <span itemprop="name">uncategorized</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/learning-regexp.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="learning-regexp.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <img src="https://i1.wp.com/digitalfortress.tech/wp-content/uploads/2018/05/regex1.png?fit=526%2C526&ssl=1" alt style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px">
+
+<a id="more"></a>
+
+<div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="javascript:;" target="_blank" rel="noopener">
+    網路
+  </a>
+</div>
+<br>
+
+<h2 id="創造一個正規式"><a href="#創造一個正規式" class="headerlink" title="創造一個正規式"></a>創造一個正規式</h2><p>正規式的基本結構通常以<code>/</code>開頭以<code>/</code>結尾，來寫個簡單的正規式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regexp = <span class="regexp">/xxx/</span></span><br></pre></td></tr></table></figure>
+
+<p>還可以用 JavaScript內建的建構子來創建一個正規式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> regexp = <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'xxx'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>用 <code>tpyeof</code>來檢驗他的型別是什麼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typeof</span> regexp </span><br><span class="line"><span class="comment">// output: "object"</span></span><br></pre></td></tr></table></figure>
+
+<p>可以發現他是物件，JavaScript很多東西都是物件型別，包含陣列和函式。</p>
+<h2 id="使用正規式來檢驗字串-test"><a href="#使用正規式來檢驗字串-test" class="headerlink" title="使用正規式來檢驗字串 test()"></a>使用正規式來檢驗字串 test()</h2><p>先宣告一組簡單的字串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'This is a book'</span></span><br></pre></td></tr></table></figure>
+
+<p>透過 JavaScript正規式所提供的語法 <code>text</code>來檢驗字串使否符合我們的正規式</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/a/.test(str) <span class="comment">// output: true</span></span><br></pre></td></tr></table></figure>
+
+<p>因為 str 的這個字串內有 a這個字母，因此輸出為 <code>ture</code>。</p>
+<p>稍微修改一下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/z/.test(str) <span class="comment">// output: false</span></span><br></pre></td></tr></table></figure>
+
+<p>由於 str 字串內並沒有 z 字母，所以回傳 <code>false</code>。</p>
+<h2 id="使用正規式做字串取代-replace"><a href="#使用正規式做字串取代-replace" class="headerlink" title="使用正規式做字串取代 replace()"></a>使用正規式做字串取代 replace()</h2><p>我們可以透過 <code>replace()</code>方法來做正規式篩選，並取代回傳為 true 的字串內容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'This is a book'</span></span><br></pre></td></tr></table></figure>
+
+<p>將字串內的 ‘is’ 用 ‘xx’ 取代</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="string">'is'</span>, <span class="string">'xx'</span>) <span class="comment">// output: "Thxx is a book"</span></span><br></pre></td></tr></table></figure>
+
+<p>有發現什麼地方怪怪的嗎? 為什麼正規式只取代了 <code>this</code> 中的 <code>is</code>，而忽略的 be動詞 <code>is</code> 呢?</p>
+<p><strong>取代多個</strong></p>
+<p>剛剛的例子中我們其實並沒有使用到正規式，而是用單純的<strong>is 字串</strong>做篩選而已，一開始我們就提到，正規式是需要包含 <code>/</code>開頭結尾的。</p>
+<p>來修來一下程式碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/is/</span>, <span class="string">'xx'</span>) <span class="comment">// output: "Thxx is a book"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Wait Wait Wait! What? 不對欸不對欸，換成了正規式，輸出結果還是沒有變?</p>
+</blockquote>
+<h2 id="使用正規式取得特定字串-match"><a href="#使用正規式取得特定字串-match" class="headerlink" title="使用正規式取得特定字串 match()"></a>使用正規式取得特定字串 match()</h2><p>試著取出 HTML 中 h3 標籤間內的文字</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> htmlStr = <span class="string">`    </span></span><br><span class="line"><span class="string">  &lt;li&gt;</span></span><br><span class="line"><span class="string">    &lt;h3&gt;吳先生&lt;/h3&gt;</span></span><br><span class="line"><span class="string">    &lt;p&gt;我覺得這個耳機不好用</span></span><br><span class="line"><span class="string">      &lt;span&gt;2017/11/12&lt;/span&gt;</span></span><br><span class="line"><span class="string">    &lt;/p&gt;</span></span><br><span class="line"><span class="string">  &lt;/li&gt;</span></span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+
+<p>透過 match 方法做篩選</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htmlStr.match(<span class="regexp">/&lt;h3&gt;.*?&lt;\/h3&gt;/</span>)</span><br></pre></td></tr></table></figure>
+
+<p>輸出結果</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"&lt;h3&gt;吳先生&lt;/h3&gt;"</span>]</span><br></pre></td></tr></table></figure>
+
+<p>若要取得標籤內文字, 可以透過 () 進行標註</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">htmlStr.match(<span class="regexp">/&lt;h3&gt;(.*?)&lt;\/h3&gt;/</span>)</span><br></pre></td></tr></table></figure>
+
+<p>結果會將 () 符合條件的文字也推入返回的陣列中</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">"&lt;h3&gt;吳先生&lt;/h3&gt;"</span>, <span class="string">"吳先生"</span>]</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://codepen.io/Dylan_Liu/pen/qBBrjMZ" target="_blank" rel="noopener">Demo</a></p>
+<h2 id="Regex-Flags"><a href="#Regex-Flags" class="headerlink" title="Regex Flags"></a>Regex Flags</h2><p>其實是這樣的，正規式另外有若干的模式可以做設定，常見的三種參數有 <code>i</code>、<code>g</code>、<code>m</code>。</p>
+<p>他們分別代表 <code>insensitive</code>、<code>global</code>、<code>multi line</code>。</p>
+<blockquote>
+<p>補充：除了上述三種模式以外，還有另外三種比較進階的，分別是　<code>sticky</code>、<code>unicode</code>、<code>single line</code>，是在 ES6 以後出現的模式。</p>
+</blockquote>
+<h3 id="global"><a href="#global" class="headerlink" title="global"></a>global</h3><blockquote>
+<p>全局匹配</p>
+</blockquote>
+<p>預設模式只會取代字串中第一個符合的對象，後面的會直接忽略。<br>現在我們使用 <code>g</code> 模式，如此一來檢驗的目標中所有符合的對象都會順利被取代。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/is/g</span>, <span class="string">'xx'</span>) <span class="comment">// output: "Thxx xx a book"</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="insensitive"><a href="#insensitive" class="headerlink" title="insensitive"></a>insensitive</h3><blockquote>
+<p>忽略大小寫</p>
+</blockquote>
+<p>一般來說在使用正規式是有區分大小寫的，我們直接看下面的例子。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'This is a book'</span></span><br><span class="line"></span><br><span class="line">str.replace(<span class="regexp">/this/</span>, <span class="string">'That'</span>) <span class="comment">// output: "This is a book"</span></span><br></pre></td></tr></table></figure>
+
+<p>結果是沒有任何變化的，因為小寫 <code>this</code>和大寫 <code>This</code>是會被判斷為不同的。</p>
+<p>修改一下程式碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'This is a book'</span></span><br><span class="line"></span><br><span class="line">str.replace(<span class="regexp">/this/i</span>, <span class="string">'That'</span>) <span class="comment">// output: "That is a book"</span></span><br></pre></td></tr></table></figure>
+
+<p>加入 <code>i</code>參數，可以忽略大小寫，如此一來輸出結果就如我們所預期的囉！</p>
+<h3 id="multi-line"><a href="#multi-line" class="headerlink" title="multi line"></a>multi line</h3><blockquote>
+<p>多行匹配</p>
+</blockquote>
+<p>這個比較難以敘述，直接用程式碼來說明吧～</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'iPhone4\niPhone5\niPhone6\niPhone7\niPhone8'</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://i.imgur.com/6o0d1Nl.jpg" alt></p>
+<p>只要在字串內放入 <code>\n</code> 會產生換行的符號，如果這時候來試試看取代會發生什麼事呢?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/iPhone/</span>, <span class="string">'iPad'</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// output:</span></span><br><span class="line"><span class="string">"iPad4</span></span><br><span class="line"><span class="string">iPhone5</span></span><br><span class="line"><span class="string">iPhone6</span></span><br><span class="line"><span class="string">iPhone7</span></span><br><span class="line"><span class="string">iPhone8"</span></span><br></pre></td></tr></table></figure>
+
+<p>和剛才的情況一樣只取代了第一個符合的目標。</p>
+<blockquote>
+<p>诶? 這不是一樣用剛剛學到的 <code>g</code> 就可以解決了嗎 ?</p>
+</blockquote>
+<p>來試試看吧</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/iPhone/g</span>, <span class="string">'iPad'</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// output:</span></span><br><span class="line"><span class="string">"iPad4</span></span><br><span class="line"><span class="string">iPad5</span></span><br><span class="line"><span class="string">iPad6</span></span><br><span class="line"><span class="string">iPad7</span></span><br><span class="line"><span class="string">iPad8"</span></span><br></pre></td></tr></table></figure>
+
+<p>確實成功了！</p>
+<p>不過！在實際的情況下可能還有意外的事情會發生！</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/^iPhone/g</span>, <span class="string">'iPad'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>上面的向上箭頭 <code>^</code> 是一個正規式很常見符號，簡單說明一下它的意義，它會去匹配字串的<code>開頭</code>。我們來看看 <code>str.replace(/^iPhone/g, &#39;iPad&#39;)</code>的輸出結果。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// output:</span></span><br><span class="line"><span class="string">"iPad4</span></span><br><span class="line"><span class="string">iPhone5</span></span><br><span class="line"><span class="string">iPhone6</span></span><br><span class="line"><span class="string">iPhone7</span></span><br><span class="line"><span class="string">iPhone8"</span></span><br></pre></td></tr></table></figure>
+
+<p>現在，又只修改到第一個符合的目標了！</p>
+<blockquote>
+<p>怎麼會醬 ?</p>
+</blockquote>
+<p><code>/^iPhone/</code> 的定義為<code>開頭</code>符合字串<code>iPhone</code>的目標，在沒有使用 <code>m</code> 模式的情況下，即使有換行，他們也不會被視為一個新的開頭，可以想像字串就相當於</p>
+<p><code>&#39;iPhone4iPhone5iPhone6iPhone7iPhone8&#39;</code></p>
+<p>這樣的一大串文字，他們的開頭是 <code>iPhone4</code>中的<code>iPhone</code>字眼。</p>
+<p>現在我們來修改一下程式碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/^iPhone/gm</span>, <span class="string">'iPad'</span>)</span><br></pre></td></tr></table></figure>
+
+<p>輸出結果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&quot;iPad4</span><br><span class="line">iPad5</span><br><span class="line">iPad6</span><br><span class="line">iPad7</span><br><span class="line">iPad8&quot;</span><br></pre></td></tr></table></figure>
+
+<h2 id="常用情境"><a href="#常用情境" class="headerlink" title="常用情境"></a>常用情境</h2><h3 id="資料驗證"><a href="#資料驗證" class="headerlink" title="資料驗證"></a>資料驗證</h3><p>有沒有經驗是當你在註冊某些網站的服務時，當你輸入 E-mail 格式不包含 <code>@</code> 或是一些 <code>.</code>時，網站會有格是錯誤提示，這是怎麼做到的呢?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//please input the test email to see is valid</span></span><br><span class="line"><span class="keyword">var</span> strEmail = <span class="string">'xxx1234@gmail.com'</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//Regular expression Testing</span></span><br><span class="line"><span class="keyword">var</span> emailRule = <span class="regexp">/^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/</span>;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//validate ok or not</span></span><br><span class="line"><span class="keyword">if</span>(strEmail.search(emailRule)!= <span class="number">-1</span>)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"true"</span>);</span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"false"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上網搜尋一下<code>正規式 表單驗證</code>其實就很容易找到相關的程式碼了。</p>
+<p>由於 E-mail 的格式是固定的，為了避免用戶錯誤輸入，將必定驗證不過的E-mail格式傳到資料庫，消耗不必要的資源，通常在前端我們就會透過正規式的技巧來做簡單的篩選。</p>
+<h3 id="搜尋功能"><a href="#搜尋功能" class="headerlink" title="搜尋功能"></a>搜尋功能</h3><p>相信會看到這篇文章的各位，大部分都有使用文字編輯器。像是筆者使用的文字編輯器是 VS code，我非常常使用到 <code>ctrl + shift + F</code> 的搜尋功能，以往都是使用單純的字串搜尋，但其是現在有非常多的文字編輯器( 或是其他服務 )，都有提供正規式搜尋功能，學會了以後對於資料的篩選精確度會有非常大的提升！</p>
+<p><img src="https://i.imgur.com/VTOAB5u.jpg" alt></p>
+<h2 id="regex101-正規式測試服務"><a href="#regex101-正規式測試服務" class="headerlink" title="regex101 正規式測試服務"></a>regex101 正規式測試服務</h2><p>這是一個正規式測式的服務，提供正規式的撰寫測試。<br><a href="https://regex101.com/" target="_blank" rel="noopener">Regex101 Website</a></p>
+<h3 id="設定程式語言"><a href="#設定程式語言" class="headerlink" title="設定程式語言"></a>設定程式語言</h3><p>進入網站第一件事情需要先<strong>設定程式語言</strong>，雖然幾乎所有程式語言都支援正規式，但之中還是有些微差異，有些功能並不是每個程式語言都會支援，但總體來說大概有<code>80%</code>的語法在所有語言都通用。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1559532435221.jpg?raw=true" alt></p>
+<p>因為筆者是Web前端開發者，所以這邊我選 JavaScript。</p>
+<h3 id="基本功能說明"><a href="#基本功能說明" class="headerlink" title="基本功能說明"></a>基本功能說明</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1559533409643.jpg?raw=true" alt></p>
+<h2 id="常用字元"><a href="#常用字元" class="headerlink" title="常用字元"></a>常用字元</h2><h3 id="字面值"><a href="#字面值" class="headerlink" title="字面值"></a>字面值</h3><p>如 <code>a b c d 1 2 3 4</code> 等等指定字。</p>
+<h3 id="字符類"><a href="#字符類" class="headerlink" title="字符類"></a>字符類</h3><p><code>. [abc] [a-z] \d \w \s</code></p>
+<ul>
+<li><code>.</code> 表示<code>任何字符</code></li>
+<li><code>[abc]</code> 括號表示<code>找到集合裡任意一個字符</code>。</li>
+<li><code>\d</code> 表示<code>一個數字</code>，等同於[0-9]</li>
+<li><code>\w</code> 表示<code>一個單詞字符</code>，等同於[0-9A-Za-z_]</li>
+<li><code>\s</code> 表示<code>一個空格，tab，回車或一個換行符</code></li>
+<li><code>[^abc] \D \W \S</code>: 否定字符類，和上述同字母小寫的意義相反</li>
+</ul>
+<h3 id="乘法器"><a href="#乘法器" class="headerlink" title="乘法器"></a>乘法器</h3><p><code>{4} {3,16} {1,} ? * +</code></p>
+<ul>
+<li><code>{3,16}</code> 表示找到重複3 到16 次內的字元</li>
+<li><code>?</code> 表示”沒有或出現一次”</li>
+<li><code>*</code> 表示”沒有或出現多次”</li>
+<li><code>+</code> 表示”一個或出現多次”</li>
+</ul>
+<h3 id="分支和組合"><a href="#分支和組合" class="headerlink" title="分支和組合"></a>分支和組合</h3><p><code>(Septem|Octo|Novem|Decem)ber</code></p>
+<ul>
+<li>符號 <code>|</code> 表示”或”</li>
+<li>圓括號表示組合，比如在一周中找到一天，使用<code>(Mon|Tues|Wednes|Thurs|Fri|Satur|Sun)day</code>。</li>
+</ul>
+<h3 id="詞、行和文本邊界"><a href="#詞、行和文本邊界" class="headerlink" title="詞、行和文本邊界"></a>詞、行和文本邊界</h3><ul>
+<li><code>^</code> 表示行開始</li>
+<li><code>$</code> 表示行結束</li>
+</ul>
+<h3 id="反向捕獲組"><a href="#反向捕獲組" class="headerlink" title="反向捕獲組"></a>反向捕獲組</h3><p>比如有一段字符，我們需要前面的橫槓去掉，英文句號換成橫槓，尾巴的數字去掉，但是<code>編號</code>及<code>文章標題</code>需要保留。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-1.文章標題1 </span><br><span class="line">-2.文章標題2 </span><br><span class="line">-3.文章標題3 </span><br><span class="line">-4.文章標題4 </span><br><span class="line">-51.文章標題5</span><br></pre></td></tr></table></figure></p>
+<p>將上文宣告成一組換行字串</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'-1.文章標題1\n-2.文章標題2\n-3.文章標題3\n-4.文章標題4\n-51.文章標題5'</span></span><br></pre></td></tr></table></figure>
+
+<p>我們預計要將字串替換成 <code>[編號]-[標題]</code><br>我們的正規式為 / <code>-</code> <code>(\d+)</code> <code>\.</code> <code>(.+)</code> <code>\d+</code> / <code>g</code></p>
+<table>
+<thead>
+<tr>
+<th align="center">RegEx</th>
+<th align="center">代表意義</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>-</code></td>
+<td align="center">固定字串</td>
+</tr>
+<tr>
+<td align="center">★ <code>(\d+)</code></td>
+<td align="center">至少一位數的數字(編號)，<code>小括號內的值之後可以用$1輸出</code></td>
+</tr>
+<tr>
+<td align="center"><code>\.</code></td>
+<td align="center">固定字串，由於dot在正規式是有意義的，須以反斜線標記，代表為固定字串<code>.</code></td>
+</tr>
+<tr>
+<td align="center">★ <code>(.+)</code></td>
+<td align="center">至少一個字的任意字元(標題)，<code>小括號內的值之後可以用$2輸出</code></td>
+</tr>
+<tr>
+<td align="center"><code>\d+</code></td>
+<td align="center">至少一位數的數字</td>
+</tr>
+<tr>
+<td align="center"><code>g</code></td>
+<td align="center">全局匹配</td>
+</tr>
+</tbody></table>
+<p>而其中<code>$1</code> <code>$2</code>分別代表正規式中小括號內的字串，他們是由左自右排列的，舉例來說若將 <code>(\d+)</code>的小括號移除，則後面的 <code>(.+)</code>往前遞補，變成 <code>$1</code>的參考值，<code>$2</code>則不存在了。</p>
+<blockquote>
+<p>有時候我們需要括號來作區隔，但是不希望它形成一個群組，意即不希望小括號內的值成為 <code>$</code>的參考值時，我們可以在小括號的前方加上 <code>?:</code>，就可以把群組取消。如例子中可以將　<code>(\d+)</code>改為<code>(?:\d+)</code>，這麼一來現在的 <code>$1</code>參考到的值是 <code>(.+)</code>，而 <code>$2</code>則不存在了。</p>
+</blockquote>
+<p>使用<code>replace()</code>方法替換內容。<br>  <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">str.replace(<span class="regexp">/-(\d+)\.(.+)\d+/g</span>, <span class="string">'$1-$2'</span>)</span><br></pre></td></tr></table></figure></p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// output:</span><br><span class="line">&quot;1-文章標題</span><br><span class="line">2-文章標題</span><br><span class="line">3-文章標題</span><br><span class="line">4-文章標題</span><br><span class="line">51-文章標題&quot;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="空白字元"><a href="#空白字元" class="headerlink" title="空白字元"></a>空白字元</h3><ul>
+<li>直接打空白鍵 → space</li>
+<li><code>\t</code>       → TAB</li>
+<li><code>\n</code>       → 換行</li>
+<li><code>\r</code>       → 回車符</li>
+<li><code>\s*</code>      → 所有空白字元</li>
+</ul>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="預查"><a href="#預查" class="headerlink" title="預查"></a>預查</h4><ul>
+<li><p>正向預查 <code>(?=)</code><br>有時候我們希望匹配的字串符合某個條件，但不希望該條件也被選取<br><img src="https://github.com/dylan237/images_source/blob/master/1559552188255.jpg?raw=true" alt></p>
+</li>
+<li><p>反向預查 <code>(?!)</code><br><img src="https://github.com/dylan237/images_source/blob/master/1559552219898.jpg?raw=true" alt></p>
+<blockquote>
+<p><code>(?=)</code> &amp; <code>(?!)</code> 和上面補充的 <code>(?:)</code>相同，都不會使小括號內值被群組。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><p><a href="https://www.youtube.com/watch?v=yrUx7FAhfV0&" target="_blank" rel="noopener">[偷米騎巴哥]正規式苦手超入門</a><br><a href="http://wuchong.me/blog/2014/07/02/learn-regular-expressions/" target="_blank" rel="noopener">Jark’s Blog - 正則表達式學習</a><br><a href="http://ccckmit.wikidot.com/regularexpression" target="_blank" rel="noopener">正規式語法大全</a><br><a href="https://ithelp.ithome.com.tw/articles/10094951" target="_blank" rel="noopener">常見正規式範例 - Email 正規式</a><br><a href="https://www.itread01.com/content/1538978947.html" target="_blank" rel="noopener">常見正規式範例 - 驗證整數和小數的正則表達式</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/RegEx/" rel="tag"># RegEx</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/array-duplicates-filter.html" rel="next" title="JavaScript 過濾陣列重複值的方法">
+                <i class="fa fa-chevron-left"></i> JavaScript 過濾陣列重複值的方法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/pollyfills.html" rel="prev" title="常用的 function 及 Pollyfills 整理">
+                常用的 function 及 Pollyfills 整理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#創造一個正規式"><span class="nav-number">1.</span> <span class="nav-text">創造一個正規式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用正規式來檢驗字串-test"><span class="nav-number">2.</span> <span class="nav-text">使用正規式來檢驗字串 test()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用正規式做字串取代-replace"><span class="nav-number">3.</span> <span class="nav-text">使用正規式做字串取代 replace()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用正規式取得特定字串-match"><span class="nav-number">4.</span> <span class="nav-text">使用正規式取得特定字串 match()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Regex-Flags"><span class="nav-number">5.</span> <span class="nav-text">Regex Flags</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#global"><span class="nav-number">5.1.</span> <span class="nav-text">global</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#insensitive"><span class="nav-number">5.2.</span> <span class="nav-text">insensitive</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#multi-line"><span class="nav-number">5.3.</span> <span class="nav-text">multi line</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用情境"><span class="nav-number">6.</span> <span class="nav-text">常用情境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#資料驗證"><span class="nav-number">6.1.</span> <span class="nav-text">資料驗證</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜尋功能"><span class="nav-number">6.2.</span> <span class="nav-text">搜尋功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regex101-正規式測試服務"><span class="nav-number">7.</span> <span class="nav-text">regex101 正規式測試服務</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#設定程式語言"><span class="nav-number">7.1.</span> <span class="nav-text">設定程式語言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本功能說明"><span class="nav-number">7.2.</span> <span class="nav-text">基本功能說明</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用字元"><span class="nav-number">8.</span> <span class="nav-text">常用字元</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字面值"><span class="nav-number">8.1.</span> <span class="nav-text">字面值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符類"><span class="nav-number">8.2.</span> <span class="nav-text">字符類</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#乘法器"><span class="nav-number">8.3.</span> <span class="nav-text">乘法器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分支和組合"><span class="nav-number">8.4.</span> <span class="nav-text">分支和組合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#詞、行和文本邊界"><span class="nav-number">8.5.</span> <span class="nav-text">詞、行和文本邊界</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#反向捕獲組"><span class="nav-number">8.6.</span> <span class="nav-text">反向捕獲組</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空白字元"><span class="nav-number">8.7.</span> <span class="nav-text">空白字元</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">8.8.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#預查"><span class="nav-number">8.8.1.</span> <span class="nav-text">預查</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考資料"><span class="nav-number">9.</span> <span class="nav-text">參考資料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/learning-regexp.html';
+          this.page.identifier = 'learning-regexp.html';
+          this.page.title = '初探正規式';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

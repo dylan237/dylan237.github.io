@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="HTTP,AJAX,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="HTTP,AJAX">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lidemy HTTP Challenge 紀錄">
+<meta property="og:url" content="https://dylan237.github.io/http-game.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://www.ionos.ca/digitalguide/fileadmin/DigitalGuide/Teaser/was-ist-http-t.jpg">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/creating_query_strings1.png?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557973353491.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557973600667.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557974129167.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557974978985.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557975423201.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557977753629.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557983212973.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557984087433.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557984531961.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557985129732.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557986866340.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557993300846.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557994363311.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1557995496899.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.434Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Lidemy HTTP Challenge 紀錄">
+<meta name="twitter:image" content="https://www.ionos.ca/digitalguide/fileadmin/DigitalGuide/Teaser/was-ist-http-t.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/http-game.html">
+
+
+
+
+
+  <title>Lidemy HTTP Challenge 紀錄 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/http-game.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Lidemy HTTP Challenge 紀錄</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-05-16T10:07:41+08:00">
+                2019-05-16
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/uncategorized/" itemprop="url" rel="index">
+                    <span itemprop="name">uncategorized</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/http-game.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="http-game.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- 摘要start -->
+<img src="https://www.ionos.ca/digitalguide/fileadmin/DigitalGuide/Teaser/was-ist-http-t.jpg" alt style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px">
+<!-- 摘要end -->
+<a id="more"></a>
+<div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="https://www.ionos.com/digitalguide/hosting/technical-matters/the-most-important-http-status-codes-at-a-glance/" target="_blank" rel="noopener">
+  https://www.ionos.com/
+  </a>
+</div>
+<br>
+
+<h2 id="API文件"><a href="#API文件" class="headerlink" title="API文件"></a>API文件</h2><ul>
+<li><a href="https://gist.github.com/aszx87410/3873b3d9cbb28cb6fcbb85bf493b63ba" target="_blank" rel="noopener">3 - 5 關</a></li>
+<li><a href="https://gist.github.com/aszx87410/1e5e5105c1c35197f55c485a88b0328a" target="_blank" rel="noopener">6 - 10 關</a></li>
+<li><a href="https://gist.github.com/aszx87410/0b0d3cabf32c4e44084fadf5180d0cf4" target="_blank" rel="noopener">10 - 15 關</a><br>
+
+</li>
+</ul>
+<hr>
+<h2 id="第-0-關-說明"><a href="#第-0-關-說明" class="headerlink" title="第 0 關 - 說明"></a>第 0 關 - 說明</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/start" target="_blank" rel="noopener">挑戰連結</a></p>
+<p>第0關主要在說明一些遊戲規則，但有一個重點詞 <code>query string</code> ，在串接 API 時時常會使用到的一個技巧，後面也會使用到。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/creating_query_strings1.png?raw=true" alt></p>
+<h2 id="第-1-關-GET-Query-String"><a href="#第-1-關-GET-Query-String" class="headerlink" title="第 1 關 - GET / Query String"></a>第 1 關 - GET / Query String</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv1?token={GOGOGO}" target="_blank" rel="noopener">挑戰連結</a></p>
+<p>這關較為單純，只需要在瀏覽器網址列的 <code>query string</code> 後帶上自己的名字傳入即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/lv1?token=&#123;GOGOGO&#125;&amp;name=&apos;dylan&apos;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Postman"><a href="#Postman" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557973353491.jpg?raw=true" alt></p>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><p>Postman右側的code點進去可以選擇JavaScript原始碼</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/lv1?token=&#123;GOGOGO&#125;&amp;name=%27dylan%27"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-2-關-GET-Query-String"><a href="#第-2-關-GET-Query-String" class="headerlink" title="第 2 關 - GET / Query String"></a>第 2 關 - GET / Query String</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv2?token={HellOWOrld}" target="_blank" rel="noopener">挑戰連結</a></p>
+<p>和第一關一樣用 <code>query string</code> 傳送參數即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/lv2?token=&#123;HellOWOrld&#125;&amp;id=56</span><br></pre></td></tr></table></figure>
+
+<h3 id="Postman-1"><a href="#Postman-1" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557973600667.jpg?raw=true" alt></p>
+<h3 id="JavaScript-1"><a href="#JavaScript-1" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/lv2?token=&#123;HellOWOrld&#125;&amp;id=56"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line">xhr.send(data)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-3-關-POST"><a href="#第-3-關-POST" class="headerlink" title="第 3 關 - POST"></a>第 3 關 - POST</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv3?token={5566NO1}" target="_blank" rel="noopener">挑戰連結</a></p>
+<p>這關需要使用 POST 來新增書籍資料。</p>
+<h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>新增書籍的 API 網址為 <code>https://lidemy-http-challenge.herokuapp.com/api</code></li>
+<li>資料的 <code>content type</code> 為 <code>application/x-www-form-urlencoded</code> 格式，這部分需要在撰寫程式碼時加入 <code>request header</code> 當中。</li>
+</ul>
+<h3 id="Postman-2"><a href="#Postman-2" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557974129167.jpg?raw=true" alt></p>
+<h3 id="JavaScript-2"><a href="#JavaScript-2" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="string">"name=《大腦喜歡這樣學》&amp;ISBN=9789863594475"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"POST"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/books"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"content-type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);　<span class="comment">/*!!*/</span></span><br><span class="line"></span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<p>做完第一步伺服器回傳 <code>{&quot;message&quot;:&quot;新增成功&quot;,&quot;id&quot;:&quot;1989&quot;}</code>，接著再把 id 以 <code>query string</code>傳給伺服器就過關了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/lv3?token=&#123;5566NO1&#125;&amp;id=1989</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-4-關-Query-String過濾資料"><a href="#第-4-關-Query-String過濾資料" class="headerlink" title="第 4 關 - Query String過濾資料"></a>第 4 關 - Query String過濾資料</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv4?token={LEarnHOWtoLeArn}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="需求-1"><a href="#需求-1" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>API網址為 <code>https://lidemy-http-challenge.herokuapp.com/api/books</code></li>
+<li>查詢書籍的方式為 <code>/books?q=書名</code></li>
+<li>方法為 <code>GET</code></li>
+</ul>
+<h3 id="Postman-3"><a href="#Postman-3" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557974978985.jpg?raw=true" alt></p>
+<h3 id="JavaScript-3"><a href="#JavaScript-3" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.withCredentials = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/books?q=%E4%B8%96%E7%95%8C"</span>);</span><br><span class="line"></span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<p>得到 id 後再透過網址列傳送給伺服器即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/lv4?token=&#123;LEarnHOWtoLeArn&#125;&amp;id=79</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-5-關-DELETE"><a href="#第-5-關-DELETE" class="headerlink" title="第 5 關 - DELETE"></a>第 5 關 - DELETE</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv5?token={HarukiMurakami}" target="_blank" rel="noopener">挑戰連結</a></p>
+<p>這關需要刪除一本書籍資料，此資料的 id 為 23。</p>
+<h3 id="需求-2"><a href="#需求-2" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>刪除的API網址為 <code>https://lidemy-http-challenge.herokuapp.com/api</code></li>
+<li>刪除書籍的方式為 <code>/books/:id</code></li>
+<li>方法為 <code>DELETE</code></li>
+</ul>
+<h3 id="Postman-4"><a href="#Postman-4" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557975423201.jpg?raw=true" alt></p>
+<h3 id="JavaScript-4"><a href="#JavaScript-4" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"DELETE"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/books/23"</span>);</span><br><span class="line">xhr.send(data)</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-6-關-登入驗證"><a href="#第-6-關-登入驗證" class="headerlink" title="第 6 關 - 登入驗證"></a>第 6 關 - 登入驗證</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv6?token={CHICKENCUTLET}" target="_blank" rel="noopener">挑戰連結</a><br><a href="https://gist.github.com/aszx87410/1e5e5105c1c35197f55c485a88b0328a" target="_blank" rel="noopener">此關開始使用新的API (需驗證)</a></p>
+<h3 id="關卡敘述"><a href="#關卡敘述" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>我終於知道上次哪裡怪怪的了！</p>
+<p>照理來說要進入系統應該要先登入才對，怎麼沒有登入就可以新增刪除…<br>這太奇怪了，我已經回報給那邊的工程師了</p>
+<p>這邊是帳號密碼，你先登入試試看吧，可以呼叫一個 /me 的 endpoint，裡面會給你一個 email。<br>把 email 放在 query string 上面帶過來，我看看是不是對的。</p>
+<p>帳號：admin<br>密碼：admin123</p>
+</blockquote>
+<h3 id="需求-3"><a href="#需求-3" class="headerlink" title="需求"></a>需求</h3><p>以下 endpoint 都必須經由 HTTP 驗證，<code>驗證方法為傳入 Authorization 的 Header</code>。</p>
+<p>首先你必須準備好一組字串，內容為 <code>base64(username:password)</code><br>舉例來說，如果 username 是 aaa，password 是 123 的話，就會是字串 aaa:123 拿去做 base64 編碼之後得到的結果<br>再把這個結果放到 Header 去，最後變成： <code>Authorization: Basic YWFhOjEyMw==</code><br>只要帶上這個 Header 就可以驗證身份囉！</p>
+<p>（提示：可查詢關鍵字 <code>http basic authorization</code>）</p>
+<blockquote>
+<p>搜索關鍵字 http basic authorization</p>
+</blockquote>
+<ul>
+<li><a href="https://zh.wikipedia.org/wiki/HTTP%E5%9F%BA%E6%9C%AC%E8%AE%A4%E8%AF%81" target="_blank" rel="noopener">HTTP基本認證</a></li>
+<li><a href="https://zxc0328.github.io/2015/11/04/http-basic-auth/" target="_blank" rel="noopener">Http Basic Authorization的使用</a></li>
+</ul>
+<h3 id="base64加密"><a href="#base64加密" class="headerlink" title="base64加密"></a>base64加密</h3><p>為了使用者的安全，通常在進行密碼傳遞時會進行一層加密，<code>http basic authorization</code>是其中一種最簡單的方式，作法是將密碼轉譯為 <code>BASE64</code> 格式，再透過明碼方式傳送，雖然相對容易，但安全性比較低。</p>
+<p>我們需要將文件此題所提供的帳號(admin)密碼(admin123)以<code>admin:admin123</code>格式丟入<a href="http://www.convertstring.com/zh_TW/EncodeDecode/Base64Encode" target="_blank" rel="noopener">BASE64編碼器</a>中，完成編碼後得到<code>YWRtaW46YWRtaW4xMjM=</code>。
+最後組成完整的<code>http basic authorization</code>則會變成<code>Authorization: Basic YWRtaW46YWRtaW4xMjM=</code></p>
+<h3 id="Postman-5"><a href="#Postman-5" class="headerlink" title="Postman"></a>Postman</h3><ul>
+<li>API路徑 <code>https://lidemy-http-challenge.herokuapp.com/api/v2/me</code></li>
+<li>夾帶 <code>request header</code> <code>Authorization: Basic YWRtaW46YWRtaW4xMjM=</code></li>
+<li>方法 <code>GET</code></li>
+</ul>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1557977753629.jpg?raw=true" alt></p>
+<h3 id="JavaScript-5"><a href="#JavaScript-5" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/v2/me"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Authorization"</span>, <span class="string">"Basic YWRtaW46YWRtaW4xMjM="</span>);</span><br><span class="line"></span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<h3 id="將回傳的-E-mail-放在-query-string-上面回傳"><a href="#將回傳的-E-mail-放在-query-string-上面回傳" class="headerlink" title="將回傳的 E-mail 放在 query string 上面回傳"></a>將回傳的 E-mail 放在 query string 上面回傳</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/lv6?token=&#123;CHICKENCUTLET&#125;&amp;email=lib@lidemy.com</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-7-關-DELETE"><a href="#第-7-關-DELETE" class="headerlink" title="第 7 關 - DELETE"></a>第 7 關 - DELETE</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv7?token={SECurityIsImPORTant}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="需求-4"><a href="#需求-4" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>要刪除的書 ID 為 <strong>89</strong></li>
+<li>方法為 <code>DELETE</code></li>
+<li>API路徑  <code>https://lidemy-http-challenge.herokuapp.com/api/v2</code></li>
+<li><code>endpoint</code> 為 /books/:id</li>
+<li>需要包含 <code>http basic authorization</code> 的驗證 <code>request header</code></li>
+</ul>
+<h3 id="Postman-6"><a href="#Postman-6" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557983212973.jpg?raw=true" alt></p>
+<h3 id="JavaScript-6"><a href="#JavaScript-6" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"DELETE"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/v2/books/89"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Authorization"</span>, <span class="string">"Basic YWRtaW46YWRtaW4xMjM="</span>);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-8-關-PATCH-PUT"><a href="#第-8-關-PATCH-PUT" class="headerlink" title="第 8 關 - PATCH (PUT)"></a>第 8 關 - PATCH (PUT)</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv8?token={HsifnAerok}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="關卡敘述-1"><a href="#關卡敘述-1" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>我昨天在整理書籍的時候發現有一本書的 ISBN 編號跟系統內的對不上，仔細看了一下發現我當時輸入系統時 key 錯了。<br>哎呀，人老了就是這樣，老是會看錯。</p>
+<p>那本書的名字裡面有個「我」，作者的名字是四個字，key 錯的 ISBN 最後一碼為 7，只要把最後一碼改成 3 就行了。<br>對了！記得要用新的系統喔，舊的已經完全廢棄不用了。</p>
+</blockquote>
+<h3 id="需求-5"><a href="#需求-5" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>用 <code>GET</code>方法透過 <code>query string</code> 查詢該書籍</li>
+<li>用 <code>PATCH</code>方法修改書籍的 ISBN 資訊 (一樣須帶驗證)</li>
+</ul>
+<h3 id="Postman-7"><a href="#Postman-7" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557984087433.jpg?raw=true" alt><br><img src="https://github.com/dylan237/images_source/blob/master/1557984531961.jpg?raw=true" alt></p>
+<h3 id="JavaScript-7"><a href="#JavaScript-7" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/v2/books?q=我"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Authorization"</span>, <span class="string">"Basic YWRtaW46YWRtaW4xMjM="</span>);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="string">"name=日日好日：茶道教我的幸福15味【電影書腰版】&amp;ISBN=9981835423"</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"PATCH"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/v2/books/72"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Authorization"</span>, <span class="string">"Basic YWRtaW46YWRtaW4xMjM="</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Content-Type"</span>, <span class="string">"application/x-www-form-urlencoded"</span>);</span><br><span class="line"></span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-9-關-User-agent定義瀏覽器"><a href="#第-9-關-User-agent定義瀏覽器" class="headerlink" title="第 9 關 - User-agent定義瀏覽器"></a>第 9 關 - User-agent定義瀏覽器</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv9?token={NeuN}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="關卡敘述-2"><a href="#關卡敘述-2" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>API 文件裡面有個獲取系統資訊的 endpoint 你記得嗎？<br>工程師跟我說這個網址不太一樣，用一般的方法是沒辦法成功拿到回傳值的。</p>
+<p>想要存取的話要符合兩個條件：</p>
+<ol>
+<li>帶上一個 X-Library-Number 的 header，我們圖書館的編號是 20</li>
+<li>伺服器會用 user agent 檢查是否是從 IE6 送出的 Request，不是的話會擋掉</li>
+</ol>
+<p>順利拿到系統資訊之後應該會有個叫做 version 的欄位，把裡面的值放在 query string 給我吧。</p>
+</blockquote>
+<h3 id="需求-6"><a href="#需求-6" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>補上對應的 header ,包含登入驗證</li>
+<li>偽造IE6的 ` request header</li>
+</ul>
+<h3 id="Postman-8"><a href="#Postman-8" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557985129732.jpg?raw=true" alt></p>
+<h3 id="JavaScript-8"><a href="#JavaScript-8" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/v2/sys_info"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Authorization"</span>, <span class="string">"Basic YWRtaW46YWRtaW4xMjM="</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"X-Library-Number"</span>, <span class="string">"20"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (Windows; U; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 2.0.50727)"</span>);</span><br><span class="line"></span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<h3 id="query-string-回傳剛剛得到的-version資訊"><a href="#query-string-回傳剛剛得到的-version資訊" class="headerlink" title="query string 回傳剛剛得到的 version資訊"></a>query string 回傳剛剛得到的 version資訊</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/lv9?token=&#123;NeuN&#125;&amp;version=1A4938Jl7</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-10-關-邏輯遊戲"><a href="#第-10-關-邏輯遊戲" class="headerlink" title="第 10 關 - 邏輯遊戲"></a>第 10 關 - 邏輯遊戲</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv10?token={duZDsG3tvoA}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="關卡敘述-3"><a href="#關卡敘述-3" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>出題者會出一個四位數不重複的數字，例如說 9487。<br>你如果猜 9876，我會跟你說 1A2B，1A 代表 9 位置對數字也對，2B 代表 8 跟 7 你猜對了但位置錯了。</p>
+<p>開始吧，把你要猜的數字放在 query string 用 num 當作 key 傳給我。</p>
+</blockquote>
+<h3 id="需求-7"><a href="#需求-7" class="headerlink" title="需求"></a>需求</h3><p>這是一個邏輯遊戲，就試吧</p>
+<ul>
+<li>如果1個數字對且位置也對就會顯示 <code>1A</code>，兩個的話則顯示 <code>2A</code>，依此類推</li>
+<li>若玩家其中一個數字猜對但是位置錯，則會顯示 <code>1B</code>，兩個的話則顯示 <code>2B</code>，依此類推</li>
+</ul>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/lv10?token=&#123;duZDsG3tvoA&#125;&amp;num=9613</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-11-關-Origin-跨域限制"><a href="#第-11-關-Origin-跨域限制" class="headerlink" title="第 11 關 - Origin 跨域限制"></a>第 11 關 - Origin 跨域限制</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv11?token={IhateCORS}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="關卡敘述-4"><a href="#關卡敘述-4" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>嘿！很開心看到你願意回來繼續幫忙，這次我們接到一個新的任務，要跟在菲律賓的一個中文圖書館資訊系統做串連<br>這邊是他們的 API 文件，你之後一定會用到：<a href="https://gist.github.com/aszx87410/0b0d3cabf32c4e44084fadf5180d0cf4。" target="_blank" rel="noopener">https://gist.github.com/aszx87410/0b0d3cabf32c4e44084fadf5180d0cf4。</a></p>
+<p>現在就讓我們先跟他們打個招呼吧，只是我記得他們的 API 好像會限制一些東西就是了…</p>
+</blockquote>
+<h3 id="需求-8"><a href="#需求-8" class="headerlink" title="需求"></a>需求</h3><ul>
+<li>從 API 文件參考基本 API 路徑為 <code>https://lidemy-http-challenge.herokuapp.com/api/v3</code></li>
+<li>打招呼的 endpoint 為 <code>/hello</code></li>
+<li>在 <code>request header</code> 內偽造 <code>origin</code> ( 此API有CROS跨域限制，必須來自 lidemy.com 才可存取 )</li>
+<li>方法為 <code>GET</code></li>
+</ul>
+<h3 id="Postman-9"><a href="#Postman-9" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557986866340.jpg?raw=true" alt></p>
+<h3 id="JavaScript-9"><a href="#JavaScript-9" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/v3/hello"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"Origin"</span>, <span class="string">"lidemy.com"</span>);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-12-關-使用開發者工具Network觀察回傳的response-header資訊"><a href="#第-12-關-使用開發者工具Network觀察回傳的response-header資訊" class="headerlink" title="第 12 關 - 使用開發者工具Network觀察回傳的response header資訊"></a>第 12 關 - 使用開發者工具Network觀察回傳的response header資訊</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv12?token={r3d1r3c7}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="關卡敘述-5"><a href="#關卡敘述-5" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>使用 API 文件提供的方法，獲得藏在其中的 token</p>
+</blockquote>
+<h3 id="需求-9"><a href="#需求-9" class="headerlink" title="需求"></a>需求</h3><p>使用瀏覽器開發者工具的 Network分頁觀察 request ，並於網址列中輸入網址，訪問 API</p>
+<h3 id="過程"><a href="#過程" class="headerlink" title="過程"></a>過程</h3><p>當訪問該 API 後，我們被轉址到其他地方了，順序如下:</p>
+<ul>
+<li><code>deliver_token</code> &gt; <code>stopover</code> &gt; <code>deliver_token_result</code></li>
+</ul>
+<p>可以透過 Network 分頁觀察 stopover ，發現 header 內夾帶下一關的 token <code>X-Lv13-Token: {qspyz}</code></p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1557993300846.jpg?raw=true" alt></p>
+<br>
+
+<h2 id="第-13-關-Proxy代理伺服器"><a href="#第-13-關-Proxy代理伺服器" class="headerlink" title="第 13 關 - Proxy代理伺服器"></a>第 13 關 - Proxy代理伺服器</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv12?token={r3d1r3c7}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="關卡敘述-6"><a href="#關卡敘述-6" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>太好了！自從你上次把運送用的 token 拿回來以後，我們就密切地與菲律賓在交換書籍<br>可是最近碰到了一些小問題，不知道為什麼有時候會傳送失敗<br>我跟他們反映過後，他們叫我們自己去拿 log 來看，你可以幫我去看看嗎？<br>從系統日誌裡面應該可以找到一些端倪。</p>
+</blockquote>
+<h3 id="解題"><a href="#解題" class="headerlink" title="解題"></a>解題</h3><p>如果直接用 GET 方法，會得到這段伺服器回傳提示：</p>
+<blockquote>
+<p>此 request 不是來自菲律賓，禁止存取系統資訊。</p>
+</blockquote>
+<p>網址後帶入 <code>&amp;hint=13</code> 看看提示</p>
+<blockquote>
+<p>你有聽過代理伺服器 proxy 嗎？</p>
+</blockquote>
+<h4 id="1-我們可在-chrome-的設定頁面中搜尋-proxy-，即可開啟設定視窗"><a href="#1-我們可在-chrome-的設定頁面中搜尋-proxy-，即可開啟設定視窗" class="headerlink" title="1. 我們可在 chrome 的設定頁面中搜尋 proxy ，即可開啟設定視窗"></a>1. 我們可在 chrome 的設定頁面中搜尋 <code>proxy</code> ，即可開啟設定視窗</h4><p><img src="https://github.com/dylan237/images_source/blob/master/1557994363311.jpg?raw=true" alt></p>
+<h4 id="2-上網搜尋-proxy-站點"><a href="#2-上網搜尋-proxy-站點" class="headerlink" title="2. 上網搜尋 proxy 站點"></a>2. 上網搜尋 proxy 站點</h4><p><a href="http://free-proxy.cz/zh/proxylist/country/PH/http/ping/all" target="_blank" rel="noopener">菲律賓proxy</a></p>
+<p>勾選協議是 <code>HTTP</code> 按下搜尋，可以挑選一個速度快的服務。要注意不是每個 proxy 都能正常使用，可能需要多嘗試幾次。</p>
+<p>接著在網址列輸入以下，訪問該 API</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://lidemy-http-challenge.herokuapp.com/api/v3/logs</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-成功"><a href="#3-成功" class="headerlink" title="3. 成功"></a>3. 成功</h4><p>成功可以看到以下畫面，得知下一關 <code>token</code> 為 <code>{SEOisHard}</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line"> &#123; logType: &apos;token&apos;, value: &apos;&#123;SEOisHard&#125;&apos; &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-14-關-User-agent定義搜尋引擎"><a href="#第-14-關-User-agent定義搜尋引擎" class="headerlink" title="第 14 關 - User-agent定義搜尋引擎"></a>第 14 關 - User-agent定義搜尋引擎</h2><p><a href="https://lidemy-http-challenge.herokuapp.com/lv14?token={SEOisHard}" target="_blank" rel="noopener">挑戰連結</a></p>
+<h3 id="關卡敘述-7"><a href="#關卡敘述-7" class="headerlink" title="關卡敘述"></a>關卡敘述</h3><blockquote>
+<p>跟那邊的溝通差不多都搞定了，真是太謝謝你了，關於這方面沒什麼問題了！<br>不過我老大昨天給了我一個任務，他希望我去研究那邊的首頁內容到底是怎麼做的<br>為什麼用 Google 一搜尋關鍵字就可以排在第一頁，真是太不合理了<br>他們的網站明明就什麼都沒有，怎麼會排在那麼前面？<br>難道說他們偷偷動了一些手腳？讓 Google 搜尋引擎看到的內容跟我們看到的不一樣？<br>算了，還是不要瞎猜好了，你幫我們研究一下吧！</p>
+</blockquote>
+<h3 id="解題-1"><a href="#解題-1" class="headerlink" title="解題"></a>解題</h3><p>網址後帶入 <code>&amp;hint=14</code> 看看提示</p>
+<blockquote>
+<p>伺服器是怎麼辨識是不是 Google 搜尋引擎的？仔細想想之前我們怎麼偽裝自己是 IE6 的。</p>
+</blockquote>
+<p>在<a href="#nine">第九關</a>我們曾經使用 ` 這個 request header 來偽裝瀏覽器，這題也需要朝這個方向著手。</p>
+<ul>
+<li>深入了解 `<ul>
+<li>說明與使用](<a href="https://ithelp.ithome.com.tw/articles/10209356" target="_blank" rel="noopener">https://ithelp.ithome.com.tw/articles/10209356</a>)</li>
+</ul>
+</li>
+<li>透過`` 伺服器不只可以知道使用者的瀏覽器名稱、瀏覽器版本號，使用者還可以透過他設定要使用哪種搜尋引擎。<ul>
+<li><a href="http://www.lrxin.com/archives-325.html" target="_blank" rel="noopener">各个搜索引擎</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="Postman-10"><a href="#Postman-10" class="headerlink" title="Postman"></a>Postman</h3><p><img src="https://github.com/dylan237/images_source/blob/master/1557995496899.jpg?raw=true" alt></p>
+<h3 id="JavaScript-10"><a href="#JavaScript-10" class="headerlink" title="JavaScript"></a>JavaScript</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line"></span><br><span class="line">xhr.addEventListener(<span class="string">"readystatechange"</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">this</span>.readyState === <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="keyword">this</span>.responseText);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">xhr.open(<span class="string">"GET"</span>, <span class="string">"https://lidemy-http-challenge.herokuapp.com/api/v3/index"</span>);</span><br><span class="line">xhr.setRequestHeader(<span class="string">"User-Agent"</span>, <span class="string">"Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)"</span>);</span><br><span class="line">xhr.send(data);</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="第-15-關"><a href="#第-15-關" class="headerlink" title="第 15 關"></a>第 15 關</h2><!-- [挑戰連結](https://lidemy-http-challenge.herokuapp.com/lv15?token={ILOVELIdemy!!!}) -->
+
+<p>這關就沒有題目了，非常感謝 <code>鋰學院</code> 開發這麼有趣的挑戰，對於像我這種菜雞來說非常有幫助XD，透過實際操作，終於開始可以搞懂一些一直很疑惑的概念了。</p>
+<h2 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h2><ul>
+<li><a href="https://pvt5r486.github.io/2019/05/13/HTTP-Game%E6%94%BB%E7%95%A5(%E4%B8%80)/" target="_blank" rel="noopener">HTTP-Game攻略(一)</a></li>
+<li><a href="https://pvt5r486.github.io/2019/05/15/HTTP-Game%E6%94%BB%E7%95%A5(%E4%BA%8C)/" target="_blank" rel="noopener">HTTP-Game攻略(二)</a> </li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag"># HTTP</a>
+          
+            <a href="/tags/AJAX/" rel="tag"># AJAX</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/javascript-async.html" rel="next" title="學習 JavaScript 非同步方案：callback / Promise / async await">
+                <i class="fa fa-chevron-left"></i> 學習 JavaScript 非同步方案：callback / Promise / async await
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/hexo-blog.html" rel="prev" title="Hexo 部落格架設流程紀錄">
+                Hexo 部落格架設流程紀錄 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#API文件"><span class="nav-number">1.</span> <span class="nav-text">API文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-0-關-說明"><span class="nav-number">2.</span> <span class="nav-text">第 0 關 - 說明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-1-關-GET-Query-String"><span class="nav-number">3.</span> <span class="nav-text">第 1 關 - GET / Query String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman"><span class="nav-number">3.1.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript"><span class="nav-number">3.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-2-關-GET-Query-String"><span class="nav-number">4.</span> <span class="nav-text">第 2 關 - GET / Query String</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-1"><span class="nav-number">4.1.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-1"><span class="nav-number">4.2.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-3-關-POST"><span class="nav-number">5.</span> <span class="nav-text">第 3 關 - POST</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求"><span class="nav-number">5.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-2"><span class="nav-number">5.2.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-2"><span class="nav-number">5.3.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-4-關-Query-String過濾資料"><span class="nav-number">6.</span> <span class="nav-text">第 4 關 - Query String過濾資料</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-1"><span class="nav-number">6.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-3"><span class="nav-number">6.2.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-3"><span class="nav-number">6.3.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-5-關-DELETE"><span class="nav-number">7.</span> <span class="nav-text">第 5 關 - DELETE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-2"><span class="nav-number">7.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-4"><span class="nav-number">7.2.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-4"><span class="nav-number">7.3.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-6-關-登入驗證"><span class="nav-number">8.</span> <span class="nav-text">第 6 關 - 登入驗證</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述"><span class="nav-number">8.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-3"><span class="nav-number">8.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#base64加密"><span class="nav-number">8.3.</span> <span class="nav-text">base64加密</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-5"><span class="nav-number">8.4.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-5"><span class="nav-number">8.5.</span> <span class="nav-text">JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#將回傳的-E-mail-放在-query-string-上面回傳"><span class="nav-number">8.6.</span> <span class="nav-text">將回傳的 E-mail 放在 query string 上面回傳</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-7-關-DELETE"><span class="nav-number">9.</span> <span class="nav-text">第 7 關 - DELETE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-4"><span class="nav-number">9.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-6"><span class="nav-number">9.2.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-6"><span class="nav-number">9.3.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-8-關-PATCH-PUT"><span class="nav-number">10.</span> <span class="nav-text">第 8 關 - PATCH (PUT)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述-1"><span class="nav-number">10.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-5"><span class="nav-number">10.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-7"><span class="nav-number">10.3.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-7"><span class="nav-number">10.4.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-9-關-User-agent定義瀏覽器"><span class="nav-number">11.</span> <span class="nav-text">第 9 關 - User-agent定義瀏覽器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述-2"><span class="nav-number">11.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-6"><span class="nav-number">11.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-8"><span class="nav-number">11.3.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-8"><span class="nav-number">11.4.</span> <span class="nav-text">JavaScript</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#query-string-回傳剛剛得到的-version資訊"><span class="nav-number">11.5.</span> <span class="nav-text">query string 回傳剛剛得到的 version資訊</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-10-關-邏輯遊戲"><span class="nav-number">12.</span> <span class="nav-text">第 10 關 - 邏輯遊戲</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述-3"><span class="nav-number">12.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-7"><span class="nav-number">12.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解答"><span class="nav-number">12.3.</span> <span class="nav-text">解答</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-11-關-Origin-跨域限制"><span class="nav-number">13.</span> <span class="nav-text">第 11 關 - Origin 跨域限制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述-4"><span class="nav-number">13.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-8"><span class="nav-number">13.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-9"><span class="nav-number">13.3.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-9"><span class="nav-number">13.4.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-12-關-使用開發者工具Network觀察回傳的response-header資訊"><span class="nav-number">14.</span> <span class="nav-text">第 12 關 - 使用開發者工具Network觀察回傳的response header資訊</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述-5"><span class="nav-number">14.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求-9"><span class="nav-number">14.2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#過程"><span class="nav-number">14.3.</span> <span class="nav-text">過程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-13-關-Proxy代理伺服器"><span class="nav-number">15.</span> <span class="nav-text">第 13 關 - Proxy代理伺服器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述-6"><span class="nav-number">15.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解題"><span class="nav-number">15.2.</span> <span class="nav-text">解題</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-我們可在-chrome-的設定頁面中搜尋-proxy-，即可開啟設定視窗"><span class="nav-number">15.2.1.</span> <span class="nav-text">1. 我們可在 chrome 的設定頁面中搜尋 proxy ，即可開啟設定視窗</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-上網搜尋-proxy-站點"><span class="nav-number">15.2.2.</span> <span class="nav-text">2. 上網搜尋 proxy 站點</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-成功"><span class="nav-number">15.2.3.</span> <span class="nav-text">3. 成功</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-14-關-User-agent定義搜尋引擎"><span class="nav-number">16.</span> <span class="nav-text">第 14 關 - User-agent定義搜尋引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#關卡敘述-7"><span class="nav-number">16.1.</span> <span class="nav-text">關卡敘述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解題-1"><span class="nav-number">16.2.</span> <span class="nav-text">解題</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postman-10"><span class="nav-number">16.3.</span> <span class="nav-text">Postman</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript-10"><span class="nav-number">16.4.</span> <span class="nav-text">JavaScript</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第-15-關"><span class="nav-number">17.</span> <span class="nav-text">第 15 關</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#參考"><span class="nav-number">18.</span> <span class="nav-text">參考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/http-game.html';
+          this.page.identifier = 'http-game.html';
+          this.page.title = 'Lidemy HTTP Challenge 紀錄';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

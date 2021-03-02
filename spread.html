@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,ES6,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="JavaScript,ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 - Spread 展開與其餘參數">
+<meta property="og:url" content="https://dylan237.github.io/spread.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552294453572.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552294922207.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552296008299.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552269826771.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552270078699.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552270419535.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552270703327.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552270894610.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552296535910.jpg?raw=true">
+<meta property="og:image" content="https://github.com/dylan237/images_source/blob/master/1552296960891.jpg?raw=true">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 - Spread 展開與其餘參數">
+<meta name="twitter:image" content="https://github.com/dylan237/images_source/blob/master/1552294453572.jpg?raw=true">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/spread.html">
+
+
+
+
+
+  <title>ES6 - Spread 展開與其餘參數 | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/spread.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ES6 - Spread 展開與其餘參數</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-03-14T12:18:22+08:00">
+                2019-03-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/spread.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="spread.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <img src="" alt="" style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px"> -->
+
+<a id="more"></a>
+
+<!-- <div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="javascript:;">
+    網路
+  </a>
+</div>
+<br /> -->
+
+<h2 id="展開"><a href="#展開" class="headerlink" title="展開"></a>展開</h2><p><strong>先宣告兩個陣列</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr1 = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>]</span><br><span class="line"><span class="keyword">let</span> arr2 = [<span class="string">'D'</span>, <span class="string">'E'</span>, <span class="string">'F'</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="合併陣列"><a href="#合併陣列" class="headerlink" title="合併陣列"></a>合併陣列</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line"><span class="keyword">let</span> arrAll = arr1.concat(arr2) <span class="comment">// ["A", "B", "C", "D", "E", "F"]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6 展開</span></span><br><span class="line"><span class="keyword">let</span> arrAll = [...arr1, ...arr2] <span class="comment">// ["A", "B", "C", "D", "E", "F"]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="複製陣列"><a href="#複製陣列" class="headerlink" title="複製陣列"></a>複製陣列</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line"><span class="keyword">let</span> copy = arr1.concat() <span class="comment">// ['A', 'B', 'C']</span></span><br><span class="line"><span class="comment">// ES6 展開</span></span><br><span class="line"><span class="keyword">let</span> copy = [...arr1] <span class="comment">// ['A', 'B', 'C']</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="陣列開頭插入陣列-物件"><a href="#陣列開頭插入陣列-物件" class="headerlink" title="陣列開頭插入陣列(物件)"></a>陣列開頭插入陣列(物件)</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.unshift.apply(arr1, arr2) <span class="comment">//arr1現在是 ["D", "E", "F", "A", "B", "C"]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6 展開</span></span><br><span class="line">arr1 = [...arr2, ...arr1] <span class="comment">//arr1現在是 ["D", "E", "F", "A", "B", "C"]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(...arr1) <span class="comment">// A B C</span></span><br></pre></td></tr></table></figure>
+
+<p>單純印出 <code>...arr1</code> 會出現陣列內的內容，我們可以理解 <code>... 這個運算子</code> 的作用是將它後方的陣列值一個個取出來，然後再 <code>push</code> 回去。</p>
+<br>
+
+<h2 id="類陣列-array-like"><a href="#類陣列-array-like" class="headerlink" title="類陣列 (array like)"></a>類陣列 (array like)</h2><ul>
+<li><a href="https://itw01.com/NOYNEB3.html" target="_blank" rel="noopener">參考：JavaScript 深入之類陣列物件與 arguments</a></li>
+</ul>
+<blockquote>
+<p>定義：擁有一個 <strong>length 屬性</strong> 和 <strong>若干索引屬性</strong> 的 <code>物件</code>。</p>
+</blockquote>
+<h3 id="手動創造一個類陣列"><a href="#手動創造一個類陣列" class="headerlink" title="手動創造一個類陣列"></a>手動創造一個類陣列</h3><p>以物件實體語法創造一個物件，其成員的屬性皆為索引(數字)，並賦予額外 length 屬性。 </p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arrayLike = &#123; </span><br><span class="line">    <span class="number">0</span>: <span class="string">'name'</span>,</span><br><span class="line">    <span class="number">1</span>: <span class="string">'age'</span>,</span><br><span class="line">    <span class="number">2</span>: <span class="string">'sex'</span>,</span><br><span class="line">    length: <span class="number">3</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>操作</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 讀寫</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike[<span class="number">0</span>]) <span class="comment">// name</span></span><br><span class="line">arrayLike[<span class="number">0</span>] = <span class="string">'new name'</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//長度</span></span><br><span class="line"><span class="built_in">console</span>.log(arrayLike.length) <span class="comment">// 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//遍歷</span></span><br><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>, len = arrayLike.length; i &lt; len; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arrayLike[i])</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//2 類陣列本身還是屬於物件，因此要使用陣列方法必須這麼做</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.forEach.call(arrayLike, <span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(item)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Arguments"><a href="#Arguments" class="headerlink" title="Arguments"></a>Arguments</h3><ul>
+<li><a href="https://itw01.com/NOYNEB3.html" target="_blank" rel="noopener">JavaScript 深入之類陣列物件與 arguments</a></li>
+<li><a href="https://www.udemy.com/javascriptjs/learn/v4/t/lecture/3604412?start=0" target="_blank" rel="noopener">克服JS的奇怪部分 ‘arguments’ 與 spread</a></li>
+</ul>
+<blockquote>
+<p><strong>Arguments</strong> 是當函數的執行環境被創造時與 <strong>環境變數</strong>、<strong>this</strong>、<strong>外部環境</strong>一起被 JavaScript 引擎創造出來的物件。他也是一個<strong>類陣列</strong>，而裡面的屬性是所有被傳入該函數的<strong>參數</strong>。</p>
+</blockquote>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552294453572.jpg?raw=true" style="width:70%;margin:0 auto;display:block"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">arguments</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="string">'Dylan'</span>, <span class="number">25</span>, <span class="string">'Eva'</span>, <span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552294922207.jpg?raw=true" alt></p>
+<p>可以看到輸出結果產生了<strong>類陣列的物件</strong>，而<code>__proto__</code>內的方法皆是物件的原生方法。</p>
+<p>如果嘗試用 <code>arguments</code> 使用陣列的 <code>push</code> 方法，會跳出錯誤。因為 <strong>arguments是物件不是陣列</strong>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">arguments</span>.push([<span class="string">'John'</span>, <span class="number">40</span>]); <span class="comment">// Uncaught TypeError: arguments.push is not a function</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//補充：如果要取用原生陣列方法要使用</span></span><br><span class="line">    <span class="comment">// Array.prototype.push.apply(arguments, ['John', 40])</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="string">'Dylan'</span>, <span class="number">25</span>, <span class="string">'Eva'</span>, <span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+
+<p>利用<strong>展開</strong>將類陣列轉換成陣列，如此也可以順利取用陣列的方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> arg = [...arguments]</span><br><span class="line">    arg.push(<span class="string">'John'</span>, <span class="number">40</span>)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(arg)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="string">'Dylan'</span>, <span class="number">25</span>, <span class="string">'Eva'</span>, <span class="number">25</span>);</span><br></pre></td></tr></table></figure>
+
+<p>結果：</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552296008299.jpg?raw=true" alt></p>
+<h3 id="querySelectorAll"><a href="#querySelectorAll" class="headerlink" title="querySelectorAll()"></a>querySelectorAll()</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> doms = <span class="built_in">document</span>.querySelectorAll(<span class="string">'li'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(doms)</span><br></pre></td></tr></table></figure>
+
+<p>可以發現用 <code>querySelectorAll</code> 所產生的變數doms，看起來好像是個陣列，仔細看發現紅框上面寫的是 <code>NodeList</code> 而不是陣列會顯示的 <code>Array</code>，這是一個典型的<strong>類陣列</strong>例子。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552269826771.jpg?raw=true" alt></p>
+<p>進一步做驗證，打開 <code>__proto__</code> 看看內部的原生方法，可以很快的發現和我們所知的陣列方法是有出入的，真正的陣列方法並沒有這麼少。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552270078699.jpg?raw=true" alt></p>
+<p>而陣列方法 <code>concat</code> 在 <code>doms.__proto__</code> 也找不到，如果試著對 doms 使用這個方法的話，不意外的跳錯了。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552270419535.jpg?raw=true" alt></p>
+<br>
+
+<h3 id="如果類陣列就是很任性的想使用陣列的方法，可以嗎"><a href="#如果類陣列就是很任性的想使用陣列的方法，可以嗎" class="headerlink" title="如果類陣列就是很任性的想使用陣列的方法，可以嗎?"></a>如果類陣列就是很任性的想使用陣列的方法，可以嗎?</h3><p><strong>假設變數 <code>arrayLike</code>是一個類陣列</strong></p>
+<p><strong>ES6</strong><br>先轉為陣列，之後可以合理使用陣列方法了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1</span></span><br><span class="line">[...arrayLike]</span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="built_in">Array</span>.from(arrayLike)</span><br></pre></td></tr></table></figure>
+
+<p><strong>ES5</strong><br>使用<code>call</code>、<code>apply</code>、<code>bind</code>，呼叫陣列的方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.concat.apply([], arrayLike) <span class="comment">//指向一個空陣列，將doms連接進去。</span></span><br><span class="line"><span class="comment">//2</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.slice.call(arrayLike)</span><br><span class="line"><span class="comment">//3</span></span><br><span class="line"><span class="built_in">Array</span>.prototype.splice.call(arrayLike, <span class="number">0</span>) <span class="comment">//不適用於querySelectorAll產生的NodeList類陣列</span></span><br></pre></td></tr></table></figure>
+
+<p>輸出：</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552270703327.jpg?raw=true" alt></p>
+<p>看看它的 <code>__proto__</code>，可以發現他已經有所有陣列該有的原生方法了，現在就可以直接取用這些方法，不需要再使用<code>call</code>、<code>apply</code>、<code>bind</code>，也可以證明它已經變成一個真正的陣列了。</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552270894610.jpg?raw=true" alt></p>
+<br>
+
+<h2 id="其餘"><a href="#其餘" class="headerlink" title="其餘"></a>其餘</h2><p>在<a href="https://www.udemy.com/javascriptjs/learn/v4/t/lecture/3604412?start=0" target="_blank" rel="noopener">克服JS奇怪部分 4-39</a>最後提到的<strong>Speard</strong>，就是指展開與其餘，當時影片錄製時，ES6功能還不夠完整，講師提到未來這個功能如果完善了，將可以取代 <code>Arguments</code>，下面來看看如何使用吧。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">...people</span>) </span>&#123; <span class="comment">// 自定義陣列名稱 (裡面包含傳入的參數)</span></span><br><span class="line">    <span class="built_in">console</span>.log(people)　<span class="comment">// 透過自定義名稱，可以取用一個包含所有參數的陣列</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="string">'Dylan'</span>, <span class="number">25</span>, <span class="string">'Eva'</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
+
+<p>結果可以發現不同於 <code>Arguments</code>，其餘參數所創造的陣列是純粹的陣列而不是偽陣列：</p>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552296535910.jpg?raw=true" alt></p>
+<br>
+
+<p>另外如果還有其他參數並不想加入其餘參數陣列當中，我們可以</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">area, road, ...people</span>) </span>&#123; <span class="comment">// 自定義陣列名稱 (裡面包含傳入的參數)</span></span><br><span class="line">    <span class="built_in">console</span>.log(area)</span><br><span class="line">    <span class="built_in">console</span>.log(road)</span><br><span class="line">    <span class="built_in">console</span>.log(people)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">foo(<span class="string">'台北市'</span>, <span class="string">'羅斯福路'</span>, <span class="string">'Dylan'</span>, <span class="number">25</span>, <span class="string">'Eva'</span>, <span class="number">25</span>)</span><br></pre></td></tr></table></figure>
+
+<p>結果可以發現若有額外設計參數，一樣會一一對應並帶入，而剩餘的參數將直接被放入其餘參數的陣列當中。</p>
+<blockquote>
+<p>注意：其餘參數一定要在最後，且只能有一個</p>
+</blockquote>
+<p><img src="https://github.com/dylan237/images_source/blob/master/1552296960891.jpg?raw=true" alt></p>
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><p><a href="https://www.udemy.com/vue-hexschool/learn/v4/t/lecture/10279214?start=0" target="_blank" rel="noopener">六角學院 - Vue出一個電商網站</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/let-and-const.html" rel="next" title="ES6 let & const">
+                <i class="fa fa-chevron-left"></i> ES6 let & const
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/destructuring.html" rel="prev" title="ES6 解構與賦值">
+                ES6 解構與賦值 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#展開"><span class="nav-number">1.</span> <span class="nav-text">展開</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#合併陣列"><span class="nav-number">1.1.</span> <span class="nav-text">合併陣列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#複製陣列"><span class="nav-number">1.2.</span> <span class="nav-text">複製陣列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#陣列開頭插入陣列-物件"><span class="nav-number">1.3.</span> <span class="nav-text">陣列開頭插入陣列(物件)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原理"><span class="nav-number">1.4.</span> <span class="nav-text">原理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#類陣列-array-like"><span class="nav-number">2.</span> <span class="nav-text">類陣列 (array like)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#手動創造一個類陣列"><span class="nav-number">2.1.</span> <span class="nav-text">手動創造一個類陣列</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Arguments"><span class="nav-number">2.2.</span> <span class="nav-text">Arguments</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#querySelectorAll"><span class="nav-number">2.3.</span> <span class="nav-text">querySelectorAll()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如果類陣列就是很任性的想使用陣列的方法，可以嗎"><span class="nav-number">2.4.</span> <span class="nav-text">如果類陣列就是很任性的想使用陣列的方法，可以嗎?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其餘"><span class="nav-number">3.</span> <span class="nav-text">其餘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#資料來源"><span class="nav-number">4.</span> <span class="nav-text">資料來源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/spread.html';
+          this.page.identifier = 'spread.html';
+          this.page.title = 'ES6 - Spread 展開與其餘參數';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

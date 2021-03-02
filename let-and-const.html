@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="google-site-verification" content="eXzoK7rVIXPnGg00WHKjMsCwoj5alLn18IMVGwyz-Lg">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JavaScript,ES6,">
+
+
+
+
+
+
+
+
+
+
+<meta name="keywords" content="JavaScript,ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 let &amp; const">
+<meta property="og:url" content="https://dylan237.github.io/let-and-const.html">
+<meta property="og:site_name" content="Dylan&#39;s Blog">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:updated_time" content="2021-03-02T10:06:31.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6 let &amp; const">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://dylan237.github.io/let-and-const.html">
+
+
+
+
+
+  <title>ES6 let & const | Dylan's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dylan's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">⎝༼ ◕Д ◕ ༽⎠</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            標籤
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分類
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://dylan237.github.io/let-and-const.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dylan">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dylan's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">ES6 let & const</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2019-03-14T12:16:00+08:00">
+                2019-03-14
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新於&#58;</span>
+              
+              <time title="更新於" itemprop="dateModified" datetime="2021-03-02T18:06:31+08:00">
+                2021-03-02
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分類於</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/ES6/" itemprop="url" rel="index">
+                    <span itemprop="name">ES6</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/let-and-const.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="let-and-const.html" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <!-- <img src="" alt="" style="max-width:70%;display:block;margin:0 auto;margin-bottom:10px"> -->
+
+<a id="more"></a>
+
+<!-- <div style="width:70%;display:block;margin:0 auto;margin-bottom:30px;text-align:center">
+圖片來源： 
+  <a href="javascript:;">
+    網路
+  </a>
+</div>
+<br /> -->
+
+<h2 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h2><h3 id="var"><a href="#var" class="headerlink" title="var"></a>var</h3><p>在 <strong>JavaScript Understanding The Wired Parts</strong> 課程中，有提到JS的 <code>hoisting</code> 特性，當<strong>語法解析器</strong>在解析程式碼時，他會把我們所宣告的<strong>變數</strong>都設置在一個記憶體位置，並先以 <code>undefined</code> 當作值儲存到記憶體當中，之後開始逐行讀取程式碼，當讀到了 <code>var A = &#39;xxx&#39;</code> 的時候，再將 <code>xxx</code> 字串取代 <code>undefined</code> 賦值給 <code>A</code> 變數。</p>
+<p>所以在 <code>var A = &#39;xxx&#39;</code> 這行程式碼前印出 <code>A</code> 時，它還是 <code>undefined</code>，讀取到了以後才賦值變成 <code>xxx</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(A) <span class="comment">// undefined</span></span><br><span class="line"><span class="keyword">var</span> A = <span class="string">'xxx'</span></span><br><span class="line"><span class="built_in">console</span>.log(A) <span class="comment">// xxx</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="let-與-const"><a href="#let-與-const" class="headerlink" title="let 與 const"></a>let 與 const</h3><p><strong>ES6</strong>的 <code>let</code>和 <code>const</code> 無法在宣告前無法取用該值，否則會跳出 <code>is not defined</code>錯誤。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(A) <span class="comment">// Uncaught ReferenceError: A is not defined</span></span><br><span class="line"><span class="keyword">let</span> A = <span class="string">'xxx'</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h2><h3 id="var-1"><a href="#var-1" class="headerlink" title="var"></a>var</h3><blockquote>
+<p>var的作用域為 <code>Function Scope</code></p>
+</blockquote>
+<p>只能以函式為變數作用域的分界，在一些使用了區塊語句(用花括號的語句)的像 <code>if, else, for, while</code> 等等區塊語句中，在這裡面用 var 宣告的變數仍然是會曝露到全域之中可被存取。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(<span class="literal">true</span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> b = <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// a is not defined 存取不到</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// 20 存取得到</span></span><br></pre></td></tr></table></figure>
+
+<p>這對初學者容易造成誤解外，如果再搭配到隱藏的提升特性，整個程式碼經常會有出人意表的結果。在許多撰寫風格指引通常會提醒這點，而且叫你一定要把 var 語句寫在程式碼檔案的最上面。(甚至連 for 語句中的 var 宣告也要寫到最上面)</p>
+<h3 id="let-與-const-1"><a href="#let-與-const-1" class="headerlink" title="let 與 const"></a>let 與 const</h3><blockquote>
+<p>var的作用域為 <code>Block Scope</code></p>
+</blockquote>
+<p>如果使用了 <code>let</code> 或 <code>const</code> 來宣告，則是以區塊語句為分界的作用域，它會比較明確而且不易發生錯誤。一些之前對於 <code>var</code> 語句的麻煩撰寫風格，就可以不需要了。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">10</span></span><br><span class="line">    <span class="keyword">const</span> a2 = <span class="number">10</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> b = <span class="number">20</span></span><br><span class="line">    <span class="keyword">const</span> b2 = <span class="number">20</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a) <span class="comment">// a is not defined 存取不到</span></span><br><span class="line"><span class="built_in">console</span>.log(b) <span class="comment">// b is not defined 存取不到，b被限制在if的&#123;&#125;中，外部環境無法存取</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(a2) <span class="comment">// a2 is not defined</span></span><br><span class="line"><span class="built_in">console</span>.log(b2) <span class="comment">// b2 is not defined</span></span><br></pre></td></tr></table></figure>
+
+<p>總之，不要再用 <code>var</code> 了，用 <code>let</code> 或 <code>const</code> 來取代它就是了。像我們有使用的 <strong>ESLint</strong> 檢查工具，一定出現會叫你不要使用 <code>var</code> 的訊息。</p>
+<br>
+
+<h2 id="const-定義常數"><a href="#const-定義常數" class="headerlink" title="const 定義常數"></a>const 定義常數</h2><p><code>const</code> 針對是常數的定義，常數在一宣告時就必定要指定給值，不然會產生錯誤。而對於常數在 ES6 的定義是：</p>
+<blockquote>
+<p>不可再指定 can’t re-assignment</p>
+</blockquote>
+<p>指定的意思就是用等號 <code>=</code> 作指定運算，像下面這例子就是再指定值(或重覆指定值)，所以會產生錯誤：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = <span class="number">10</span></span><br><span class="line">a = <span class="number">20</span>  <span class="comment">// TypeError: Assignment to constant variable. 錯誤</span></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>宣告了一個常數，代表這個識別名稱的<strong>參照 reference</strong>是<strong>唯讀的 read-only</strong>，並不代表這個參照指定到的值是不可改變的 immutable。<br>意思是如果你宣告的常數是一個物件或陣列類型，裡面的值是可以作改變的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = []</span><br><span class="line">a[<span class="number">0</span>] = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> b = &#123;&#125;</span><br><span class="line">b.foo = <span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>所以對於<strong>物件、陣列、函式</strong>來說，使用const常數來宣告就可以，除非你有需要再指定這個陣列或物件的參照。</p>
+<br>
+
+<h2 id="let使用於for語句"><a href="#let使用於for語句" class="headerlink" title="let使用於for語句"></a>let使用於for語句</h2><h3 id="for-圓括號中的-let-變數仍然是在區塊作用域"><a href="#for-圓括號中的-let-變數仍然是在區塊作用域" class="headerlink" title="for 圓括號中的 let 變數仍然是在區塊作用域"></a>for 圓括號中的 let 變數仍然是在區塊作用域</h3><p><code>for圓括號中</code>的第一個表達式，用 <code>let</code>宣告變數時，是不是也會是被限制到 <code>for</code> 語句的區塊作用域中？答案是<code>肯定的</code>，見下面的例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'in for statement: i'</span>, i)</span><br><span class="line">    <span class="comment">// in for statement: i 0</span></span><br><span class="line">    <span class="comment">// in for statement: i 1</span></span><br><span class="line">    <span class="comment">// ( i變數被限制在for的"block scope"中，所以可以正常印出 )</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(i) <span class="comment">// ReferenceError: i is not defined ( 全域則存取不到 )</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="for-迴圈中的-let-變數會作重新綁定"><a href="#for-迴圈中的-let-變數會作重新綁定" class="headerlink" title="for 迴圈中的 let 變數會作重新綁定"></a>for 迴圈中的 let 變數會作重新綁定</h3><p><a href="https://segmentfault.com/q/1010000007541743/a-1020000007542563" target="_blank" rel="noopener">參考文章</a></p>
+<p>這是 <code>let</code>的特別之處，是由於區塊作用域造成的結果，在每次的 <code>for迴圈</code>執行時，用 <code>let</code> 宣告的變數都會<code>重新綁定 re-bind</code>一次。這是在 <code>for 語句中 var 與 let 的差異</code>。</p>
+<p>以下用程式碼直接看會比較容易的理解。這個改進主要是為了要解決在 for 語句中的閉包結構的問題。</p>
+<h4 id="使用-var"><a href="#使用-var" class="headerlink" title="使用 var"></a>使用 var</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123; </span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(i), <span class="number">1000</span>) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>JS中<code>setTimeout</code>屬於非同步函式，當JS引擎看到<code>setTimeout</code>時並不會等待一秒，而是先將它放入<code>event queue</code>等待執行，並且持續執行程式碼，也就是繼續執行第2、3、4…次for迴圈。此例總共迴圈了十次，所以<code>event queue</code>裡等待被執行的<code>console.log(i)</code>有十個，然而當for迴圈跑完時，i已經透過九次i++變成了<code>10</code>，因此累積的十次<code>console.log(i)</code>依序執行後參照到的 i 將都會是<code>10</code>，所以輸出的結果為十個<code>10</code>，而非我們預期的0~9。</p>
+<h4 id="使用-let"><a href="#使用-let" class="headerlink" title="使用 let"></a>使用 let</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123; </span><br><span class="line">  setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(i), <span class="number">1000</span>) </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你使用了 <code>let</code> 而不是 <code>var</code>，<code>let</code> 的變數除了作用域是在 <code>for的{}區塊</code>中，而且會為<strong>每次循環執行建立新的詞彙環境(LexicalEnvironment)</strong>，拷貝所有的變量名稱與值到下個循環執行，因此<code>event queue</code>裡的十次<code>console.log(i)</code>將會各自參考到不同的 i 變數，輸出預期的0~9。</p>
+<p><strong>模擬情況</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> k;</span><br><span class="line"><span class="keyword">for</span> (k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) &#123;</span><br><span class="line">    <span class="keyword">let</span> i = k <span class="comment">//注意這裡，每次循環都會建立一個新的i變數</span></span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span> =&gt;</span> <span class="built_in">console</span>.log(i), <span class="number">1000</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h2 id="let的陷阱-Hoisting-和-臨時死區-TDZ"><a href="#let的陷阱-Hoisting-和-臨時死區-TDZ" class="headerlink" title="let的陷阱 - Hoisting 和 臨時死區(TDZ)"></a>let的陷阱 - Hoisting 和 臨時死區(TDZ)</h2><p>要理解 <code>let</code>, <code>const</code>是否會被提升，可以用下面的簡單例子來看。第一個例子，是正常可以輸出 <code>a</code> 變數的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// 1</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>然而如果 <code>let</code> 不會提升，那麼這裡的 <code>console.log(a)</code> 應該還是會印出全域的 <code>1</code>，但是執行時發現報錯，這是因為函數中 <code>let a = 2</code>宣告的變數被提升到函數中區塊的最上面，進而產生<strong>TDZ</strong>，因此造成錯誤。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// Uncaught ReferenceError: a is not defined</span></span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">2</span>;</span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>對於<strong>TDZ</strong>，可以<strong>大概</strong>理解成這樣：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 這裡產生 TDZ for a</span></span><br><span class="line">    <span class="built_in">console</span>.log(a); <span class="comment">// TDZ期間取用變數，產生Uncaught ReferenceError: a is not defined錯誤</span></span><br><span class="line">    <span class="keyword">let</span> a = <span class="number">2</span>; <span class="comment">// 對a的宣告語句，這裡結束 TDZ for a</span></span><br><span class="line">&#125;)()</span><br></pre></td></tr></table></figure>
+
+<p>在例子中的 IIFE 裡的函數作用域，變數 <code>a</code> 在作用域中會先被提升到函數區域中的最上面，但這時會產生<strong>TDZ</strong>，如果在程序流程還未運行到 <code>a</code> 的宣告語句時，算是在<strong>TDZ</strong>作用的期間，這時候取用 <code>a</code> 的值，就會拋出ReferenceError錯誤。</p>
+<h3 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h3><ul>
+<li><code>let</code> 和 <code>var</code> 都有hoisting</li>
+<li><code>let</code> 有TDZ，<code>var</code> 沒有TDZ</li>
+</ul>
+<p>不過說句實在話，<code>let</code> 有沒有 <strong>hoisting</strong> 都無所謂，程式還是那樣寫，因為即使是古早的<code>var</code>我們也知道必須先宣告後使用，只要把握這個原則就沒問題了。</p>
+<h3 id="參考文章"><a href="#參考文章" class="headerlink" title="參考文章"></a>參考文章</h3><ul>
+<li><a href="https://zhuanlan.zhihu.com/p/27558914" target="_blank" rel="noopener">TDZ 參考內容1</a></li>
+<li><a href="https://segmentfault.com/a/1190000008213835" target="_blank" rel="noopener">TDZ 參考內容2</a></li>
+</ul>
+<br>
+
+<h2 id="撰寫風格建議"><a href="#撰寫風格建議" class="headerlink" title="撰寫風格建議"></a>撰寫風格建議</h2><ul>
+<li><p>不要再用 <code>var</code> 來宣告變數，改用 <code>let</code> 與 <code>const</code>，而且優先使用 <code>const</code>，除非需要再指定值才用 <code>let</code>。
+  var 的部份不要再用的理由，上面的內文已經有說明。const 可以用在物件、陣列與函式上，常數一宣告時就要指定值，犯錯的機會會減少很多。另外，JS 引擎也可以作最佳化。所以大概9成的情況都是用 const，只有像 for 迴圈語句或一些需要再指定值的情況才會用到 let。</p>
+<br>
+</li>
+<li><p>並不是在區塊中或函式中區域的最上面來宣告變數/常數，而是在合理的位置，<strong>在變數/常數首次被使用時的上面一行</strong>來宣告變數。<br>現在的編譯器與 JS 引擎都已經做得很好，而且 let 與 const 都是區塊作用域，不用再擔心常數/變數會曝露到全域中的問題，提升特性如果你已經學過知道了，不要亂用也很難遇到。總之變數/常數在要用到前再宣告就行了，這是所謂的”合理的位置”。這會與 Douglas Crockford 大師所提的，一定要宣告在函式或程式檔案的最上面，這個撰寫風格的說法會不太一樣，不過當年也只有 var 可用，大師的想法自然有他的道理，但現在有了 let 與 const 就不用這樣做了。</p>
+</li>
+</ul>
+<h2 id="重點歸納"><a href="#重點歸納" class="headerlink" title="重點歸納"></a>重點歸納</h2><ul>
+<li>若未使用<code>var</code> 、<code>let</code>、 <code>const</code>宣告，會使變數成為全域變數。</li>
+<li>ES6後，鼓勵使用 <code>let</code>、<code>const</code> 取代 <code>var</code>。</li>
+<li><code>let</code> 在 for 迴圈時，每次循環都會重新綁定。</li>
+<li><code>let</code> 與 <code>const</code> 都是區塊作用域 ( block scope )，而 <code>var</code> 是函式作用域( function scope )</li>
+</ul>
+<h2 id="資料來源"><a href="#資料來源" class="headerlink" title="資料來源"></a>資料來源</h2><p><a href="https://ithelp.ithome.com.tw/articles/10185142" target="_blank" rel="noopener">eyesofkids - Day 05: ES6篇 - let與const</a><br><a href="https://www.udemy.com/vue-hexschool/learn/v4/t/lecture/10279212?start=20" target="_blank" rel="noopener">六角學院 - Vue出一個電商網站</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/build-a-js-framework-3.html" rel="next" title="實作一個 JavaScript 迷你框架 (三)">
+                <i class="fa fa-chevron-left"></i> 實作一個 JavaScript 迷你框架 (三)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/spread.html" rel="prev" title="ES6 - Spread 展開與其餘參數">
+                ES6 - Spread 展開與其餘參數 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dylan</p>
+              <p class="site-description motion-element" itemprop="description">學習紀錄</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">文章</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">分類</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">標籤</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="https://github.com/dylan237" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a rel="external nofollow" href="mailto:dylan.liu237@gmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#特性"><span class="nav-number">1.</span> <span class="nav-text">特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var"><span class="nav-number">1.1.</span> <span class="nav-text">var</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let-與-const"><span class="nav-number">1.2.</span> <span class="nav-text">let 與 const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#作用域"><span class="nav-number">2.</span> <span class="nav-text">作用域</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#var-1"><span class="nav-number">2.1.</span> <span class="nav-text">var</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#let-與-const-1"><span class="nav-number">2.2.</span> <span class="nav-text">let 與 const</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-定義常數"><span class="nav-number">3.</span> <span class="nav-text">const 定義常數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let使用於for語句"><span class="nav-number">4.</span> <span class="nav-text">let使用於for語句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#for-圓括號中的-let-變數仍然是在區塊作用域"><span class="nav-number">4.1.</span> <span class="nav-text">for 圓括號中的 let 變數仍然是在區塊作用域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#for-迴圈中的-let-變數會作重新綁定"><span class="nav-number">4.2.</span> <span class="nav-text">for 迴圈中的 let 變數會作重新綁定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-var"><span class="nav-number">4.2.1.</span> <span class="nav-text">使用 var</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-let"><span class="nav-number">4.2.2.</span> <span class="nav-text">使用 let</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#let的陷阱-Hoisting-和-臨時死區-TDZ"><span class="nav-number">5.</span> <span class="nav-text">let的陷阱 - Hoisting 和 臨時死區(TDZ)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#結論"><span class="nav-number">5.1.</span> <span class="nav-text">結論</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#參考文章"><span class="nav-number">5.2.</span> <span class="nav-text">參考文章</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#撰寫風格建議"><span class="nav-number">6.</span> <span class="nav-text">撰寫風格建議</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重點歸納"><span class="nav-number">7.</span> <span class="nav-text">重點歸納</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#資料來源"><span class="nav-number">8.</span> <span class="nav-text">資料來源</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dylan Liu</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://dylan-blog.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://dylan237.github.io/let-and-const.html';
+          this.page.identifier = 'let-and-const.html';
+          this.page.title = 'ES6 let & const';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://dylan-blog.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
